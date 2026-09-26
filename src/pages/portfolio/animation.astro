@@ -1,0 +1,258 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import CategoryNav from '../../components/CategoryNav.astro';
+import { projectHref } from '../../config/categories';
+// Still frames of each animation, picked to match the mockup; the videos themselves come in step 6.
+import portfolioEvening from '../../assets/animation/portfolio-evening.jpg';
+import cyclist from '../../assets/animation/cyclist.jpg';
+import geometrical from '../../assets/animation/geometrical-animation.jpg';
+import recordPlayer from '../../assets/animation/record-player-cinemagraph.jpg';
+import vanderberg from '../../assets/animation/vanderberg-magazine-cover.jpg';
+import laRue from '../../assets/animation/la-rue-sanime.jpg';
+import ballAndBox from '../../assets/animation/the-ball-and-box.jpg';
+import dinner from '../../assets/animation/a-classic-european-dinner.jpg';
+import reflect from '../../assets/animation/reflect-your-ambitions.jpg';
+import embrace from '../../assets/animation/embrace-every-moment.jpg';
+// PLACEHOLDER: crop of the mockup, the "Look Good In Any Situation" video was not provided.
+import lookGood from '../../assets/animation/look-good-in-any-situation-from-mockup.png';
+
+interface Piece {
+  src: ImageMetadata;
+  alt: string;
+  caption: string;
+  mobileCaption?: string;
+  /** Desktop box and caption top, in mockup px (1920 artboard, page coordinates). */
+  box: [x: number, y: number, w: number, h: number];
+  captionY: number;
+  /** Mobile size and gaps (393 artboard): width, height, gap above, gap above the caption. */
+  mobile: [w: number, h: number, gap: number, captionGap: number];
+}
+
+const pieces: Piece[] = [
+  {
+    src: portfolioEvening,
+    alt: 'Yellow plane flying over a city, from the Portfolio evening animation',
+    caption: 'Portfolio evening',
+    box: [0, 1088, 1920, 1083],
+    captionY: 2205,
+    mobile: [347, 197, 24, 22],
+  },
+  {
+    src: recordPlayer,
+    alt: 'Hand putting a record on a turntable',
+    caption: 'Record player cinemagraph',
+    box: [623, 3852, 674, 512],
+    captionY: 4423,
+    mobile: [241, 183, 50, 29],
+  },
+  {
+    src: vanderberg,
+    alt: 'The Vanderberg magazine cover with a snowy forest path',
+    caption: 'Vanderberg magazine cover',
+    box: [960, 2460, 812, 1051],
+    captionY: 3541,
+    mobile: [345, 446, 109, 20],
+  },
+  {
+    src: laRue,
+    alt: 'Night street with lamp posts and a bench',
+    caption: '" La rue s\'anime "',
+    box: [0, 4636, 1920, 1080],
+    captionY: 5766,
+    mobile: [349, 196, 110, 20],
+  },
+  {
+    src: ballAndBox,
+    alt: 'Yellow door on a blue floor',
+    caption: 'The ball and box',
+    mobileCaption: 'Ball and box',
+    box: [0, 5937, 1920, 1079],
+    captionY: 7066,
+    mobile: [346, 195, 111, 20],
+  },
+  {
+    src: dinner,
+    alt: 'Dining room with red walls',
+    caption: 'A classic European dinner',
+    box: [571, 7254, 779, 585],
+    captionY: 7870,
+    mobile: [332, 248, 109, 20],
+  },
+];
+
+const pair: Piece[] = [
+  {
+    src: cyclist,
+    alt: 'Man riding a bicycle, black and white line drawing',
+    caption: 'Cyclist',
+    box: [318, 2460, 388, 363],
+    captionY: 2862,
+    mobile: [156, 156, 63, 10],
+  },
+  {
+    src: geometrical,
+    alt: 'Black and turquoise geometric shapes',
+    caption: 'Geometrical animation',
+    box: [318, 3073, 388, 363],
+    captionY: 3476,
+    mobile: [156, 156, 63, 10],
+  },
+];
+
+const wearASuit = [
+  {
+    src: reflect,
+    alt: 'Tailor fitting a suit in front of a mirror',
+    caption: 'Reflect Your Ambitions',
+    x: 133,
+  },
+  { src: embrace, alt: 'Man in a suit at a party', caption: 'Embrace Every Momment', x: 690 },
+  {
+    src: lookGood,
+    alt: 'Train passing between buildings at sunset',
+    caption: 'Look Good In Any Situation',
+    x: 1247,
+  },
+];
+
+const vars = (piece: Piece) => ({
+  '--x': piece.box[0],
+  '--y': piece.box[1],
+  '--w': piece.box[2],
+  '--h': piece.box[3],
+  '--cy': piece.captionY,
+  '--cx': piece.box[0] + piece.box[2] / 2,
+  '--mw': piece.mobile[0],
+  '--mh': piece.mobile[1],
+  '--mgap': piece.mobile[2],
+  '--mcap': piece.mobile[3],
+});
+const sizes = (piece: Piece) =>
+  `(min-width: 1024px) ${((piece.box[2] / 1920) * 100).toFixed(1)}vw, ${piece.mobile[0]}px`;
+const mediaClass =
+  'block h-[calc(var(--mh)*1px)] w-[calc(var(--mw)*1px)] object-cover desktop:absolute desktop:top-[calc(var(--y)*var(--u))] desktop:left-[calc(var(--x)*var(--u))] desktop:h-[calc(var(--h)*var(--u))] desktop:w-[calc(var(--w)*var(--u))]';
+const captionClass =
+  'mt-[calc(var(--mcap)*1px)] text-center text-[12px] leading-[1.1] tracking-[0.04em] whitespace-nowrap uppercase desktop:absolute desktop:top-[calc(var(--cy)*var(--u))] desktop:left-[calc(var(--cx)*var(--u))] desktop:m-0 desktop:-translate-x-1/2 desktop:text-[calc(30*var(--u))] desktop:tracking-[0.037em]';
+const wearASuitHref = projectHref('animation', 'wear-a-suit');
+---
+
+<BaseLayout title="Animation" bodyClass="pb-[56px] desktop:pb-0">
+  <div class="relative">
+    <div class="absolute inset-x-0 top-0 z-10">
+      <Header />
+    </div>
+    <main class="relative desktop:h-[calc(8700*var(--u))]">
+      <h1 class="sr-only">Animation</h1>
+      <!-- Opening video (step 6); the mockup only shows its first, almost blank frame. -->
+      <section
+        class="relative h-[852px] bg-blush desktop:h-[calc(1080*var(--u))] desktop:bg-[#fffaee]"
+        aria-label="Wear a Suit"
+      >
+        <a
+          href={wearASuitHref}
+          class="absolute top-[742px] left-1/2 -translate-x-1/2 text-[16px] leading-[1.1] whitespace-nowrap underline desktop:top-[calc(1006*var(--u))] desktop:right-[calc(102*var(--u))] desktop:left-auto desktop:translate-x-0 desktop:text-[calc(30*var(--u))] desktop:tracking-[0.037em] desktop:no-underline"
+        >
+          <span class="desktop:hidden">View SURMESUR project</span>
+          <span class="hidden desktop:inline">View 'WEAR A SUIT' project</span>
+        </a>
+      </section>
+
+      <div class="flex flex-col items-center">
+        {pieces.slice(0, 1).map((piece) => (
+          <figure
+            class="mt-[calc(var(--mgap)*1px)] flex flex-col items-center desktop:contents"
+            style={vars(piece)}
+          >
+            <Image
+              src={piece.src}
+              alt={piece.alt}
+              class={mediaClass}
+              widths={[347, 694, 1200, 1920]}
+              sizes={sizes(piece)}
+            />
+            <figcaption class={captionClass}>{piece.caption}</figcaption>
+          </figure>
+        ))}
+        <div class="mt-[63px] flex -translate-x-[4px] gap-[26px] desktop:contents">
+          {pair.map((piece) => (
+            <figure class="flex flex-col items-center desktop:contents" style={vars(piece)}>
+              <Image
+                src={piece.src}
+                alt={piece.alt}
+                class={mediaClass}
+                widths={[156, 312, 388, 776]}
+                sizes={sizes(piece)}
+              />
+              <figcaption class={captionClass}>{piece.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+        {pieces.slice(1).map((piece) => (
+          <figure
+            class="mt-[calc(var(--mgap)*1px)] flex flex-col items-center desktop:contents"
+            style={vars(piece)}
+          >
+            <Image
+              src={piece.src}
+              alt={piece.alt}
+              class={mediaClass}
+              widths={[350, 700, 1200, 1920]}
+              sizes={sizes(piece)}
+            />
+            <figcaption class={captionClass}>
+              {piece.mobileCaption ? (
+                <>
+                  <span class="desktop:hidden">{piece.mobileCaption}</span>
+                  <span class="hidden desktop:inline">{piece.caption}</span>
+                </>
+              ) : (
+                piece.caption
+              )}
+            </figcaption>
+          </figure>
+        ))}
+
+        <section
+          class="mt-[110px] flex flex-col items-center desktop:contents"
+          aria-label="Wear a Suit videos"
+        >
+          <a
+            href={wearASuitHref}
+            class="order-last mt-[51px] text-[20px] leading-[1.1] underline desktop:absolute desktop:top-[calc(8225*var(--u))] desktop:left-[calc(980*var(--u))] desktop:m-0 desktop:-translate-x-1/2 desktop:text-[calc(30*var(--u))] desktop:tracking-[0.037em] desktop:no-underline"
+          >
+            <span class="desktop:hidden">View SURMESUR project</span>
+            <span class="hidden desktop:inline">View WEAR A SUIT project</span>
+          </a>
+          {wearASuit.map((video, index) => (
+            <figure
+              class:list={[
+                'flex flex-col items-center desktop:absolute desktop:top-[calc(8280*var(--u))] desktop:left-[calc(var(--x)*var(--u))] desktop:w-[calc(532*var(--u))]',
+                { 'mt-[16px] desktop:mt-0': index > 0 },
+              ]}
+              style={{ '--x': video.x }}
+            >
+              <Image
+                src={video.src}
+                alt={video.alt}
+                class="h-[130px] w-[233px] object-cover desktop:h-[calc(297*var(--u))] desktop:w-full"
+                widths={[233, 466, 532, 1064]}
+                sizes="(min-width: 1024px) 28vw, 233px"
+              />
+              <figcaption class="mt-[10px] text-[12px] leading-[1.1] desktop:mt-[calc(34*var(--u))] desktop:text-[calc(25*var(--u))]">
+                {video.caption}
+              </figcaption>
+            </figure>
+          ))}
+        </section>
+      </div>
+    </main>
+  </div>
+  <div class="mt-[188px] desktop:mt-[calc(428*var(--u))]">
+    <CategoryNav current="animation" barClass="bg-blush" />
+  </div>
+  <Footer class="mt-[116px] desktop:mt-[calc(237*var(--u))]" />
+</BaseLayout>

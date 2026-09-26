@@ -377,3 +377,28 @@ Détail par écran dans `docs/screens/*.md`. Récapitulatif :
   44 (Futura PT) / 25 px, réseaux Contact 40 / 17 px, textes 404 : 33, 28, 25 et 37 px.
 - **À revoir à l'étape 10** : entre 1024 et 1280 px, la mise à l'échelle bureau fait descendre
   les plus petits textes vers 10 px ; prévoir un plancher de lisibilité.
+
+## 8. Portfolio et catégories (étape 4)
+
+- **Routes** : `/portfolio`, `/portfolio/design`, `/portfolio/illustration`, `/portfolio/animation`,
+  pages projet `/portfolio/<catégorie>/<projet>` (placeholders jusqu'à l'étape 5), page police
+  `/ashton-font` (placeholder jusqu'à l'étape 9).
+- **Content collection** `projects` (`src/content.config.ts`, fichiers `src/content/projects/*.md`) :
+  titre, catégorie, libellé de la carte (orthographe de la maquette), ordre bureau et ordre mobile
+  (la maquette mobile range les cartes Design autrement), vignette, lien externe.
+- **Vignettes** : recadrées automatiquement depuis les fichiers source pour reproduire le cadrage
+  de la maquette (`scripts/match-crop.py`, corrélation d'image). **Placeholders** (recadrages de la
+  maquette) : vignettes Miles Clayton, Matong'EAU, Yarha', pochette « You Give Me », chaussette Curly Sox.
+- **Animation** : images fixes tirées des vidéos/GIF source, choisies pour correspondre à la maquette
+  (`scripts/match-frame.py`) ; les vidéos arrivent à l'étape 6. « Look Good In Any Situation » :
+  placeholder (vidéo introuvable). La vidéo d'ouverture reste un fond crème, comme dans la maquette.
+- **Découvertes** : l'astérisque cerclé (Portfolio, Design) mène à la page de la police
+  (« discover The Ashton Font » sur mobile, « Ashton font display catalogue » sur Design).
+  Les liens de catégories en bas de page sont centrés sur x 797 et x 1121 (maquette 1920).
+- **Couleurs** : les captures macOS (profil « Display ») sont copiées sans profil ICC, sinon le navigateur
+  sature leurs couleurs (le vert de l'affiche Indoor Squash ne correspondait plus au fond de page).
+- **Écarts restants** : bas de la page Illustration mobile décalé d'environ 57 px (images de 350 px
+  de large contre 346–355 px dans la maquette) ; libellé de catégorie actif (barre mobile) en gras
+  de remplacement, faute de Futura PT.
+- **Note dev** : après l'ajout d'un nouveau fichier `.astro`, relancer `npm run dev` si des classes
+  Tailwind semblent absentes (le serveur ne rescanne pas toujours les nouveaux fichiers).

@@ -1,0 +1,34 @@
+---
+import AsteriskIcon from './icons/AsteriskIcon.astro';
+
+interface Props {
+  /** Desktop label next to the circled asterisk (the Portfolio page only shows the icon on desktop). */
+  desktopLabel?: string;
+  class?: string;
+}
+
+const { desktopLabel, class: className } = Astro.props;
+const href = '/ashton-font';
+---
+
+<a
+  href={href}
+  class:list={[
+    'flex items-center justify-center desktop:justify-between desktop:pr-[calc(141*var(--u))] desktop:pl-[calc(140*var(--u))]',
+    className,
+  ]}
+>
+  <span class="flex items-baseline gap-[10px] desktop:hidden">
+    <span class="text-[14px]">discover</span>
+    <span class="text-[20px]">The Ashton Font</span>
+  </span>
+  {desktopLabel ? (
+    <span class="hidden text-[calc(28*var(--u))] desktop:inline">{desktopLabel}</span>
+  ) : (
+    <span class="hidden desktop:inline desktop:sr-only">The Ashton Font</span>
+  )}
+  <AsteriskIcon
+    variant="circled"
+    class="ml-[26px] size-[43px] desktop:ml-auto desktop:size-[calc(55*var(--u))]"
+  />
+</a>

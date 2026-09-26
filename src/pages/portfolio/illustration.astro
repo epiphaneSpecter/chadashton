@@ -1,0 +1,255 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import CategoryNav from '../../components/CategoryNav.astro';
+import violinist from '../../assets/illustration/violinist.png';
+import wildlife from '../../assets/illustration/wildlife.png';
+import rush from '../../assets/illustration/rush.png';
+import kitchen from '../../assets/illustration/kitchen.png';
+import scarboroughStairs from '../../assets/illustration/scarborough-stairs.png';
+import diningRoom from '../../assets/illustration/dining-room.png';
+import scarboroughLivingRoom from '../../assets/illustration/scarborough-living-room.png';
+import tree from '../../assets/illustration/tree.png';
+import spaceTelescope from '../../assets/illustration/space-telescope.png';
+import winterForest from '../../assets/illustration/winter-forest.jpg';
+import weddingCrasher from '../../assets/illustration/wedding-crasher.png';
+import nickDrake from '../../assets/illustration/nick-drake.png';
+import windowView from '../../assets/illustration/window.png';
+import livingRoom from '../../assets/illustration/living-room.png';
+import manStreetDog from '../../assets/illustration/man-street-dog.png';
+import girlOnCouch from '../../assets/illustration/girl-on-couch.png';
+import fire from '../../assets/illustration/fire.png';
+import pilotDogs from '../../assets/illustration/pilot-dogs.jpg';
+import mountainScene from '../../assets/illustration/mountain-scene.jpg';
+// PLACEHOLDER: crop of the mockup, the Curly Sox product photos were not provided.
+import curlySoxSock from '../../assets/illustration/curly-sox-sock-from-mockup.png';
+import curlySoxSockMobile from '../../assets/illustration/curly-sox-sock-mobile-from-mockup.png';
+
+interface Artwork {
+  src: ImageMetadata;
+  alt: string;
+  /** Desktop box in mockup px (1920 artboard): x, offset from the row top, width, height. */
+  box: [x: number, y: number, w: number, h: number];
+  /** Mobile crop when the mockup does not show the whole image. */
+  mobileAspect?: string;
+}
+
+interface Row {
+  /** Desktop gap above the row and row height, in mockup px. */
+  gap: number;
+  height: number;
+  items: Artwork[];
+  /** The Curly Sox block sits on the left of this row. */
+  curlySox?: boolean;
+  /** Stays on one line on mobile (three images side by side). */
+  triptych?: boolean;
+}
+
+const rows: Row[] = [
+  {
+    gap: 129,
+    height: 747,
+    items: [
+      { src: violinist, alt: 'Violinist playing in a dark apartment', box: [140, 0, 1077, 745] },
+      {
+        src: wildlife,
+        alt: 'Path between rows of bare trees, drawn in dark red ink',
+        box: [1267, 0, 515, 747],
+        mobileAspect: '346 / 427',
+      },
+    ],
+  },
+  {
+    gap: 218,
+    height: 720,
+    curlySox: true,
+    items: [
+      { src: rush, alt: 'Man in an orange suit rushing up a staircase', box: [960, 0, 822, 720] },
+    ],
+  },
+  {
+    gap: 195,
+    height: 1159,
+    items: [
+      { src: kitchen, alt: 'Narrow kitchen with yellow tiles', box: [140, 0, 735, 1159] },
+      {
+        src: scarboroughStairs,
+        alt: 'Staircase seen from the top, going down to a living room',
+        box: [927, 0, 859, 535],
+      },
+      {
+        src: diningRoom,
+        alt: 'Dining room with a piano and a large wooden cabinet',
+        box: [927, 595, 859, 564],
+      },
+    ],
+  },
+  {
+    gap: 59,
+    height: 1065,
+    items: [
+      {
+        src: scarboroughLivingRoom,
+        alt: 'Living room with a pink sofa and green walls',
+        box: [134, 0, 1651, 1065],
+      },
+    ],
+  },
+  {
+    gap: 129,
+    height: 616,
+    triptych: true,
+    items: [
+      { src: tree, alt: 'Tree growing out of swirling blue water', box: [260, 0, 408, 616] },
+      {
+        src: spaceTelescope,
+        alt: 'Man in a red coat looking at the moon through a telescope',
+        box: [686, 0, 463, 616],
+      },
+      { src: winterForest, alt: 'Snowy forest with dark trunks', box: [1168, 0, 493, 616] },
+    ],
+  },
+  {
+    gap: 129,
+    height: 725,
+    items: [
+      {
+        src: weddingCrasher,
+        alt: 'A Wedding Crasher: man walking a dog in a garden',
+        box: [137, 0, 470, 725],
+      },
+      { src: nickDrake, alt: 'Portrait of a musician with a guitar', box: [715, 8, 1068, 712] },
+    ],
+  },
+  {
+    gap: 124,
+    height: 587,
+    items: [
+      {
+        src: windowView,
+        alt: 'Man sitting by a large window facing a mountain',
+        box: [137, 0, 739, 587],
+      },
+      {
+        src: livingRoom,
+        alt: 'Couple in a living room with a yellow floor',
+        box: [925, 5, 855, 582],
+      },
+    ],
+  },
+  {
+    gap: 69,
+    height: 703,
+    items: [
+      {
+        src: manStreetDog,
+        alt: 'Man and dog in front of a stone house',
+        box: [138, 0, 967, 703],
+      },
+      { src: girlOnCouch, alt: 'Woman lying on a pink sofa', box: [1267, 80, 515, 515] },
+    ],
+  },
+  {
+    gap: 76,
+    height: 828,
+    items: [
+      { src: fire, alt: 'Building on fire watched by a boy and his dog', box: [138, 0, 506, 828] },
+      { src: pilotDogs, alt: 'Pilot playing the guitar next to a plane', box: [712, 0, 1072, 828] },
+    ],
+  },
+  {
+    gap: 82,
+    height: 1187,
+    items: [
+      {
+        src: mountainScene,
+        alt: 'House at the foot of a pink mountain',
+        box: [137, 0, 1646, 1187],
+        mobileAspect: '355 / 543',
+      },
+    ],
+  },
+];
+
+const boxStyle = ([x, y, w, h]: Artwork['box']) => ({ '--x': x, '--y': y, '--w': w, '--h': h });
+const itemClass =
+  'block w-full object-cover desktop:absolute desktop:top-[calc(var(--y)*var(--u))] desktop:left-[calc(var(--x)*var(--u))] desktop:h-[calc(var(--h)*var(--u))] desktop:w-[calc(var(--w)*var(--u))]';
+const sizes = (width: number) =>
+  `(min-width: 1024px) ${((width / 1920) * 100).toFixed(1)}vw, 350px`;
+---
+
+<BaseLayout title="Illustration" bodyClass="pb-[56px] desktop:pb-0">
+  <Header />
+  <main class="pr-[23px] pl-[20px] desktop:px-0">
+    <h1 class="sr-only">Illustration</h1>
+    {rows.map((row, rowIndex) => (
+      <div
+        class:list={[
+          rowIndex === 0 ? 'mt-[23px]' : 'mt-[29px]',
+          'desktop:relative desktop:mt-[calc(var(--gap)*var(--u))] desktop:h-[calc(var(--row-h)*var(--u))]',
+          {
+            'flex gap-[4px]': row.triptych,
+            'flex flex-col gap-[29px]': !row.triptych && rowIndex > 0,
+            'flex flex-col gap-[16px]': rowIndex === 0,
+          },
+        ]}
+        style={{ '--gap': row.gap, '--row-h': row.height }}
+      >
+        {row.curlySox && (
+          <a
+            href="https://curlysox.com/en"
+            target="_blank"
+            rel="noopener"
+            class="order-first block text-center desktop:absolute desktop:left-[calc(320*var(--u))] desktop:w-[calc(353*var(--u))]"
+          >
+            <Image
+              src={curlySoxSockMobile}
+              alt="Show Jumping sock illustrated for Curly Sox"
+              class="mx-auto mt-[97px] w-[85px] desktop:hidden"
+              widths={[85, 170]}
+              sizes="85px"
+            />
+            <Image
+              src={curlySoxSock}
+              alt="Show Jumping socks illustrated for Curly Sox"
+              class="hidden desktop:mt-[calc(49*var(--u))] desktop:block desktop:w-full"
+              widths={[353, 706]}
+              sizes="18.4vw"
+            />
+            <span class="mt-[40px] mb-[13px] inline-block text-[14px] leading-[1.1] underline desktop:mt-[calc(105*var(--u))] desktop:text-[calc(30*var(--u))]">
+              View CURLY SOX project
+            </span>
+          </a>
+        )}
+        {row.items.map((item) => (
+          <Image
+            src={item.src}
+            alt={item.alt}
+            class:list={[
+              itemClass,
+              {
+                'h-[155px] min-w-0 flex-1': row.triptych,
+                'aspect-(--mobile-aspect) desktop:aspect-auto': item.mobileAspect,
+              },
+            ]}
+            style={{
+              ...boxStyle(item.box),
+              ...(row.triptych ? { flexGrow: item.box[2] } : {}),
+              ...(item.mobileAspect ? { '--mobile-aspect': item.mobileAspect } : {}),
+            }}
+            widths={[350, 700, 1000, 1650, 2400]}
+            sizes={sizes(item.box[2])}
+            loading={rowIndex === 0 ? 'eager' : 'lazy'}
+          />
+        ))}
+      </div>
+    ))}
+  </main>
+  <div class="mt-[178px] desktop:mt-[calc(304*var(--u))]">
+    <CategoryNav current="illustration" />
+  </div>
+  <Footer class="mt-[120px] desktop:mt-[calc(237*var(--u))]" />
+</BaseLayout>

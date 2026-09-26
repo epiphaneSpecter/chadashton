@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { categoryHref } from '../../../config/categories';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { category: project.data.category, id: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+---
+
+<!-- PLACEHOLDER: project pages are built from the content collection in step 5. -->
+<BaseLayout title={project.data.title}>
+  <main class="px-page py-20 text-title">
+    <h1>{project.data.title}</h1>
+    <p>[PLACEHOLDER] Page projet à construire à l'étape 5.</p>
+    <a href={categoryHref(project.data.category)} class="underline">
+      EXIT
+    </a>
+  </main>
+</BaseLayout>

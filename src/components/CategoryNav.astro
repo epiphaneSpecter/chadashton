@@ -1,0 +1,47 @@
+---
+import { categories, categoryHref, type CategorySlug } from '../config/categories';
+
+interface Props {
+  current: CategorySlug;
+  /** Background of the fixed mobile bar (matches the page section behind it). */
+  barClass?: string;
+}
+
+const { current, barClass = 'bg-paper' } = Astro.props;
+const currentIndex = categories.findIndex((category) => category.slug === current);
+const others = categories.filter((category) => category.slug !== current);
+---
+
+{/* Cross navigation to the two other categories, at the bottom of the page. */}
+<nav
+  aria-label="Other categories"
+  class="flex flex-col items-center gap-[136px] text-[20px] leading-[1.1] uppercase desktop:flex-row desktop:justify-center desktop:gap-0 desktop:text-[calc(30*var(--u))]"
+>
+  {/* Desktop: each word is centered in a 324 px cell (centers at x 797 and 1121 in the mockup). */}
+  {others.map((category) => (
+    <a href={categoryHref(category.slug)} class="text-center desktop:w-[calc(324*var(--u))]">
+      {category.label}
+    </a>
+  ))}
+</nav>
+
+{/* Mobile only: category switcher fixed at the bottom of the screen. */}
+<nav
+  aria-label="Categories"
+  class:list={[
+    'fixed inset-x-0 bottom-0 z-40 flex h-[56px] items-center justify-between px-[23px] text-[15px] uppercase desktop:hidden',
+    barClass,
+  ]}
+>
+  {categories.map((category, index) =>
+    index === currentIndex ? (
+      <span aria-current="page" class="font-futura font-bold not-italic">
+        {category.label}
+      </span>
+    ) : (
+      <a href={categoryHref(category.slug)}>
+        {index < currentIndex ? `←${category.label}` : `${category.label}→`}
+      </a>
+    ),
+  )}
+</nav>
