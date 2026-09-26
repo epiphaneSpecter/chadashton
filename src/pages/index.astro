@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../config/site';
+---
+
+<BaseLayout bodyClass="bg-blush">
+  <main class="relative h-svh overflow-hidden">
+    <h1 class="absolute top-[47.8%] desktop:top-[49.9%] left-1/2 -translate-x-1/2 -translate-y-1/2 text-hero whitespace-nowrap">
+      Chad ASHTON
+    </h1>
+    <p class="absolute bottom-[13.3svh] left-1/2 -translate-x-1/2 text-center text-title whitespace-nowrap desktop:bottom-[8svh]">
+      {site.tagline}
+    </p>
+  </main>
+</BaseLayout>

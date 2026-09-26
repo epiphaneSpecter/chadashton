@@ -9,3 +9,9 @@ dist/
 assets-source/*
 !assets-source/README.md
 design/original/
+
+# logs
+npm-debug.log*
+
+# editors
+.idea/

@@ -1,6 +1,7 @@
 # Pages projets (lot B1) — desktop 1920 px
 
 Conventions communes observées sur les 4 écrans :
+
 - **En-tête projet** : titre/sous-titre en haut à gauche, **Futura PT oblique** (Book Oblique), ~27 px (hauteur de capitale ~19 px), interlettrage large (~0.08 em), ligne de base ~y 83 ; lien **EXIT** en haut à droite, même police/taille, capitales, ~y 64-82. Pas de header/nav global visible sur ces pages.
 - Marges latérales dominantes : **137 px** (contenu 137 → 1782, soit 1645 px de large).
 - Grilles 3 colonnes : colonnes de **515 px**, gouttière **~50 px** (137-652 / 702-1217 / 1267-1782).
@@ -9,6 +10,7 @@ Conventions communes observées sur les 4 écrans :
 ---
 
 ### Miles Clayton (`design/desktop/miles-clayton.webp`)
+
 Artboard 1920 × 8868.
 
 - **Fond / couleurs** : fond de page `#F7F7F7`. Texte courant `#000000`. Titre d'en-tête `#F7F7F7` (posé sur la photo sombre). EXIT `#B2B2B2` (mesuré ~#B2AEB0). Cadres blancs des pochettes `#FCFCFC`.
@@ -40,6 +42,7 @@ Artboard 1920 × 8868.
 ---
 
 ### Matong'eau (`design/desktop/matongeau.webp`)
+
 Artboard 1920 × 4129.
 
 - **Fond / couleurs** : fond **`#FFFFFF`** (blanc pur, pas #F7F7F7). Titre d'en-tête **bleu `#3284C6`** (bleu de la marque). EXIT `#4D4D4D`. Bleu marque des tuiles `#3384C6`. Noir `#000000`. Astérisque décoratif `#676767`/`#B2B2B2`.
@@ -66,6 +69,7 @@ Artboard 1920 × 4129.
 ---
 
 ### Davie (`design/desktop/davie.webp`)
+
 Artboard 1920 × 6931.
 
 - **Fond / couleurs** : fond **`#FFFFFF`**. Titre `#000000`. EXIT `#4D4D4D`. Ombres douces des mockups (#F9F9F9 autour du téléphone). Vignette vidéo : papier crème `#F0E9D9`/`#F8F2E3` + noir.
@@ -100,6 +104,7 @@ Artboard 1920 × 6931.
 ---
 
 ### Yarha' (`design/desktop/yarha.webp`)
+
 Artboard 1920 × 12082.
 
 - **Fond / couleurs** : hero `#3A5A75` (bleu ardoise, plein cadre) ; reste de la page **`#FFFFFF`**. Titre `#000000`. **EXIT `#C5A58A` souligné** (beige doré). Placeholders vidéo : noir `#000000`, bleu `#3F63D2`.

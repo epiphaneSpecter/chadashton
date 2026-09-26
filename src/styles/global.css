@@ -1,0 +1,75 @@
+@import 'tailwindcss';
+
+/*
+ * Site typeface. Family name taken from the font file's name table (see docs/design-notes.md).
+ * The file only ships an italic face, so every text is rendered with font-style: italic
+ * and synthesis is disabled to avoid any fake bold or fake oblique.
+ */
+@font-face {
+  font-family: 'CA Scholar V2';
+  src: url('/fonts/ca-scholar-v2-italic.woff2') format('woff2');
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+}
+
+/*
+ * Design tokens, extracted from the Adobe XD mockup (desktop artboards 1920 px, mobile 393 px).
+ * Fluid sizes follow clamp(mobile value, desktop value scaled to a 1920 px viewport, desktop value).
+ */
+@theme {
+  /* Colors */
+  --color-paper: #f7f7f7;
+  --color-blush: #fff9f8;
+  --color-ink: #000000;
+  --color-white: #ffffff;
+  --color-gray: #b2b2b2;
+  --color-gray-dark: #454545;
+  --color-rule: #3e3e3e;
+  --color-gold: #a77b14;
+  --color-lilac: #cfbad1;
+  --color-green: #3a8146;
+  --color-cream: #fdfcef;
+  --color-olive: #1c1c12;
+  --color-pink: #ffb5f2;
+  --color-magenta: #ff00ff;
+  --color-blue: #3284c6;
+
+  /* Fonts */
+  --font-scholar: 'CA Scholar V2', 'Futura', 'Century Gothic', 'Avenir Next', sans-serif;
+  /* PLACEHOLDER: Futura PT is used by the mockup but was not provided, so it is not loaded yet. */
+  --font-futura: 'Futura PT', 'Futura', 'Century Gothic', 'Avenir Next', sans-serif;
+
+  /* Type scale */
+  --text-display: clamp(42px, 10.417vw, 200px);
+  --text-display--line-height: 1.1;
+  --text-hero: clamp(35px, 4.844vw, 93px);
+  --text-hero--line-height: 1.1;
+  --text-logo: clamp(30px, 2.604vw, 50px);
+  --text-logo--line-height: 1.1;
+  --text-nav: clamp(25px, 1.875vw, 36px);
+  --text-nav--line-height: 1.08;
+  --text-title: clamp(20px, 1.562vw, 30px);
+  --text-title--line-height: 1.44;
+  --text-body: clamp(16px, 1.354vw, 26px);
+  --text-body--line-height: 1.08;
+  --text-small: clamp(15px, 1.042vw, 20px);
+  --text-small--line-height: 1.1;
+
+  /* Layout */
+  --spacing-page: clamp(20px, 7.292vw, 140px);
+  --breakpoint-desktop: 64rem;
+}
+
+@layer base {
+  html {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-scholar);
+    font-style: italic;
+    font-synthesis: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+}

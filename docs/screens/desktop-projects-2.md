@@ -1,6 +1,7 @@
 # Pages projets (lot C-2) — desktop
 
 Conventions communes observées sur les pages projet desktop (artboard 1920 px) :
+
 - **Titre du projet** en haut à gauche : CA Scholar V2 Italic, ≈ 28 px (hauteur des capitales ≈ 20 px), approche large (≈ +0.1 em), casse phrase (sauf Curly Sox en capitales), x ≈ 137–140, ligne de base ≈ y 88 (bbox y 62–93).
 - **EXIT** en haut à droite : même police, ≈ 28 px, capitales, bbox y 63–82. La position varie selon les maquettes : bord droit à x ≈ 1784 (Misc. Editorial, Curly Sox) ou x ≈ 1822 (L'erreur Inspire, RPS). Recommandation : aligner sur une seule marge droite (≈ 136 px, symétrique du titre).
 - Couleur de l'EXIT : gris foncé ≈ #454545 sur fond clair (trait fin antialiasé : peut aussi être #000 ; à confirmer), **#000 souligné** sur L'erreur Inspire (probablement l'état hover/actif), **#B2B2B2** sur fond noir (RPS).
@@ -9,6 +10,7 @@ Conventions communes observées sur les pages projet desktop (artboard 1920 px) 
 ---
 
 ### Miscellaneous Editorial (`design/desktop/miscellaneous-editorial.webp`)
+
 (Correspond à l'entrée « Miscelaneous Print Works » de la page Design.)
 
 - **Fond / couleurs** : fond #F7F7F7 uniforme ; texte titre #000000 ; EXIT ≈ #454545 (non souligné). Ligne noire de 1 px à y = 0 (artefact d'export de l'artboard, à ignorer).
@@ -16,22 +18,22 @@ Conventions communes observées sur les pages projet desktop (artboard 1920 px) 
   1. En-tête : titre x 137–916, y 66–93 ; EXIT x 1719–1784, y 63–82.
   2. Une pile verticale de **13 images mockup PNG transparentes**, chacune affichée en **pleine largeur 1920 × 1440** (source 4200 × 3150, ratio 4:3), sans marge, centrées ; elles se **chevauchent** (pas vertical ≈ 1315 px < 1440 px) car leur fond est transparent — le contenu visible (le magazine) occupe environ x 278–1645 et ≈ 1137 px de haut, avec ~180 px de vide entre deux mockups et une ombre portée douce sous chaque magazine.
      Positions (haut de l'image dans l'artboard, approx.) :
-     | # | y top | contenu visible (y) | fichier |
-     |---|---|---|---|
-     | 1 | 0 | 218–1262 (couverture seule, x 597–1350) | `Front.png` |
-     | 2 | 1294 | 1504–2641 | `2-3.png` |
-     | 3 | 2609 | 2819–3955 | `4-5.png` |
-     | 4 | 3924 | 4134–5270 | `6-7.png` |
-     | 5 | 5238 | 5448–6584 | `8-9.png` |
-     | 6 | 6552 | 6762–7899 | `10_11.png` |
-     | 7 | 7867 | 8077–9214 | `12-13.png` |
-     | 8 | 9182 | 9392–10528 | `14-15.png` |
-     | 9 | 10497 | 10707–11843 | `16-17.png` |
-     | 10 | 11811 | 12021–13157 | `18-19.png` |
-     | 11 | 13126 | 13336–14472 | `20-21.png` |
-     | 12 | 14441 | 14651–15787 | `22-23.png` |
-     | 13 | 15755 | 15961–17128 (4e de couv + couverture) | `Cover.png` |
-     Bas de page : ~270 px de vide après la dernière ombre. Pas de footer dessiné.
+     | #                                                                             | y top | contenu visible (y)                     | fichier     |
+     | ----------------------------------------------------------------------------- | ----- | --------------------------------------- | ----------- |
+     | 1                                                                             | 0     | 218–1262 (couverture seule, x 597–1350) | `Front.png` |
+     | 2                                                                             | 1294  | 1504–2641                               | `2-3.png`   |
+     | 3                                                                             | 2609  | 2819–3955                               | `4-5.png`   |
+     | 4                                                                             | 3924  | 4134–5270                               | `6-7.png`   |
+     | 5                                                                             | 5238  | 5448–6584                               | `8-9.png`   |
+     | 6                                                                             | 6552  | 6762–7899                               | `10_11.png` |
+     | 7                                                                             | 7867  | 8077–9214                               | `12-13.png` |
+     | 8                                                                             | 9182  | 9392–10528                              | `14-15.png` |
+     | 9                                                                             | 10497 | 10707–11843                             | `16-17.png` |
+     | 10                                                                            | 11811 | 12021–13157                             | `18-19.png` |
+     | 11                                                                            | 13126 | 13336–14472                             | `20-21.png` |
+     | 12                                                                            | 14441 | 14651–15787                             | `22-23.png` |
+     | 13                                                                            | 15755 | 15961–17128 (4e de couv + couverture)   | `Cover.png` |
+     | Bas de page : ~270 px de vide après la dernière ombre. Pas de footer dessiné. |
   → Rebuild conseillé : `<img>` pleine largeur (`w-full`), `-mt-[125px]`/chevauchement ou simplement recadrer les PNG sur leur bbox et empiler avec `gap` ≈ 180 px.
 - **Textes** :
   - « Poster/panphlet for C2 conference, academic project » — CA Scholar V2 Italic ≈ 28 px, casse phrase, #000, aligné à gauche, non souligné, letter-spacing large.
@@ -78,6 +80,7 @@ Conventions communes observées sur les pages projet desktop (artboard 1920 px) 
 ---
 
 ### Rock Paper Scissors (`design/desktop/rock-paper-scissors.webp`)
+
 (Correspond à l'entrée « Mind-bogglers » de la page Design ; la page regroupe 2 projets : le pamphlet RPS et « Think inside the box ».)
 
 - **Fond / couleurs** : fond de page **#000000** ; titre et sous-titre #F7F7F7 ; EXIT #B2B2B2 ; pages du pamphlet (image) fond #F4F3F1 ; carré « box » vert sarcelle ≈ #005F53 avec texte pêche (dans l'image).
@@ -117,7 +120,7 @@ Conventions communes observées sur les pages projet desktop (artboard 1920 px) 
      - 3 camion de glaces / chien (gris) : x 770–992, y 213–873
      - 4 « EVENTING » dressage (blanc/menthe) : x 1140–1375, y 207–880
      - 5 chutes de cheval (crème/jaune) : x 1494–1743, y 201–891
-     Largeur de chaque visuel ≈ 210–250 px, gouttières ≈ 70–150 px (les paires 2 et 3 sont rapprochées, ≈ 67 px). En Tailwind : grille de 5 colonnes égales `justify-items-center` suffit.
+       Largeur de chaque visuel ≈ 210–250 px, gouttières ≈ 70–150 px (les paires 2 et 3 sont rapprochées, ≈ 67 px). En Tailwind : grille de 5 colonnes égales `justify-items-center` suffit.
   3. Lien « Visit CURLYSOX.COM » aligné à droite : x 1457–1706, y 980–1000.
 - **Textes** :
   - « SOCK ILLUSTRATION CONTRACT » — CA Scholar V2 Italic ≈ 28 px, **capitales**, #000, gauche, letter-spacing large.
@@ -135,10 +138,10 @@ Conventions communes observées sur les pages projet desktop (artboard 1920 px) 
 - **Fond / couleurs** : #FFFFFF ; éléments #000000 ; cadre gris clair ≈ #B2B2B2 (1 px) ; bulle « copy » **#CEBAD1** (≈ lilas #CFBAD1) avec texte blanc.
 - **Structure / contenu** (coordonnées dans la planche 4436 px) :
   1. Icône panier seule, x 4119–4163, y 548–579 (≈ 44 × 31 px).
-  2. **États du sous-menu Portfolio**, x ≈ 512–960, y ≈ 932–1075 : trois lignes « DESIGN   ILLUSTRATION   ANIMATION », chacune avec un item actif en **gras** (ligne 1 DESIGN, ligne 2 ILLUSTRATION, ligne 3 ANIMATION) ; CA Scholar V2 Italic, capitales, ≈ 18–20 px, #000, items espacés d'≈ 130 px.
+  2. **États du sous-menu Portfolio**, x ≈ 512–960, y ≈ 932–1075 : trois lignes « DESIGN ILLUSTRATION ANIMATION », chacune avec un item actif en **gras** (ligne 1 DESIGN, ligne 2 ILLUSTRATION, ligne 3 ANIMATION) ; CA Scholar V2 Italic, capitales, ≈ 18–20 px, #000, items espacés d'≈ 130 px.
   3. **États du panier**, x 2306–2379, y 932–1216 : panier vide, puis panier + « 1 », « 2 », « 3 » (compteur en CA Scholar Italic à droite de l'icône) — lié au Shop (ignorer pour le rebuild si Shop hors périmètre, mais l'icône panier reste dans la nav).
   4. Libellé « Portfolio » (x 3225–3356, y 1375–1398), au-dessus d'un **cadre 1920 × 1077** (x 2306–4225, y 1460–2536, contour gris 1 px) = gabarit d'écran desktop contenant :
-     - Header : « C. ASHTON » (logo texte, CA Scholar V2 Italic ≈ 44 px, capitales, x ≈ 2460) ; nav « Portfolio   Shop   About   Contact » (CA Scholar V2 Italic ≈ 30 px, casse phrase ; « Contact » **souligné** = état actif/hover) + icône panier à droite (x ≈ 4045).
+     - Header : « C. ASHTON » (logo texte, CA Scholar V2 Italic ≈ 44 px, capitales, x ≈ 2460) ; nav « Portfolio Shop About Contact » (CA Scholar V2 Italic ≈ 30 px, casse phrase ; « Contact » **souligné** = état actif/hover) + icône panier à droite (x ≈ 4045).
      - « < BACK » (x ≈ 2740–2845, y ≈ 2336) — **Futura PT** droit, capitales, ≈ 26 px, chevron fin à gauche : bouton retour (variante de l'EXIT, sans doute pour mobile/lightbox).
      - Croix de fermeture « × » fine (x ≈ 4130, y ≈ 2166) : bouton close de lightbox/menu.
   5. Rangée d'états isolés, y ≈ 2625–2700 : « EXIT » souligné (CA Scholar V2 Italic ≈ 34 px, x ≈ 2977–3075) et bulle d'infobulle « copy » (x ≈ 3420–3530, pastille arrondie lilas avec pointe vers le haut, texte blanc italique ≈ 22 px) → feedback « copié » (probablement au clic sur l'adresse e-mail de la page Contact).
@@ -150,6 +153,7 @@ Conventions communes observées sur les pages projet desktop (artboard 1920 px) 
 ---
 
 ## Assets introuvables dans assets-source
+
 - Curly Sox : les 5 photos de chaussettes détourées.
 - Moodboard : icônes panier, ×, chevron « < », astérisque cerclé (à refaire en SVG).
 - (Misc. Editorial : tous les visuels trouvés, mais le contenu ne correspond pas au titre « C2 conference ».)

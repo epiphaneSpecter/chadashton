@@ -22,30 +22,30 @@ chaque écran fournis par le client (dossier Drive « SHARE_EPIPHANE »), rangé
 
 ### 1.1 Correspondance des artboards (noms trompeurs dans la maquette)
 
-| Page du site | Bureau | Mobile |
-|---|---|---|
-| Accueil | `landing-page` | `landing` |
-| Menu mobile ouvert | — | `hamburger` |
-| Portfolio | `portfolio` | `portfolio` |
-| Catégorie Design | `design` | `design` |
-| Catégorie Illustration | `illustration` | `illustration` |
-| Catégorie Animation | `animation` | `animation` |
-| Projet Miles Clayton | `miles-clayton` | `miles-clayton` |
-| Projet Davie | `davie` | `davie` |
-| Projet **Rossignol Magazine** | `miscellaneous-editorial` ⚠️ | `rossignol-magazine` |
-| Projet Matong'EAU | `matongeau` | `matongeau` |
-| Projet Yarha' | `yarha` | `lerreur-inspire-2` ⚠️ |
-| Projet L'erreur Inspire | `lerreur-inspire` | `lerreur-inspire` |
-| Projet **Mind-bogglers** (Rock Paper Scissors) | `rock-paper-scissors` | `lerreur-inspire-1` ⚠️ |
-| Projet **Miscellaneous Print Works** | `artboard-1` ⚠️ | `miscellaneous-print-works` |
-| Projet Curly Sox | `curly-sox` | `curly-sox` |
-| Projet **Wear a Suit** (Surmesur, animation) | `animation-1` ⚠️ | `surmesur` |
-| About | `about` | `about` |
-| Contact | `contact` | `contact` |
-| 404 | `404`, `404-v2` (2 variantes) | — |
-| Page cachée Song Generator | `hidden-page-song-generator` | idem |
-| Police Ashton (2 états) | `ashton-font`, `ashton-font-technical-view` | idem |
-| Planche de composants (non publiée) | `moodboard` | — |
+| Page du site                                   | Bureau                                      | Mobile                      |
+| ---------------------------------------------- | ------------------------------------------- | --------------------------- |
+| Accueil                                        | `landing-page`                              | `landing`                   |
+| Menu mobile ouvert                             | —                                           | `hamburger`                 |
+| Portfolio                                      | `portfolio`                                 | `portfolio`                 |
+| Catégorie Design                               | `design`                                    | `design`                    |
+| Catégorie Illustration                         | `illustration`                              | `illustration`              |
+| Catégorie Animation                            | `animation`                                 | `animation`                 |
+| Projet Miles Clayton                           | `miles-clayton`                             | `miles-clayton`             |
+| Projet Davie                                   | `davie`                                     | `davie`                     |
+| Projet **Rossignol Magazine**                  | `miscellaneous-editorial` ⚠️                | `rossignol-magazine`        |
+| Projet Matong'EAU                              | `matongeau`                                 | `matongeau`                 |
+| Projet Yarha'                                  | `yarha`                                     | `lerreur-inspire-2` ⚠️      |
+| Projet L'erreur Inspire                        | `lerreur-inspire`                           | `lerreur-inspire`           |
+| Projet **Mind-bogglers** (Rock Paper Scissors) | `rock-paper-scissors`                       | `lerreur-inspire-1` ⚠️      |
+| Projet **Miscellaneous Print Works**           | `artboard-1` ⚠️                             | `miscellaneous-print-works` |
+| Projet Curly Sox                               | `curly-sox`                                 | `curly-sox`                 |
+| Projet **Wear a Suit** (Surmesur, animation)   | `animation-1` ⚠️                            | `surmesur`                  |
+| About                                          | `about`                                     | `about`                     |
+| Contact                                        | `contact`                                   | `contact`                   |
+| 404                                            | `404`, `404-v2` (2 variantes)               | —                           |
+| Page cachée Song Generator                     | `hidden-page-song-generator`                | idem                        |
+| Police Ashton (2 états)                        | `ashton-font`, `ashton-font-technical-view` | idem                        |
+| Planche de composants (non publiée)            | `moodboard`                                 | —                           |
 
 ⚠️ **Écart avec le brief** : le brief cite « Miscellaneous Editorial » ; la maquette a deux projets distincts,
 **Rossignol Magazine** et **Miscellaneous Print Works** (Jeff Koons, livret Japon, dépliant C2, Coffee Crisp),
@@ -57,34 +57,34 @@ plus **Mind-bogglers** (Rock Paper Scissors, qui est donc une page projet de pam
 
 Classées par nombre d'écrans (artboards) qui les utilisent.
 
-| Rôle probable | Hex | Écrans |
-|---|---|---:|
-| Texte / fond sombre | `#000000` | 29 |
-| Fond clair principal | `#F7F7F7` | 25 |
-| Blanc | `#FFFFFF` | 14 |
-| Gris (texte secondaire, menu inactif ?) | `#B2B2B2` | 14 |
-| Gris moyen (traits, bordures ?) | `#707070` | 6 |
-| Doré (accent) | `#A77B14` (variantes `#A87B15`, `#A67B14`) | 8 |
-| Gris clair | `#F0F0EF` | 3 |
-| Crème (page police Ashton ?) | `#FDFCEF` (variantes `#FDFCEE`, `#FCFBEE`) | 4 |
-| Olive très sombre | `#1C1C12` | 2 |
-| Lilas (titre 200 px) | `#CFBAD1` / `#CEBAD1` | 2 |
-| Bleu nuit | `#001733` | 2 |
-| Gris foncés | `#6E6E6E`, `#6D6D6D`, `#6B6B6B`, `#6F6F6F`, `#454545`, `#303030` | 1–2 |
-| Accents ponctuels (jeu RPS, page cachée, visuels) | `#EA001B`, `#F69D1B`, `#FE5F00`, `#FD6F00`, `#FF4545`, `#FF00FF`, `#FA43FF`, `#EEA9E2`, `#FFB5F2`, `#F7BFEC`, `#42033E`, `#3284C6`, `#019AE0`, `#002C8A`, `#3A8146`… | 1–2 |
+| Rôle probable                                     | Hex                                                                                                                                                                  | Écrans |
+| ------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -----: |
+| Texte / fond sombre                               | `#000000`                                                                                                                                                            |     29 |
+| Fond clair principal                              | `#F7F7F7`                                                                                                                                                            |     25 |
+| Blanc                                             | `#FFFFFF`                                                                                                                                                            |     14 |
+| Gris (texte secondaire, menu inactif ?)           | `#B2B2B2`                                                                                                                                                            |     14 |
+| Gris moyen (traits, bordures ?)                   | `#707070`                                                                                                                                                            |      6 |
+| Doré (accent)                                     | `#A77B14` (variantes `#A87B15`, `#A67B14`)                                                                                                                           |      8 |
+| Gris clair                                        | `#F0F0EF`                                                                                                                                                            |      3 |
+| Crème (page police Ashton ?)                      | `#FDFCEF` (variantes `#FDFCEE`, `#FCFBEE`)                                                                                                                           |      4 |
+| Olive très sombre                                 | `#1C1C12`                                                                                                                                                            |      2 |
+| Lilas (titre 200 px)                              | `#CFBAD1` / `#CEBAD1`                                                                                                                                                |      2 |
+| Bleu nuit                                         | `#001733`                                                                                                                                                            |      2 |
+| Gris foncés                                       | `#6E6E6E`, `#6D6D6D`, `#6B6B6B`, `#6F6F6F`, `#454545`, `#303030`                                                                                                     |    1–2 |
+| Accents ponctuels (jeu RPS, page cachée, visuels) | `#EA001B`, `#F69D1B`, `#FE5F00`, `#FD6F00`, `#FF4545`, `#FF00FF`, `#FA43FF`, `#EEA9E2`, `#FFB5F2`, `#F7BFEC`, `#42033E`, `#3284C6`, `#019AE0`, `#002C8A`, `#3A8146`… |    1–2 |
 
 À confirmer avec les écrans : quel fond est utilisé sur quelle page (`#F7F7F7` vs `#FFFFFF` vs `#000000`).
 
 ### 2.2 Polices
 
-| Famille (nom réel) | Style | Tailles utilisées (px) | Fichier fourni |
-|---|---|---|---|
-| **CA Scholar V2** | Italic | 16, 17, 18, 19, 20, 23–28, 30–33, 35–37, 40, 50, 85, 93, 200 | ✅ `Font/CAScholarV2-Italic.otf` |
-| CA Scholar V2 | **Medium** (20 px, 8 usages) | 20 | ❌ **manquant** |
-| **Futura PT** | Medium, Book, Demi, Heavy | 16–45 | ❌ **manquant** |
-| Futura | Medium | 28, 44 | ❌ manquant (probablement remplaçable par Futura PT Medium) |
-| Big Moore | Regular, Italic | 30, 32, 38 | ❌ manquant |
-| Helvetica Neue | Regular | 50 | ❌ (police système macOS) |
+| Famille (nom réel) | Style                        | Tailles utilisées (px)                                       | Fichier fourni                                              |
+| ------------------ | ---------------------------- | ------------------------------------------------------------ | ----------------------------------------------------------- |
+| **CA Scholar V2**  | Italic                       | 16, 17, 18, 19, 20, 23–28, 30–33, 35–37, 40, 50, 85, 93, 200 | ✅ `Font/CAScholarV2-Italic.otf`                            |
+| CA Scholar V2      | **Medium** (20 px, 8 usages) | 20                                                           | ❌ **manquant**                                             |
+| **Futura PT**      | Medium, Book, Demi, Heavy    | 16–45                                                        | ❌ **manquant**                                             |
+| Futura             | Medium                       | 28, 44                                                       | ❌ manquant (probablement remplaçable par Futura PT Medium) |
+| Big Moore          | Regular, Italic              | 30, 32, 38                                                   | ❌ manquant                                                 |
+| Helvetica Neue     | Regular                      | 50                                                           | ❌ (police système macOS)                                   |
 
 **Nom réel du fichier fourni** (lu dans la table `name`) : famille `CA Scholar V2`, style `Italic`,
 nom complet `CA Scholar V2 Italic`, PostScript `CAScholarV2Italic`. 245 glyphes, graisse 400,
@@ -98,20 +98,20 @@ Helvetica Neue**, qui ne sont pas fournis. Pas de simulation (pas de faux gras) 
 
 Les plus utilisés (tous sans espacement de lettres) :
 
-| Police | Taille / interligne | Couleurs | Casse | Usages |
-|---|---|---|---|---:|
-| Scholar Italic | 36 / 39 | noir, blanc, crème, doré, lilas | — | 41 |
-| Scholar Italic | 50 / 55 (aussi 72, 73, 94) | noir, crème, blanc, doré | — | 26 |
-| Scholar Italic | 32 / 35 | noir, `#F7F7F7`, `#B2B2B2`, blanc, bleu | parfois MAJ | 24 |
-| Scholar Italic | 30 / 43.2 et 30 / 33 | noir, blanc, doré | parfois MAJ | 23 |
-| Scholar Italic | 20 / 22 | noir, blanc | — | 9 |
-| Scholar Medium | 20 / 22 | noir, blanc | — | 8 |
-| Scholar Italic | 23 / 43.2 | blanc, `#F7F7F7` | MAJ | 6 |
-| Scholar Italic | 85 / 123, 93 / 102, 200 / 220 | crème, blanc, lilas | MAJ | 3 (titres d'accueil / police ?) |
-| Futura PT Medium | 25 / 43.2 | noir, `#F0F0EF` | parfois MAJ | 14 |
-| Futura PT Medium | 32 / 44 | noir | MAJ | 7 |
-| Futura PT Book | 25 / 54 | doré, `#F7F7F7` | parfois MAJ | 7 |
-| Futura PT Book/Medium | 16–20 / 18–27 | noir, bleu nuit, `#454545` | — | ~20 |
+| Police                | Taille / interligne           | Couleurs                                | Casse       |                          Usages |
+| --------------------- | ----------------------------- | --------------------------------------- | ----------- | ------------------------------: |
+| Scholar Italic        | 36 / 39                       | noir, blanc, crème, doré, lilas         | —           |                              41 |
+| Scholar Italic        | 50 / 55 (aussi 72, 73, 94)    | noir, crème, blanc, doré                | —           |                              26 |
+| Scholar Italic        | 32 / 35                       | noir, `#F7F7F7`, `#B2B2B2`, blanc, bleu | parfois MAJ |                              24 |
+| Scholar Italic        | 30 / 43.2 et 30 / 33          | noir, blanc, doré                       | parfois MAJ |                              23 |
+| Scholar Italic        | 20 / 22                       | noir, blanc                             | —           |                               9 |
+| Scholar Medium        | 20 / 22                       | noir, blanc                             | —           |                               8 |
+| Scholar Italic        | 23 / 43.2                     | blanc, `#F7F7F7`                        | MAJ         |                               6 |
+| Scholar Italic        | 85 / 123, 93 / 102, 200 / 220 | crème, blanc, lilas                     | MAJ         | 3 (titres d'accueil / police ?) |
+| Futura PT Medium      | 25 / 43.2                     | noir, `#F0F0EF`                         | parfois MAJ |                              14 |
+| Futura PT Medium      | 32 / 44                       | noir                                    | MAJ         |                               7 |
+| Futura PT Book        | 25 / 54                       | doré, `#F7F7F7`                         | parfois MAJ |                               7 |
+| Futura PT Book/Medium | 16–20 / 18–27                 | noir, bleu nuit, `#454545`              | —           |                             ~20 |
 
 Les tailles (36–50 px pour le texte courant) laissent penser à des artboards larges
 (probablement 1920 px ou plus) : les tailles seront converties en `clamp()` une fois la
@@ -119,22 +119,23 @@ largeur des artboards connue.
 
 ### 2.4 Interactions et transitions (111 au total)
 
-| Type | Nombre | Détail |
-|---|---:|---|
-| Survol → changement d'état (auto-animate) | 37 | 0,3 s, ease-out ; 47 composants ont un état « Hover » (liens du menu, vignettes…) |
-| Clic → autre écran | 53 | majoritairement sans transition ; 0,3 s ou 0,2 s ease-out |
-| Clic → écran, glissement vers le haut (`slide-up`) | 4 | 0,2 s (×3) et 1 s (×1) |
-| Clic → fondu (`dissolve`) | 3 | 0,3 s (dont 2 en auto-animate) |
-| Clic → écran précédent | 3 | bouton retour / EXIT |
-| Clic → changement d'état | 9 | bascules (Print mode / Blur ?, jeu ?) |
-| Vidéo | 7 | 4 lectures automatiques au chargement, 3 lecture/pause au clic |
-| Lien externe | 1 | `https://curlysox.com/en` (page projet CURLY SOX) |
+| Type                                               | Nombre | Détail                                                                            |
+| -------------------------------------------------- | -----: | --------------------------------------------------------------------------------- |
+| Survol → changement d'état (auto-animate)          |     37 | 0,3 s, ease-out ; 47 composants ont un état « Hover » (liens du menu, vignettes…) |
+| Clic → autre écran                                 |     53 | majoritairement sans transition ; 0,3 s ou 0,2 s ease-out                         |
+| Clic → écran, glissement vers le haut (`slide-up`) |      4 | 0,2 s (×3) et 1 s (×1)                                                            |
+| Clic → fondu (`dissolve`)                          |      3 | 0,3 s (dont 2 en auto-animate)                                                    |
+| Clic → écran précédent                             |      3 | bouton retour / EXIT                                                              |
+| Clic → changement d'état                           |      9 | bascules (Print mode / Blur ?, jeu ?)                                             |
+| Vidéo                                              |      7 | 4 lectures automatiques au chargement, 3 lecture/pause au clic                    |
+| Lien externe                                       |      1 | `https://curlysox.com/en` (page projet CURLY SOX)                                 |
 
 ## 3. Écrans du périmètre : éléments communs et pages simples
 
 Mesures sur les originaux 1920 px (x, y en px d'artboard).
 
 ### 3.1 En-tête du site (Portfolio, catégories, About, Contact)
+
 - Logo `C. ASHTON` : Scholar Italic ≈ 44 px, x 144–149, capitales y 53–83. Lien vers l'accueil (supposé).
 - Menu à droite, Scholar Italic ≈ 34 px : `Portfolio` (x 835), ~~`Shop` (x 1104)~~, `About` (x 1315), `Contact` (x 1525), ~~panier (x 1730–1774)~~.
   **V1 : Shop et panier retirés**, les 3 liens restants seront redistribués en gardant la même taille, le même interlettrage et le bord droit à x ≈ 1780.
@@ -143,18 +144,21 @@ Mesures sur les originaux 1920 px (x, y en px d'artboard).
 - Mobile : `C. ASHTON` + bouton astérisque (burger) → menu plein écran ocre `#A87B15` (voir `screens/mobile.md`).
 
 ### 3.2 Pied de page (Portfolio, catégories)
+
 - Ligne : `chadgrenier42@gmail.com` à gauche (x 154) ; `Instagram`, `LinkedIn`, `Behance` à droite (se termine à x 1778). Scholar Italic ≈ 20 px.
 - Filet noir pleine largeur (2–3 px), puis slogan centré Scholar Italic ≈ 28 px.
 - ⚠️ Slogan écrit « For beauty. At all costs. » (accueil, Portfolio) **et** « For Beauty. At All Costs. » (catégories) : à unifier.
 - Pages projet : **pas** d'en-tête de site ni de pied de page (titre du projet à gauche + `EXIT` à droite).
 
 ### 3.3 Accueil (`landing-page`) — fond `#FFF9F8`
+
 - `Chad ASHTON` centré, Scholar Italic ≈ 85 px (x 673–1254, y 494–553).
 - `For beauty. At all costs.` centré en bas (y 957–981), ≈ 32 px.
 - Un trait fin apparaît dans le coin bas-droit : début de l'animation illustrée (séquence auto-animate du prototype, à détailler à l'étape 7).
 - Pas d'en-tête ni de menu. Clic / délai → Portfolio (supposé).
 
 ### 3.4 Portfolio (`portfolio`) — fond `#F7F7F7`, 1920×1239
+
 - En-tête (Portfolio actif).
 - Trois libellés centrés sur une ligne à y ≈ 563 : `DESIGN` (x 448), `ILLUSTRATION` (x 863), `ANIMATION` (x 1296) ; Scholar Italic capitales ≈ 25 px.
   Les zones vides autour suggèrent une image qui apparaît au survol (37 états Hover dans le prototype) : **à confirmer**.
@@ -162,6 +166,7 @@ Mesures sur les originaux 1920 px (x, y en px d'artboard).
 - Pied de page (§ 3.2).
 
 ### 3.5 Catégorie Design (`design`) — fond `#000000` puis `#3A8146`
+
 - En-tête en blanc. Projet mis en avant : pochette « You Give Me » (691×691 px, centrée, y 176) + légende à droite
   `You Give Me` / `Single artwork for Miles Clayton` / `(Latest project)`.
 - Grille 4 colonnes (≈ 400 px, gouttière ≈ 15 px) de 8 vignettes + légendes centrées :
@@ -171,6 +176,7 @@ Mesures sur les originaux 1920 px (x, y en px d'artboard).
 - ✅ **La page police Ashton garde donc un point d'entrée** (depuis Design), en plus de la boutique.
 
 ### 3.6 About (`about`) — fond `#A67B14` (doré), 1920×3002
+
 - En-tête (About souligné ; Contact aussi souligné dans l'export, sans doute un état de survol).
 - `Chad Ashton Grenier works and lives in Quebec City.` (x 140, y 318), Scholar Italic ≈ 30 px.
 - Portrait N&B 409×409 px (x 1288, y 300) — **absent des assets** (seule source : l'export de maquette, basse résolution).
@@ -183,6 +189,7 @@ Mesures sur les originaux 1920 px (x, y en px d'artboard).
 - Textes complets : lire l'écran `design/desktop/about.webp` (repris tels quels à l'étape 3).
 
 ### 3.7 Contact (`contact`) — fond `#F7F7F7`
+
 - En-tête (Contact souligné).
 - `WRITE TO ME` : Scholar Italic capitales ≈ 200 px, lilas `#CFBAD1`, centré (x 366–1572, y 309–430).
 - `chadgrenier42@gmail.com` : **Futura PT** Medium ≈ 44 px, noir, centré (y 608–654).
@@ -190,18 +197,21 @@ Mesures sur les originaux 1920 px (x, y en px d'artboard).
 - Pas de formulaire, pas de pied de page. ⚠️ Contraste lilas/fond ≈ 1,6:1 (titre décoratif, à signaler).
 
 ### 3.8 404 (`404` et `404-v2`) — fond `#F7F7F7`
+
 - `PAGE #404` en haut à gauche (x 140, y 72) ; illustration centrée avec bulle `Error !`
   (v1 : homme à table = `Illustration/404.png` ; v2 : guitariste = `Illustration/404_2.png`).
 - `THE 404 PAGE HAS BEEN FOUND.` (≈ 30 px, capitales) ; `The page you were looking for has not.` ; lien `BACK TO HOME` (y 925).
 - Deux variantes → proposition : en tirer une au hasard à chaque chargement, ou choisir `404` (à valider).
 
 ### 3.9 Song Generator (page cachée), police Ashton, projets, galeries, mobile
+
 Voir les fichiers de `docs/screens/`.
 Points clés : Song Generator = fond `#CFBAD1`, 9 chansons, bouton `RELOAD`, `BACK TO HOME`, `You discovered a hidden page`.
 Page police : un seul interrupteur **« BLUPRINT MODE » OFF/ON** (et non « Print mode / Blur » comme dans le brief) qui bascule
 entre `ashton-font` et `ashton-font-technical-view`. Éléments de vente à retirer : `AVAILABLE SOON`, « The ASHTON font will be AVAILABLE SOON! », panier.
 
 ### 3.10 Coquilles relevées dans la maquette (à valider avant correction)
+
 « reccomendations », « necssities », « MILES CLAYTON 's », « Secondairy », « Momment », « togheter », « panphlet »,
 « Cofee Crisp », « BLUPRINT », « reminicsence », « derrived », « intesely », « hapen », « Miscelaneous », « VAN MORISSON », « EGON SHEILE ».
 Titre de la page Rossignol erroné : « Poster/panphlet for C2 conference » (copié de Miscellaneous Print Works).
@@ -216,33 +226,33 @@ Tableau complet fichier par fichier : [`assets-inventory.md`](./assets-inventory
 
 ### 4.1 Vue d'ensemble
 
-| Type | Nombre | Poids total |
-|---|---:|---:|
-| PNG | 250 | 1 058 Mo |
-| MP4 | 22 | 560 Mo |
-| PSD (sources Photoshop) | 6 | 217 Mo |
-| GIF | 23 | 101 Mo |
-| AI (sources Illustrator) | 3 | 99 Mo |
-| JPG | 54 | 94 Mo |
-| PDF | 9 | 27 Mo |
-| HEIC | 1 | 2 Mo |
-| OTF | 1 | 0,2 Mo |
+| Type                     | Nombre | Poids total |
+| ------------------------ | -----: | ----------: |
+| PNG                      |    250 |    1 058 Mo |
+| MP4                      |     22 |      560 Mo |
+| PSD (sources Photoshop)  |      6 |      217 Mo |
+| GIF                      |     23 |      101 Mo |
+| AI (sources Illustrator) |      3 |       99 Mo |
+| JPG                      |     54 |       94 Mo |
+| PDF                      |      9 |       27 Mo |
+| HEIC                     |      1 |        2 Mo |
+| OTF                      |      1 |      0,2 Mo |
 
 ### 4.2 Par dossier et usage prévu
 
-| Dossier | Contenu | Usage (d'après les écrans) |
-|---|---|---|
-| `Font/` | police, logo (14409×2576), favicon (16×16), visuels de la police (Ashton.png, Capitals/Lowercase/glyphs_display, 8 × `Artboard 60 copy N.png` 1081×1081), `Ashton_Font.gif` (10,6 Mo, 241 images, 10 s), une capture « Indoor Squash » | police du site, en-tête, favicon, page Ashton Font |
-| `Ashton_Font_Thumbnail.png` | vignette « Ashton — A reminiscence of intellectual art » | vignette de la page police |
-| `Design/davie_behance/` | branding Davie : logo, illustrations, brochure, site web, mockups | projet **Davie** |
-| `Design/L'erreur_inspire/` | visuels FailCamp « L'erreur inspire » (JPG légers) | projet **L'erreur inspire** |
-| `Design/Rossignol/`, `Design/Japon Mag/`, `Design/The_box*.png`, captures 2024/2025 | magazines Rossignol et Japon, « The box », article Jeff Koons | **Rossignol Magazine** (`Rossignol_mag/`), **Miscellaneous Print Works** (Japon, Jeff Koons), **Mind-bogglers** (`The_box_1.png`) |
-| `Design/Screenshot 2024-07-10 at 2.52.00 PM.png` | capture d'une page « MILES CLAYTON » (EPK) | projet **Miles Clayton** (seul visuel fourni) |
-| `Design/1_Grenier_ch_Atelier_1_Palette_choco_Haut_gamme.jpg` | packaging « Coffee Crisp » | **Miscellaneous Print Works** (basse résolution) |
-| `Illustration/` (racine) | illustrations finales (Metro, Nick Drake, hotel, orchestra, window4…), 404.png / 404_2.png, affiches Dance Party | catégorie Illustration, page 404 |
-| `Illustration/Final_RPS/` | 10 pages « Logical Philosophy About Rock Paper Scissors » | projet **Mind-bogglers** (pamphlet, carrousel de pages) |
-| `Illustration/inktober/`, `Inktober_2023/`, `Wildlife/`, `Van_Gogh_Aznarez/`, `scarbourough/`, `Grandma's Appartment/`, `wedding_crasher/`, `Douglass_Adams_road_construction/` | séries d'illustrations + photos de référence et captures de travail | catégorie Illustration |
-| `Animation/` | 22 MP4 (0,7 s à 87 s, avec piste audio), 23 GIF, `Surmesur_GIF/` (personnages sur fond noir), `Cyclist/` (images clés) | catégorie Animation, projets **Wear a Suit** (Surmesur), Davie (vidéo), Yarha' (calèche) |
+| Dossier                                                                                                                                                                         | Contenu                                                                                                                                                                                                                                | Usage (d'après les écrans)                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `Font/`                                                                                                                                                                         | police, logo (14409×2576), favicon (16×16), visuels de la police (Ashton.png, Capitals/Lowercase/glyphs_display, 8 × `Artboard 60 copy N.png` 1081×1081), `Ashton_Font.gif` (10,6 Mo, 241 images, 10 s), une capture « Indoor Squash » | police du site, en-tête, favicon, page Ashton Font                                                                                |
+| `Ashton_Font_Thumbnail.png`                                                                                                                                                     | vignette « Ashton — A reminiscence of intellectual art »                                                                                                                                                                               | vignette de la page police                                                                                                        |
+| `Design/davie_behance/`                                                                                                                                                         | branding Davie : logo, illustrations, brochure, site web, mockups                                                                                                                                                                      | projet **Davie**                                                                                                                  |
+| `Design/L'erreur_inspire/`                                                                                                                                                      | visuels FailCamp « L'erreur inspire » (JPG légers)                                                                                                                                                                                     | projet **L'erreur inspire**                                                                                                       |
+| `Design/Rossignol/`, `Design/Japon Mag/`, `Design/The_box*.png`, captures 2024/2025                                                                                             | magazines Rossignol et Japon, « The box », article Jeff Koons                                                                                                                                                                          | **Rossignol Magazine** (`Rossignol_mag/`), **Miscellaneous Print Works** (Japon, Jeff Koons), **Mind-bogglers** (`The_box_1.png`) |
+| `Design/Screenshot 2024-07-10 at 2.52.00 PM.png`                                                                                                                                | capture d'une page « MILES CLAYTON » (EPK)                                                                                                                                                                                             | projet **Miles Clayton** (seul visuel fourni)                                                                                     |
+| `Design/1_Grenier_ch_Atelier_1_Palette_choco_Haut_gamme.jpg`                                                                                                                    | packaging « Coffee Crisp »                                                                                                                                                                                                             | **Miscellaneous Print Works** (basse résolution)                                                                                  |
+| `Illustration/` (racine)                                                                                                                                                        | illustrations finales (Metro, Nick Drake, hotel, orchestra, window4…), 404.png / 404_2.png, affiches Dance Party                                                                                                                       | catégorie Illustration, page 404                                                                                                  |
+| `Illustration/Final_RPS/`                                                                                                                                                       | 10 pages « Logical Philosophy About Rock Paper Scissors »                                                                                                                                                                              | projet **Mind-bogglers** (pamphlet, carrousel de pages)                                                                           |
+| `Illustration/inktober/`, `Inktober_2023/`, `Wildlife/`, `Van_Gogh_Aznarez/`, `scarbourough/`, `Grandma's Appartment/`, `wedding_crasher/`, `Douglass_Adams_road_construction/` | séries d'illustrations + photos de référence et captures de travail                                                                                                                                                                    | catégorie Illustration                                                                                                            |
+| `Animation/`                                                                                                                                                                    | 22 MP4 (0,7 s à 87 s, avec piste audio), 23 GIF, `Surmesur_GIF/` (personnages sur fond noir), `Cyclist/` (images clés)                                                                                                                 | catégorie Animation, projets **Wear a Suit** (Surmesur), Davie (vidéo), Yarha' (calèche)                                          |
 
 ### 4.3 Ce qui manque
 
@@ -291,3 +301,36 @@ Détail par écran dans `docs/screens/*.md`. Récapitulatif :
 - **Noms à renommer** en kebab-case : fichiers avec espaces, apostrophes ou `&`
   (`Artboard 60 copy 2.png`, `Grandma's Appartment/`, `L'erreur_inspire/`, `cyclist_GIF_B&W.gif`,
   `punch .gif`…).
+
+## 5. Choix techniques (étape 1)
+
+- **Projet** : fichiers du modèle officiel `examples/minimal` d'Astro 7 (ce que copie `npm create astro@latest`,
+  dont le téléchargement est bloqué dans l'environnement cloud), TypeScript `astro/tsconfigs/strict`,
+  Tailwind CSS 4 via `npx astro add tailwind`.
+- **Qualité** : `npm run verify` = Prettier (`format:check`) + ESLint (TypeScript strict, Astro, accessibilité)
+  - `astro check` + `astro build`.
+- **Police** : `CAScholarV2-Italic.otf` → `public/fonts/ca-scholar-v2-italic.woff2` (fontTools, 188 → 74 Ko,
+  245 glyphes). Famille déclarée sous son vrai nom `CA Scholar V2`, `font-style: italic`, `font-display: swap`,
+  préchargée. Tout le texte est en italique (seule face fournie) et `font-synthesis: none` empêche tout faux gras.
+  Hauteur de capitale = 0,607 em : taille CSS = hauteur de capitale mesurée ÷ 0,607.
+- **Futura PT** : non fournie. Token `font-futura` prévu avec des polices de repli (placeholder), non chargée.
+- **Tokens** (Tailwind 4, bloc `@theme` de `src/styles/global.css`, qui remplace `tailwind.config.js` en v4) :
+  couleurs, polices, échelle typographique, marge de page, point de rupture `desktop` (1024 px).
+- **Tailles fluides** : `clamp(valeur mobile, valeur bureau × 100vw / 1920, valeur bureau)`. À 1920 px le site
+  reproduit la maquette au pixel ; à 1440 px il la reproduit à l'échelle 0,75 ; sous 1024 px les valeurs mobiles
+  (artboards 393 px) s'appliquent.
+
+| Token          | Bureau (1920) | Mobile (393) | Usage                      |
+| -------------- | ------------: | -----------: | -------------------------- |
+| `text-display` |        200 px |        42 px | WRITE TO ME                |
+| `text-hero`    |         93 px |        35 px | nom sur l'accueil          |
+| `text-logo`    |         50 px |        30 px | logo C. ASHTON             |
+| `text-nav`     |         36 px |        25 px | menu                       |
+| `text-title`   |         30 px |        20 px | slogan, catégories, titres |
+| `text-body`    |         26 px |        16 px | paragraphes                |
+| `text-small`   |         20 px |        15 px | pied de page               |
+| `spacing-page` |        140 px |        20 px | marges latérales           |
+
+- **Arborescence** : `src/pages` (routes), `src/layouts` (`BaseLayout.astro`), `src/components`, `src/config`
+  (`site.ts`, puis la navigation à l'étape 2), `src/styles`, `src/assets` (images optimisées),
+  `public/` (police, favicon, vidéos). Content collections (`src/content`) ajoutées à l'étape 5.

@@ -17,6 +17,7 @@ Constantes réutilisées (définies une fois ici, référencées ensuite) :
 ---
 
 ### Landing (`design/mobile/landing.webp`)
+
 - **Fond / couleurs** : #fff9f8 (blanc rosé) uni ; texte #000000.
 - **Structure** (artboard 393 × 852, un seul écran, pas de scroll) :
   1. Aucun header, aucun burger.
@@ -32,6 +33,7 @@ Constantes réutilisées (définies une fois ici, référencées ensuite) :
 ---
 
 ### Menu mobile ouvert (`design/mobile/hamburger.webp`)
+
 - **Fond / couleurs** : overlay plein écran **#a87b15** (ocre/moutarde, même couleur que la page About). Tous les textes et icônes en **#f7f7f7** (blanc cassé). Filet du footer blanc (1–2 px).
 - **Structure** (393 × 843 ≈ 1 viewport, overlay qui couvre tout l'écran, pas de scroll) :
   1. **Header** identique à HEADER-A mais en blanc : `C. ASHTON` x 30, y 58–76. À droite, **bouton de fermeture** à la même place que le burger (x 337–370, y 48–81, 34 × 34 px) : c'est une **étoile/scintillement** blanche — branches verticale et horizontale longues (34 px), diagonales courtes (~16 px), petit disque central — donc l'astérisque du burger « se transforme » en étincelle (animation de rotation/échelle possible). Pas de croix « X ».
@@ -57,6 +59,7 @@ Constantes réutilisées (définies une fois ici, référencées ensuite) :
 ---
 
 ### Portfolio (`design/mobile/portfolio.webp`)
+
 - **Fond / couleurs** : #f7f7f7 ; texte #000 ; filet #3e3e3e.
 - **Structure** (393 × 1200) :
   1. HEADER-A (noir).
@@ -77,11 +80,12 @@ Constantes réutilisées (définies une fois ici, référencées ensuite) :
 ---
 
 ### Design (`design/mobile/design.webp`)
+
 - **Fond / couleurs** : deux sections — **noire #000000** (y 0–1224) puis **verte #3a8146** (y 1224–2240). Textes blancs #f7f7f7 / #fff ; légendes de cartes grises claires ; filet du footer blanc cassé.
 - **Structure** (393 × 2240) :
   1. HEADER-A en blanc sur noir.
   2. **Projet mis en avant** : image carrée 337 × 335 à x 28, y 127 (« YOU GIVE ME », pochette Miles Clayton). Légende en dessous, alignée à gauche x 28, 3 lignes minuscules (y 473–499) : `You Give Me` / `Single artwork for Miles Clayton` / `(Latest project)` — ≈ 9–10 px, la 3ᵉ plus petite (≈ 7 px) ; gris clair #989898 environ.
-  3. **Grille de projets 2 colonnes** : cartes 170 × 126 px, colonnes x 20 et x 200 (gouttière 10 px, marges 20 / 23 px), rangées à y 545, 708, 871, 1046 (pas ≈ 163–175 px). Légende centrée sous chaque carte (8 px dessous, ≈ 11 px, italique, blanc/gris clair). Ordre : 
+  3. **Grille de projets 2 colonnes** : cartes 170 × 126 px, colonnes x 20 et x 200 (gouttière 10 px, marges 20 / 23 px), rangées à y 545, 708, 871, 1046 (pas ≈ 163–175 px). Légende centrée sous chaque carte (8 px dessous, ≈ 11 px, italique, blanc/gris clair). Ordre :
      - `Miles Clayton` | `Davie`
      - `Rossignol Magazine` | `Matong'EAU` (légendes masquées par la barre fixe dans la maquette)
      - `Miscelaneous Print Works` | `L'erreur Inspire`
@@ -102,6 +106,7 @@ Constantes réutilisées (définies une fois ici, référencées ensuite) :
 ---
 
 ### Illustration (`design/mobile/illustration.webp`)
+
 - **Fond / couleurs** : #f7f7f7 ; textes #000.
 - **Structure** (393 × 7197) — **une seule colonne**, images pleine largeur 350 px (x 20–370), espacement vertical ≈ 24–30 px entre images :
   1. HEADER-A.
@@ -135,6 +140,7 @@ Constantes réutilisées (définies une fois ici, référencées ensuite) :
 ---
 
 ### Animation (`design/mobile/animation.webp`)
+
 - **Fond / couleurs** : zone hero **#fff9f8** (y 0–852, = 1 viewport), puis **#f7f7f7** ; textes #000 ; légendes #000.
 - **Structure** (393 × 4553) :
   1. HEADER-A sur le hero.
@@ -176,6 +182,7 @@ Constantes réutilisées (définies une fois ici, référencées ensuite) :
 ---
 
 ### About (`design/mobile/about.webp`)
+
 - **Fond / couleurs** : **#a87b15** (ocre) ; textes #000 ; la ligne « from Cégep de Sainte-Foy » est plus claire (brun ≈ #987010 — en fait noir fin anti-aliasé, traiter en noir) ; filet footer noir.
 - **Structure** (393 × 2125) :
   1. HEADER-A en noir.
@@ -205,6 +212,7 @@ Constantes réutilisées (définies une fois ici, référencées ensuite) :
 ---
 
 ### Contact (`design/mobile/contact.webp`)
+
 - **Fond / couleurs** : #f7f7f7 ; **tout le contenu en lilas #cfbad1**, y compris le logo `C. ASHTON` et l'icône burger.
 - **Structure** (393 × 850, un écran) :
   1. HEADER-A en lilas.
@@ -221,6 +229,7 @@ Constantes réutilisées (définies une fois ici, référencées ensuite) :
 ---
 
 ### Curly Sox (`design/mobile/curly-sox.webp`)
+
 - **Fond / couleurs** : **#ffffff** ; textes #000.
 - **Structure** (393 × 846) :
   1. HEADER-B variante : `SOCK ILLUSTRATION CONTRACT` (capitales ≈ 13 px, x 20–247, y 56–65) + `EXIT` à droite.
@@ -233,6 +242,7 @@ Constantes réutilisées (définies une fois ici, référencées ensuite) :
 ---
 
 ### Davie (`design/mobile/davie.webp`)
+
 - **Fond / couleurs** : #ffffff ; textes #000.
 - **Structure** (393 × 4007) — 1 colonne, visuels centrés :
   1. HEADER-B : `Rebranding, website, magazine,` / `illustrations, and animation` / `academic project` (3 lignes, x 20–249, y 55–104) + `EXIT`.
@@ -253,6 +263,7 @@ Constantes réutilisées (définies une fois ici, référencées ensuite) :
 ---
 
 ### L'erreur Inspire (`design/mobile/lerreur-inspire.webp`)
+
 - **Fond / couleurs** : #ffffff ; bandeau noir #000 ; roses de l'illustration.
 - **Structure** (393 × 1308) :
   1. HEADER-B : `Advertising campaign for an event` / `by Fail Camp` / `academic project` (x 19–?, y 55–104) + `EXIT`.
@@ -269,6 +280,7 @@ Constantes réutilisées (définies une fois ici, référencées ensuite) :
 ---
 
 ### « L'erreur Inspire 1 » = Mind-bogglers (`design/mobile/lerreur-inspire-1.webp`)
+
 - **Ce que c'est** : malgré son nom d'artboard XD (copie mal renommée), cet écran est la **page projet « Mind-bogglers »** (carte `Mind-bogglers` de la page Design) = équivalent mobile de l'artboard desktop **`rock-paper-scissors`** (Rock Paper Scissors + Think inside the box). → Route suggérée : `/design/mind-bogglers`.
 - **Fond / couleurs** : **#000000** ; textes blancs #f0f0f0 ; filet séparateur gris #b8b8b8.
 - **Structure** (393 × 1175) :
@@ -284,6 +296,7 @@ Constantes réutilisées (définies une fois ici, référencées ensuite) :
 ---
 
 ### « L'erreur Inspire 2 » = Yarha' (`design/mobile/lerreur-inspire-2.webp`)
+
 - **Ce que c'est** : autre artboard mal nommé ; c'est la **page projet « Yarha' »** (carte `Yarha'` de la page Design) = équivalent mobile de l'artboard desktop **`yarha`**. → Route suggérée : `/design/yarha`.
 - **Fond / couleurs** : #f7f7f7 ; texte #000 ; bandeau bleu ardoise **#3c5a74** (≈ #385870) ; bande « tipi » parchemin (#f0e8d8).
 - **Structure** (393 × 5287) :
@@ -312,6 +325,7 @@ Constantes réutilisées (définies une fois ici, référencées ensuite) :
 ---
 
 ### Matong'EAU (`design/mobile/matongeau.webp`)
+
 - **Fond / couleurs** : #ffffff ; bleu marque **#3384c6** (description + logo) ; `EXIT` noir.
 - **Structure** (393 × 1830) :
   1. HEADER-B en **bleu #3384c6** : `Logo and brand design according` / `to client's specific needs and demands.` (x 20–302, y 55–86) + `EXIT` noir.
@@ -328,6 +342,7 @@ Constantes réutilisées (définies une fois ici, référencées ensuite) :
 ---
 
 ### Miles Clayton (`design/mobile/miles-clayton.webp`)
+
 - **Fond / couleurs** : hero sombre (≈ #000a04 / rouge profond), page **#ffffff** ; texte #000 ; description/EXIT du header en **blanc** sur le hero.
 - **Structure** (393 × 2534) :
   1. **Hero carré pleine largeur** 393 × 393 (y 0) : photo du duo sur fond rouge avec « MILES CLAYTON » ; HEADER-B **superposé en blanc** : `Art direction and multimedia design` (x 20, y ≈ 55) + `EXIT`.
@@ -346,6 +361,7 @@ Constantes réutilisées (définies une fois ici, référencées ensuite) :
 ---
 
 ### Miscellaneous Print Works (`design/mobile/miscellaneous-print-works.webp`)
+
 - **Ce que c'est** : page projet de la carte `Miscelaneous Print Works`. Son équivalent desktop est l'artboard nommé **`artboard-1`** (et non `miscellaneous-editorial`, qui contient en fait Rossignol — voir plus bas).
 - **Fond / couleurs** : 1ʳᵉ section **noire #000** (y 0–400) ; puis **#ffffff** ; filets séparateurs #404040.
 - **Structure** (393 × 4560) — 4 sous-projets séparés par des filets 2 px pleine largeur :
@@ -361,6 +377,7 @@ Constantes réutilisées (définies une fois ici, référencées ensuite) :
 ---
 
 ### Rossignol Magazine (`design/mobile/rossignol-magazine.webp`)
+
 - **Ce que c'est** : page projet de la carte `Rossignol Magazine`. **Pas d'artboard desktop portant ce nom** : le contenu correspond à l'artboard desktop **`miscellaneous-editorial`** (qui, malgré son nom, présente le catalogue Rossignol « Collection Alpine 2020-2021 »). Il faut donc créer une route `/design/rossignol-magazine` dont la version desktop = `miscellaneous-editorial`.
 - **Fond / couleurs** : #ffffff ; texte #000.
 - **Structure** (393 × 4007) :
@@ -375,6 +392,7 @@ Constantes réutilisées (définies une fois ici, référencées ensuite) :
 ---
 
 ### Surmesur (`design/mobile/surmesur.webp`)
+
 - **Ce que c'est** : page projet ouverte par le lien `View SURMESUR project` de la page Animation. **Équivalent desktop = artboard `animation-1`**, intitulé `WEAR A SUIT – personal animated advertisement project` et ouvert par `View 'WEAR A SUIT' project` (« Surmesur » = nom du client/marque, « Wear a suit » = nom de la campagne). Route suggérée : `/animation/surmesur`.
 - **Fond / couleurs** : #ffffff ; texte #000.
 - **Structure** (393 × 892) :
@@ -390,17 +408,17 @@ Constantes réutilisées (définies une fois ici, référencées ensuite) :
 
 ## Correspondance des artboards mobile ↔ desktop (récapitulatif)
 
-| Mobile | Desktop | Remarque |
-|---|---|---|
-| landing | landing-page | |
-| hamburger | — (nav inline dans le header) | overlay mobile uniquement |
-| portfolio / design / illustration / animation / about / contact / curly-sox / davie / matongeau / miles-clayton | idem | |
-| lerreur-inspire | lerreur-inspire | |
-| **lerreur-inspire-1** | **rock-paper-scissors** | = page « Mind-bogglers » (artboard mal nommé) |
-| **lerreur-inspire-2** | **yarha** | = page « Yarha' » (artboard mal nommé) |
-| **miscellaneous-print-works** | **artboard-1** | |
-| **rossignol-magazine** | **miscellaneous-editorial** | contenu Rossignol ; header erroné « C2 » sur les deux |
-| **surmesur** | **animation-1** (« WEAR A SUIT ») | |
+| Mobile                                                                                                          | Desktop                           | Remarque                                              |
+| --------------------------------------------------------------------------------------------------------------- | --------------------------------- | ----------------------------------------------------- |
+| landing                                                                                                         | landing-page                      |                                                       |
+| hamburger                                                                                                       | — (nav inline dans le header)     | overlay mobile uniquement                             |
+| portfolio / design / illustration / animation / about / contact / curly-sox / davie / matongeau / miles-clayton | idem                              |                                                       |
+| lerreur-inspire                                                                                                 | lerreur-inspire                   |                                                       |
+| **lerreur-inspire-1**                                                                                           | **rock-paper-scissors**           | = page « Mind-bogglers » (artboard mal nommé)         |
+| **lerreur-inspire-2**                                                                                           | **yarha**                         | = page « Yarha' » (artboard mal nommé)                |
+| **miscellaneous-print-works**                                                                                   | **artboard-1**                    |                                                       |
+| **rossignol-magazine**                                                                                          | **miscellaneous-editorial**       | contenu Rossignol ; header erroné « C2 » sur les deux |
+| **surmesur**                                                                                                    | **animation-1** (« WEAR A SUIT ») |                                                       |
 
 ---
 
