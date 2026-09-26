@@ -3,22 +3,53 @@
 Étape 0 — analyse de la maquette et des assets.
 Maquette : https://xd.adobe.com/view/e0b71c77-573c-4aa0-a180-205a5d8b09b1-b5e4/ (31 écrans).
 
-> **Statut : PARTIEL.** Les écrans de la maquette n'ont pas pu être affichés depuis
-> l'environnement de travail (le lecteur XD ne charge pas ses données dans le navigateur
-> headless, voir § 1). Les données *structurées* de la maquette (couleurs, polices, styles
-> de texte, interactions) ont été récupérées ; la mise en page, les textes et l'attribution
-> des médias par écran **restent à relever** (captures ou fichier `.xd`).
+Sources : manifeste de la maquette XD (couleurs, polices, styles, interactions) + exports PNG de
+chaque écran fournis par le client (dossier Drive « SHARE_EPIPHANE »), rangés dans `design/`.
 
-## 1. Accès à la maquette
+## 1. Écrans de référence
 
-| Source | Résultat |
-|---|---|
-| Lecteur XD dans Chromium (Playwright) | ❌ « Something went wrong » : la requête des données vers `cdn-sharing.adobecc.com` est bloquée par CORS dans le navigateur. |
-| Manifeste de la maquette (`cdn-sharing.adobecc.com`, via curl) | ✅ couleurs, polices, styles de texte, symboles (47, avec états Hover), 111 interactions. |
-| Artboards (mise en page, textes, images) | ❌ non disponibles dans le manifeste. |
+- `design/desktop/*.webp` : 23 écrans bureau (artboards **1920 px** de large).
+- `design/mobile/*.webp` : 21 écrans mobile (artboards **393 px**, hauteur de viewport 852 px).
+- Originaux PNG pleine résolution : `design/original/` (local, hors Git, 125 Mo).
+- Écrans Shop, Cart, Review et Thank you : exclus (hors périmètre V1).
+- Notes détaillées écran par écran (structure, textes exacts, positions, médias ↔ fichiers source) :
+  - [`screens/desktop-galleries.md`](./screens/desktop-galleries.md) : Illustration, Animation, Wear a Suit, Artboard 1 (Miscellaneous Print Works) ;
+  - [`screens/desktop-projects-1.md`](./screens/desktop-projects-1.md) : Miles Clayton, Matong'eau, Davie, Yarha' ;
+  - [`screens/desktop-projects-2.md`](./screens/desktop-projects-2.md) : Rossignol (fichier `miscellaneous-editorial`), L'erreur inspire, Rock Paper Scissors, Curly Sox, planche de composants (`moodboard`) ;
+  - [`screens/ashton-font-and-song-generator.md`](./screens/ashton-font-and-song-generator.md) : page police Ashton (2 états), Song Generator ;
+  - [`screens/mobile.md`](./screens/mobile.md) : tous les écrans mobile, menu burger, règles responsive.
+- Les pages simples (Landing, Portfolio, Contact, 404, About, Design) sont décrites au § 3 ci-dessous.
 
-Ce qui manque pour terminer l'étape 0 : une capture PNG par écran du périmètre (dans `/design`)
-ou le fichier source `.xd`.
+### 1.1 Correspondance des artboards (noms trompeurs dans la maquette)
+
+| Page du site | Bureau | Mobile |
+|---|---|---|
+| Accueil | `landing-page` | `landing` |
+| Menu mobile ouvert | — | `hamburger` |
+| Portfolio | `portfolio` | `portfolio` |
+| Catégorie Design | `design` | `design` |
+| Catégorie Illustration | `illustration` | `illustration` |
+| Catégorie Animation | `animation` | `animation` |
+| Projet Miles Clayton | `miles-clayton` | `miles-clayton` |
+| Projet Davie | `davie` | `davie` |
+| Projet **Rossignol Magazine** | `miscellaneous-editorial` ⚠️ | `rossignol-magazine` |
+| Projet Matong'EAU | `matongeau` | `matongeau` |
+| Projet Yarha' | `yarha` | `lerreur-inspire-2` ⚠️ |
+| Projet L'erreur Inspire | `lerreur-inspire` | `lerreur-inspire` |
+| Projet **Mind-bogglers** (Rock Paper Scissors) | `rock-paper-scissors` | `lerreur-inspire-1` ⚠️ |
+| Projet **Miscellaneous Print Works** | `artboard-1` ⚠️ | `miscellaneous-print-works` |
+| Projet Curly Sox | `curly-sox` | `curly-sox` |
+| Projet **Wear a Suit** (Surmesur, animation) | `animation-1` ⚠️ | `surmesur` |
+| About | `about` | `about` |
+| Contact | `contact` | `contact` |
+| 404 | `404`, `404-v2` (2 variantes) | — |
+| Page cachée Song Generator | `hidden-page-song-generator` | idem |
+| Police Ashton (2 états) | `ashton-font`, `ashton-font-technical-view` | idem |
+| Planche de composants (non publiée) | `moodboard` | — |
+
+⚠️ **Écart avec le brief** : le brief cite « Miscellaneous Editorial » ; la maquette a deux projets distincts,
+**Rossignol Magazine** et **Miscellaneous Print Works** (Jeff Koons, livret Japon, dépliant C2, Coffee Crisp),
+plus **Mind-bogglers** (Rock Paper Scissors, qui est donc une page projet de pamphlet, pas un jeu) et **Wear a Suit**.
 
 ## 2. Design tokens (extraits de la maquette)
 
@@ -99,24 +130,81 @@ largeur des artboards connue.
 | Vidéo | 7 | 4 lectures automatiques au chargement, 3 lecture/pause au clic |
 | Lien externe | 1 | `https://curlysox.com/en` (page projet CURLY SOX) |
 
-## 3. Écrans du périmètre
+## 3. Écrans du périmètre : éléments communs et pages simples
 
-**À compléter** dès réception des écrans. Liste attendue d'après le brief :
+Mesures sur les originaux 1920 px (x, y en px d'artboard).
 
-| Écran | Structure / textes / médias / interactions |
-|---|---|
-| Accueil | animation illustrée + titre + slogan « For beauty. At all costs. » — *à relever* |
-| Portfolio | *à relever* |
-| Design / Illustration / Animation | grande image mise en avant, légende, rangée de vignettes — *à relever* |
-| Projets : Miles Clayton, Matong'eau, Miscellaneous Editorial, Davie, CURLY SOX, Yarha', L'erreur inspire | *à relever* |
-| About | portrait N&B, textes — *à relever* |
-| Contact | email, Instagram, LinkedIn, Behance — *à relever* |
-| 404 | probablement `Illustration/404.png` ou `404_2.png` |
-| Song Generator (cachée) | liste aléatoire + Reload — *à relever* |
-| Rock Paper Scissors | *à relever* (visuels `Illustration/Final_RPS/`) |
-| Police Ashton | bascules Print mode / Blur — visuels dans `Font/` |
+### 3.1 En-tête du site (Portfolio, catégories, About, Contact)
+- Logo `C. ASHTON` : Scholar Italic ≈ 44 px, x 144–149, capitales y 53–83. Lien vers l'accueil (supposé).
+- Menu à droite, Scholar Italic ≈ 34 px : `Portfolio` (x 835), ~~`Shop` (x 1104)~~, `About` (x 1315), `Contact` (x 1525), ~~panier (x 1730–1774)~~.
+  **V1 : Shop et panier retirés**, les 3 liens restants seront redistribués en gardant la même taille, le même interlettrage et le bord droit à x ≈ 1780.
+- Lien actif **souligné** (trait 2 px). Couleur = couleur du texte de la page (noir, blanc sur fond noir/vert).
+- Marges latérales : **≈ 140 px** (zone utile ≈ 140–1780 px).
+- Mobile : `C. ASHTON` + bouton astérisque (burger) → menu plein écran ocre `#A87B15` (voir `screens/mobile.md`).
 
-Hors périmètre (ignorés) : Shop (Limited Edition Prints, Fonts, Art), Cart, Review, Thank you.
+### 3.2 Pied de page (Portfolio, catégories)
+- Ligne : `chadgrenier42@gmail.com` à gauche (x 154) ; `Instagram`, `LinkedIn`, `Behance` à droite (se termine à x 1778). Scholar Italic ≈ 20 px.
+- Filet noir pleine largeur (2–3 px), puis slogan centré Scholar Italic ≈ 28 px.
+- ⚠️ Slogan écrit « For beauty. At all costs. » (accueil, Portfolio) **et** « For Beauty. At All Costs. » (catégories) : à unifier.
+- Pages projet : **pas** d'en-tête de site ni de pied de page (titre du projet à gauche + `EXIT` à droite).
+
+### 3.3 Accueil (`landing-page`) — fond `#FFF9F8`
+- `Chad ASHTON` centré, Scholar Italic ≈ 85 px (x 673–1254, y 494–553).
+- `For beauty. At all costs.` centré en bas (y 957–981), ≈ 32 px.
+- Un trait fin apparaît dans le coin bas-droit : début de l'animation illustrée (séquence auto-animate du prototype, à détailler à l'étape 7).
+- Pas d'en-tête ni de menu. Clic / délai → Portfolio (supposé).
+
+### 3.4 Portfolio (`portfolio`) — fond `#F7F7F7`, 1920×1239
+- En-tête (Portfolio actif).
+- Trois libellés centrés sur une ligne à y ≈ 563 : `DESIGN` (x 448), `ILLUSTRATION` (x 863), `ANIMATION` (x 1296) ; Scholar Italic capitales ≈ 25 px.
+  Les zones vides autour suggèrent une image qui apparaît au survol (37 états Hover dans le prototype) : **à confirmer**.
+- Bouton astérisque cerclé (x 1725–1779, y 926–980) : lien vers la **page cachée Song Generator** (supposé).
+- Pied de page (§ 3.2).
+
+### 3.5 Catégorie Design (`design`) — fond `#000000` puis `#3A8146`
+- En-tête en blanc. Projet mis en avant : pochette « You Give Me » (691×691 px, centrée, y 176) + légende à droite
+  `You Give Me` / `Single artwork for Miles Clayton` / `(Latest project)`.
+- Grille 4 colonnes (≈ 400 px, gouttière ≈ 15 px) de 8 vignettes + légendes centrées :
+  Miles Clayton, Davie, Rossignol Magazine, Matong'EAU / Yarha', L'erreur Inspire, Mind-bogglers, Miscelaneous Print Works.
+- Section verte `#3A8146` : visuel « Indoor Squash » + lien **`Ashton font display catalogue`** (→ page police Ashton) +
+  bouton astérisque, puis liens `ILLUSTRATION` / `ANIMATION`, puis pied de page en blanc.
+- ✅ **La page police Ashton garde donc un point d'entrée** (depuis Design), en plus de la boutique.
+
+### 3.6 About (`about`) — fond `#A67B14` (doré), 1920×3002
+- En-tête (About souligné ; Contact aussi souligné dans l'export, sans doute un état de survol).
+- `Chad Ashton Grenier works and lives in Quebec City.` (x 140, y 318), Scholar Italic ≈ 30 px.
+- Portrait N&B 409×409 px (x 1288, y 300) — **absent des assets** (seule source : l'export de maquette, basse résolution).
+- Paragraphe biographique (x 1255, largeur ≈ 520 px, ≈ 26 px, interligne 28) : « From a very young age, I was very interested in art. … to create amazing things. »
+- 3 colonnes (titres ≈ 36 px capitales, y 1200) :
+  - `LIST OF RELEVANT THINGS I HAVE` : DEC in graphic design (from Cégep de Sainte-Foy) ; Artistic ability awards in High School (Secondairy 1 and 2) ; 20+ years experience in thinking about art ; Passion for my trade ; Sense of humor.
+  - `VISUAL ARTISTS I LIKE` : 24 noms (Wes Anderson … Jean-Paul Riopelle).
+  - `MUSIC ARTISTS I LIKE` : 25 noms (The Beatles … Harmonium).
+- Note finale centrée (3 lignes) + lien souligné `Back to home`.
+- Textes complets : lire l'écran `design/desktop/about.webp` (repris tels quels à l'étape 3).
+
+### 3.7 Contact (`contact`) — fond `#F7F7F7`
+- En-tête (Contact souligné).
+- `WRITE TO ME` : Scholar Italic capitales ≈ 200 px, lilas `#CFBAD1`, centré (x 366–1572, y 309–430).
+- `chadgrenier42@gmail.com` : **Futura PT** Medium ≈ 44 px, noir, centré (y 608–654).
+- `Instagram` / `LinkedIn` / `Behance` : Scholar Italic ≈ 36 px, 3 colonnes centrées (y ≈ 960).
+- Pas de formulaire, pas de pied de page. ⚠️ Contraste lilas/fond ≈ 1,6:1 (titre décoratif, à signaler).
+
+### 3.8 404 (`404` et `404-v2`) — fond `#F7F7F7`
+- `PAGE #404` en haut à gauche (x 140, y 72) ; illustration centrée avec bulle `Error !`
+  (v1 : homme à table = `Illustration/404.png` ; v2 : guitariste = `Illustration/404_2.png`).
+- `THE 404 PAGE HAS BEEN FOUND.` (≈ 30 px, capitales) ; `The page you were looking for has not.` ; lien `BACK TO HOME` (y 925).
+- Deux variantes → proposition : en tirer une au hasard à chaque chargement, ou choisir `404` (à valider).
+
+### 3.9 Song Generator (page cachée), police Ashton, projets, galeries, mobile
+Voir les fichiers de `docs/screens/`.
+Points clés : Song Generator = fond `#CFBAD1`, 9 chansons, bouton `RELOAD`, `BACK TO HOME`, `You discovered a hidden page`.
+Page police : un seul interrupteur **« BLUPRINT MODE » OFF/ON** (et non « Print mode / Blur » comme dans le brief) qui bascule
+entre `ashton-font` et `ashton-font-technical-view`. Éléments de vente à retirer : `AVAILABLE SOON`, « The ASHTON font will be AVAILABLE SOON! », panier.
+
+### 3.10 Coquilles relevées dans la maquette (à valider avant correction)
+« reccomendations », « necssities », « MILES CLAYTON 's », « Secondairy », « Momment », « togheter », « panphlet »,
+« Cofee Crisp », « BLUPRINT », « reminicsence », « derrived », « intesely », « hapen », « Miscelaneous », « VAN MORISSON », « EGON SHEILE ».
+Titre de la page Rossignol erroné : « Poster/panphlet for C2 conference » (copié de Miscellaneous Print Works).
 
 ## 4. Inventaire des assets
 
@@ -142,34 +230,44 @@ Tableau complet fichier par fichier : [`assets-inventory.md`](./assets-inventory
 
 ### 4.2 Par dossier et usage prévu
 
-| Dossier | Contenu | Usage prévu (à confirmer avec la maquette) |
+| Dossier | Contenu | Usage (d'après les écrans) |
 |---|---|---|
 | `Font/` | police, logo (14409×2576), favicon (16×16), visuels de la police (Ashton.png, Capitals/Lowercase/glyphs_display, 8 × `Artboard 60 copy N.png` 1081×1081), `Ashton_Font.gif` (10,6 Mo, 241 images, 10 s), une capture « Indoor Squash » | police du site, en-tête, favicon, page Ashton Font |
 | `Ashton_Font_Thumbnail.png` | vignette « Ashton — A reminiscence of intellectual art » | vignette de la page police |
 | `Design/davie_behance/` | branding Davie : logo, illustrations, brochure, site web, mockups | projet **Davie** |
 | `Design/L'erreur_inspire/` | visuels FailCamp « L'erreur inspire » (JPG légers) | projet **L'erreur inspire** |
-| `Design/Rossignol/`, `Design/Japon Mag/`, `Design/The_box*.png`, captures 2024/2025 | magazines Rossignol et Japon, « The box » | probablement **Miscellaneous Editorial** |
-| `Design/Screenshot 2024-07-10 at 2.52.00 PM.png` | capture d'une page « MILES CLAYTON » | seule trace du projet **Miles Clayton** |
-| `Design/1_Grenier_ch_Atelier_1_Palette_choco_Haut_gamme.jpg` | packaging « Coffee Crisp » | *à confirmer* |
+| `Design/Rossignol/`, `Design/Japon Mag/`, `Design/The_box*.png`, captures 2024/2025 | magazines Rossignol et Japon, « The box », article Jeff Koons | **Rossignol Magazine** (`Rossignol_mag/`), **Miscellaneous Print Works** (Japon, Jeff Koons), **Mind-bogglers** (`The_box_1.png`) |
+| `Design/Screenshot 2024-07-10 at 2.52.00 PM.png` | capture d'une page « MILES CLAYTON » (EPK) | projet **Miles Clayton** (seul visuel fourni) |
+| `Design/1_Grenier_ch_Atelier_1_Palette_choco_Haut_gamme.jpg` | packaging « Coffee Crisp » | **Miscellaneous Print Works** (basse résolution) |
 | `Illustration/` (racine) | illustrations finales (Metro, Nick Drake, hotel, orchestra, window4…), 404.png / 404_2.png, affiches Dance Party | catégorie Illustration, page 404 |
-| `Illustration/Final_RPS/` | 10 pages « Logical Philosophy About Rock Paper Scissors » | jeu **Rock Paper Scissors** |
+| `Illustration/Final_RPS/` | 10 pages « Logical Philosophy About Rock Paper Scissors » | projet **Mind-bogglers** (pamphlet, carrousel de pages) |
 | `Illustration/inktober/`, `Inktober_2023/`, `Wildlife/`, `Van_Gogh_Aznarez/`, `scarbourough/`, `Grandma's Appartment/`, `wedding_crasher/`, `Douglass_Adams_road_construction/` | séries d'illustrations + photos de référence et captures de travail | catégorie Illustration |
-| `Animation/` | 22 MP4 (0,7 s à 87 s, avec piste audio), 23 GIF, `Surmesur_GIF/` (personnages sur fond noir), `Cyclist/` (images clés) | catégorie Animation, accueil animé ? |
+| `Animation/` | 22 MP4 (0,7 s à 87 s, avec piste audio), 23 GIF, `Surmesur_GIF/` (personnages sur fond noir), `Cyclist/` (images clés) | catégorie Animation, projets **Wear a Suit** (Surmesur), Davie (vidéo), Yarha' (calèche) |
 
 ### 4.3 Ce qui manque
 
-- **Écrans de la maquette** : mise en page, textes et attribution des médias (voir § 1).
-- **Polices** : CA Scholar V2 Medium, Futura PT (Book, Medium, Demi, Heavy), Big Moore
-  (Regular, Italic). Helvetica Neue n'est pas libre pour le web. Licences web à vérifier.
-- **Projets sans dossier** : **Matong'eau**, **CURLY SOX**, **Yarha'**, **Miles Clayton**
-  (une seule capture). Miscellaneous Editorial n'est pas nommé : attribution à confirmer.
-- **Portrait N&B** de la page About : aucune photo de Chad Ashton trouvée.
-- **Textes** : biographie About, légendes des projets, email et URLs Instagram / LinkedIn / Behance,
-  liste de chansons du Song Generator.
-- **Favicon haute définition** : `favicon.png` fait 16×16 ; il faut au moins 180×180 (Apple) et 512×512,
-  ou un SVG.
-- **Animation d'accueil** : aucun fichier nommé comme tel (candidats : `_grenier_ch_introweb.mp4`,
-  `Animation.mp4`…). À identifier sur la maquette.
+Détail par écran dans `docs/screens/*.md`. Récapitulatif :
+
+- **Polices** : CA Scholar V2 **Medium** ; **Futura PT** (Book, Medium, Demi, Heavy — utilisée pour l'email de Contact,
+  les boutons RELOAD / BACK TO HOME, l'interrupteur BLUPRINT MODE, les titres des pages projet) ; Big Moore ; Helvetica Neue.
+  Licences web à vérifier.
+- **About** : le **portrait N&B** (seule source : l'export de maquette, 409 px).
+- **Design** : la pochette **« You Give Me »** (projet mis en avant) et les vignettes de la grille Design
+  (Miles Clayton, Matong'EAU, Yarha') — à recadrer depuis les visuels projet quand ils existent.
+- **Miles Clayton** : photo hero, 5 pochettes de singles, affiche « To Believe ».
+- **Matong'EAU** : tout (logo, cartes de visite, déclinaisons du logo, 3 t-shirts).
+- **Yarha'** : 4 vidéos (hero, 2 animations de logo, « Le tipi ») et toutes les illustrations sauf la calèche.
+- **Curly Sox** : les 5 photos de chaussettes détourées (aussi utilisées sur la page Illustration).
+- **Miscellaneous Print Works** : l'affiche et les 4 panneaux du dépliant C2 (existent seulement en PDF :
+  `Design/*Grenier_C_affiche-brochure*.pdf`, `02_grenier_c_brochure_sans.pdf` → à exporter en images).
+- **Animation / Wear a Suit** : la vidéo « Look Good In Any Situation » ; vidéo d'ouverture de la page Animation
+  à confirmer (`Dog_animation_footage.mp4` ou `1_Reflect_your_ambitions.mp4`).
+- **Page police Ashton** : tuiles Aa/Nn/Zz, astérisques, schémas techniques → à refaire en SVG/HTML.
+- **Icônes** (panier hors V1, ×, chevron, astérisque cerclé, burger astérisque) → à dessiner en SVG.
+- **URLs** Instagram, LinkedIn, Behance (seuls les libellés figurent sur la maquette).
+- **Favicon haute définition** : `favicon.png` fait 16×16 ; il faut au moins 180×180 et 512×512, ou un SVG.
+- **Animation d'accueil** : la séquence du prototype (auto-animate) n'est pas exportée ; seul l'état initial
+  (`landing-page`) est visible. À préciser à l'étape 7 (vidéo de référence ou description).
 
 ### 4.4 Ce qui est en trop (ne sera pas publié)
 
