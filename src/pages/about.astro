@@ -1,13 +1,105 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { bio, closingNote, musicArtists, relevantThings, visualArtists } from '../data/about';
+// PLACEHOLDER: low-resolution crop of the mockup, to replace with the original black and white portrait.
+import portrait from '../assets/about/portrait-from-mockup.png';
+
+const columnTitle = 'text-[20px] leading-[1.1] uppercase desktop:text-[calc(35*var(--u))]';
+const artistList =
+  'mt-[7px] text-[13px] leading-[32.5px] uppercase desktop:mt-[calc(25*var(--u))] desktop:text-[calc(25*var(--u))] desktop:leading-[calc(45.4*var(--u))]';
 ---
 
-<BaseLayout title="About">
+<BaseLayout title="About" bodyClass="bg-gold">
   <Header />
-  <!-- PLACEHOLDER: the About page is built in step 3. -->
-  <main class="px-page py-20 text-title">
-    <h1>About</h1>
-    <p>[PLACEHOLDER] Page à construire à l'étape 3.</p>
+  <main class="px-[20px] desktop:px-0">
+    <div class="desktop:flex desktop:justify-between desktop:pr-[calc(149*var(--u))] desktop:pl-[calc(140*var(--u))]">
+      <p class="mt-[80px] text-center text-[16px] leading-[1.4] desktop:mt-[calc(203*var(--u))] desktop:text-left desktop:text-[calc(26*var(--u))] desktop:leading-[1.1]">
+        Chad Ashton Grenier works <br class="desktop:hidden" />
+        and lives in Quebec City.
+      </p>
+      <div class="desktop:mt-[calc(197*var(--u))] desktop:w-[calc(517*var(--u))]">
+        <Image
+          src={portrait}
+          alt="Black and white portrait of Chad Ashton"
+          class="mt-[64px] mr-[3px] ml-auto block size-[174px] desktop:mt-0 desktop:mr-0 desktop:ml-[calc(34*var(--u))] desktop:size-[calc(409*var(--u))]"
+          widths={[174, 348, 409]}
+          sizes="(min-width: 1024px) 21vw, 174px"
+          loading="eager"
+        />
+        <p class="mt-[31px] text-[16px] leading-[28px] desktop:mt-[calc(59*var(--u))] desktop:text-[calc(24*var(--u))] desktop:leading-[calc(28*var(--u))]">
+          {bio}
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-[68px] desktop:mt-[calc(113*var(--u))] desktop:flex desktop:pl-[calc(140*var(--u))]">
+      <section class="desktop:w-[calc(708*var(--u))]" aria-labelledby="relevant-things">
+        <h2 id="relevant-things" class={columnTitle}>
+          List of relevant things I have
+        </h2>
+        <ul class="mt-[18px] text-[16px] leading-[22px] desktop:mt-[calc(41*var(--u))] desktop:pl-[calc(14*var(--u))] desktop:text-[calc(25*var(--u))] desktop:leading-[calc(28*var(--u))]">
+          {relevantThings.map((item) => (
+            <li
+              class:list={[
+                item.detail ? 'mb-[19px]' : 'mb-[15px]',
+                'desktop:mb-[calc(42*var(--u))]',
+              ]}
+            >
+              - {item.text}
+              {item.detail && (
+                <span
+                  class:list={[
+                    'block leading-[1.1] desktop:mt-[calc(3*var(--u))] desktop:ml-[calc(17*var(--u))] desktop:text-[calc(18*var(--u))]',
+                    item.detailFullSizeOnMobile
+                      ? 'mt-[1px] ml-[11px] text-[16px]'
+                      : 'mt-[1px] ml-[11px] text-[10px]',
+                  ]}
+                >
+                  {item.detail}
+                </span>
+              )}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <div class="mt-[32px] flex desktop:mt-0 desktop:contents">
+        <section class="w-[180px] desktop:w-[calc(534*var(--u))]" aria-labelledby="visual-artists">
+          <h2 id="visual-artists" class={columnTitle}>
+            Visual <br class="desktop:hidden" />
+            artists I like
+          </h2>
+          <ul class={artistList}>
+            {visualArtists.map((name) => (
+              <li>{name}</li>
+            ))}
+          </ul>
+        </section>
+        <section aria-labelledby="music-artists">
+          <h2 id="music-artists" class={columnTitle}>
+            Music <br class="desktop:hidden" />
+            artists I like
+          </h2>
+          <ul class={artistList}>
+            {musicArtists.map((name) => (
+              <li>{name}</li>
+            ))}
+          </ul>
+        </section>
+      </div>
+    </div>
+
+    <div class="hidden text-center desktop:mt-[calc(242*var(--u))] desktop:block desktop:pb-[calc(121*var(--u))] desktop:text-[calc(26*var(--u))]">
+      {closingNote.map((line) => (
+        <p class="leading-[calc(49*var(--u))]">{line}</p>
+      ))}
+      <a href="/" class="mt-[calc(70*var(--u))] inline-block leading-[1.1] underline">
+        Back to home
+      </a>
+    </div>
   </main>
+  <Footer links={false} class="mt-[109px] desktop:hidden" />
 </BaseLayout>

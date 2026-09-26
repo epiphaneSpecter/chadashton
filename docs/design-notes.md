@@ -357,3 +357,23 @@ Détail par écran dans `docs/screens/*.md`. Récapitulatif :
   sont réalisés avec leur page, car leur style diffère d'un écran à l'autre.
 - Unité bureau `--u` (1 px de maquette à 1920 px, réduit avec la fenêtre) : les positions bureau
   s'écrivent `calc(N * var(--u))`.
+
+## 7. Pages simples (étape 3)
+
+- **About** : textes de la maquette bureau (fautes comprises) dans `src/data/about.ts`.
+  Le portrait est un **placeholder** : recadrage 409 px de l'export de maquette
+  (`src/assets/about/portrait-from-mockup.png`), à remplacer par la photo originale.
+  Suivi de la maquette : note finale et « Back to home » affichés sur bureau seulement,
+  pied de page réduit (filet + slogan) sur mobile seulement, sous-ligne « (Secondairy 1 and 2) »
+  en taille normale sur mobile. Écart assumé : `HARMONIUM` (absent de la liste mobile de la maquette)
+  est affiché partout ; ordre de la liste Music = bureau.
+- **Contact** : titre lilas, email `mailto:`, réseaux (placeholders). Sur mobile, tout est en lilas,
+  en-tête compris. L'email bureau utilise Futura PT (**placeholder** : polices de repli).
+- **404** (`src/pages/404.astro`, publiée en `404.html`) : les deux versions de la maquette,
+  tirées au hasard à chaque visite (version 1 sans JavaScript). Pas de maquette mobile :
+  contenu centré, mêmes textes.
+- **Tailles mesurées** (bureau / mobile) : intro About 26 / 16 px, bio 24 / 16 px (interligne 28),
+  titres de colonnes 35 / 20 px, liste 25 / 16 px, noms d'artistes 25 / 13 px, email Contact
+  44 (Futura PT) / 25 px, réseaux Contact 40 / 17 px, textes 404 : 33, 28, 25 et 37 px.
+- **À revoir à l'étape 10** : entre 1024 et 1280 px, la mise à l'échelle bureau fait descendre
+  les plus petits textes vers 10 px ; prévoir un plancher de lisibilité.

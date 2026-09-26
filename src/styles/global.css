@@ -41,7 +41,7 @@
   --font-futura: 'Futura PT', 'Futura', 'Century Gothic', 'Avenir Next', sans-serif;
 
   /* Type scale */
-  --text-display: clamp(42px, 10.417vw, 200px);
+  --text-display: clamp(49px, 10.417vw, 200px);
   --text-display--line-height: 1.1;
   --text-hero: clamp(35px, 4.844vw, 93px);
   --text-hero--line-height: 1.1;
