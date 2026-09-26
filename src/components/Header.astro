@@ -1,0 +1,46 @@
+---
+import AsteriskIcon from './icons/AsteriskIcon.astro';
+import MobileMenu from './MobileMenu.astro';
+import { isActive, mainNav } from '../config/navigation';
+import { site } from '../config/site';
+
+const pathname = Astro.url.pathname;
+---
+
+<header class="flex items-start justify-between pt-[49px] pr-[23px] pl-[27px] desktop:items-baseline desktop:pt-[calc(48*var(--u))] desktop:pr-[calc(145*var(--u))] desktop:pl-[calc(145*var(--u))]">
+  <a href="/" class="mt-[6px] text-logo desktop:mt-0">
+    {site.name}
+  </a>
+
+  <nav aria-label="Main" class="hidden desktop:block">
+    <ul class="flex gap-[calc(136*var(--u))] text-nav">
+      {mainNav.map((link) => {
+        const active = isActive(link.href, pathname);
+        return (
+          <li>
+            <a
+              href={link.href}
+              class:list={[{ 'underline-active': active }]}
+              aria-current={active ? 'page' : undefined}
+            >
+              {link.label}
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  </nav>
+
+  <button
+    type="button"
+    class="size-[32px] desktop:hidden"
+    aria-label="Open menu"
+    aria-expanded="false"
+    aria-controls="mobile-menu"
+    data-menu-open
+  >
+    <AsteriskIcon variant="burger" class="size-full" />
+  </button>
+</header>
+
+<MobileMenu />

@@ -1,0 +1,48 @@
+---
+import SocialLinks from './SocialLinks.astro';
+import { contact } from '../config/navigation';
+import { site } from '../config/site';
+
+interface Props {
+  /** Looser vertical rhythm used by the Portfolio page. */
+  spacious?: boolean;
+  class?: string;
+}
+
+const { spacious = false, class: className } = Astro.props;
+---
+
+<footer class:list={['text-small', className]}>
+  <div class="flex flex-col items-center desktop:flex-row desktop:items-baseline desktop:justify-between desktop:pr-[calc(142*var(--u))] desktop:pl-[calc(150*var(--u))]">
+    <a
+      class="translate-x-[5px] underline underline-offset-2 desktop:translate-x-0 desktop:no-underline"
+      href={`mailto:${contact.email}`}
+    >
+      {contact.email}
+    </a>
+    <SocialLinks
+      class:list={[
+        'gap-[47px] underline underline-offset-2 desktop:mt-0 desktop:gap-[calc(78*var(--u))] desktop:no-underline',
+        spacious ? 'mt-[84px]' : 'mt-[17px]',
+      ]}
+    />
+  </div>
+  <hr
+    class:list={[
+      'h-px border-0 bg-rule desktop:h-[calc(2*var(--u))] desktop:min-h-px desktop:bg-current',
+      spacious
+        ? 'mt-[118px] desktop:mt-[calc(17*var(--u))]'
+        : 'mt-[17px] desktop:mt-[calc(4*var(--u))]',
+    ]}
+  />
+  <p
+    class:list={[
+      'mt-[12px] text-center text-title leading-[1.1] desktop:mt-[calc(21*var(--u))]',
+      spacious
+        ? 'pb-[11px] desktop:pb-[calc(22*var(--u))]'
+        : 'pb-[8px] desktop:pb-[calc(10*var(--u))]',
+    ]}
+  >
+    {site.tagline}
+  </p>
+</footer>

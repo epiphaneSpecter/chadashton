@@ -1,0 +1,25 @@
+---
+import { contact } from '../config/navigation';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<ul class:list={['flex', className]}>
+  {contact.socials.map((social) => (
+    <li>
+      {social.href ? (
+        <a href={social.href} rel="me noopener" target="_blank">
+          {social.label}
+        </a>
+      ) : (
+        <span data-placeholder="social-url" title="Link to be provided">
+          {social.label}
+        </span>
+      )}
+    </li>
+  ))}
+</ul>

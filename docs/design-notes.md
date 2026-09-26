@@ -334,3 +334,26 @@ Détail par écran dans `docs/screens/*.md`. Récapitulatif :
 - **Arborescence** : `src/pages` (routes), `src/layouts` (`BaseLayout.astro`), `src/components`, `src/config`
   (`site.ts`, puis la navigation à l'étape 2), `src/styles`, `src/assets` (images optimisées),
   `public/` (police, favicon, vidéos). Content collections (`src/content`) ajoutées à l'étape 5.
+
+## 6. Composants communs (étape 2)
+
+- `src/config/navigation.ts` : liste des liens du menu (`mainNav`), drapeau `features.shop` (désactivé),
+  email et réseaux. **Ajouter la boutique plus tard** = ajouter `{ label: 'Shop', href: '/shop' }`
+  et activer `features.shop`, sans toucher aux composants.
+- `Header.astro` : logo `C. ASHTON` (lien vers l'accueil) + menu. Bureau : 3 liens alignés à droite,
+  bord droit à x 1776 (comme le panier retiré), 136 px entre les mots comme dans la maquette,
+  lien actif souligné (`underline-active`, 2 px sous un mot de 36 px) avec `aria-current="page"`.
+  Mobile (< 1024 px) : bouton astérisque.
+- `MobileMenu.astro` : menu plein écran ocre, bouton de fermeture « étincelle », 3 liens centrés
+  (pas de 97 px comme dans la maquette), pied de page. Script sans framework : `aria-expanded`,
+  focus piégé, fermeture par Échap, retour du focus sur le bouton, défilement bloqué.
+- `Footer.astro` : email + réseaux, filet, slogan. Option `spacious` pour le rythme plus aéré
+  de la page Portfolio.
+- `SocialLinks.astro` : **placeholder** tant que les URL ne sont pas fournies (texte non cliquable,
+  `data-placeholder="social-url"`).
+- `icons/AsteriskIcon.astro` : astérisque du menu, étincelle de fermeture, astérisque cerclé
+  (lien vers la page de la police, voir `design/mobile/portfolio.webp` : « discover The Ashton Font »).
+- Les boutons propres à une page (`EXIT`, `BACK TO HOME`, `RELOAD`, interrupteur `BLUPRINT MODE`)
+  sont réalisés avec leur page, car leur style diffère d'un écran à l'autre.
+- Unité bureau `--u` (1 px de maquette à 1920 px, réduit avec la fenêtre) : les positions bureau
+  s'écrivent `calc(N * var(--u))`.

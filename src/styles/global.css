@@ -47,18 +47,39 @@
   --text-hero--line-height: 1.1;
   --text-logo: clamp(30px, 2.604vw, 50px);
   --text-logo--line-height: 1.1;
-  --text-nav: clamp(25px, 1.875vw, 36px);
+  --text-nav: clamp(22px, 1.875vw, 36px);
   --text-nav--line-height: 1.08;
   --text-title: clamp(20px, 1.562vw, 30px);
   --text-title--line-height: 1.44;
   --text-body: clamp(16px, 1.354vw, 26px);
   --text-body--line-height: 1.08;
-  --text-small: clamp(15px, 1.042vw, 20px);
+  --text-small: clamp(16px, 1.042vw, 20px);
   --text-small--line-height: 1.1;
 
   /* Layout */
   --spacing-page: clamp(20px, 7.292vw, 140px);
   --breakpoint-desktop: 64rem;
+}
+
+/*
+ * Desktop unit: 1 mockup pixel at a 1920 px viewport, scaled down with the viewport
+ * (and capped at 1px above 1920 px). Used as calc(N * var(--u)) for desktop positions.
+ */
+:root {
+  --u: 1px;
+}
+
+@media (width >= 64rem) {
+  :root {
+    --u: min(calc(100vw / 1920), 1px);
+  }
+}
+
+/* Underline of the active navigation link (2 px under a 36 px word in the mockup). */
+@utility underline-active {
+  text-decoration-line: underline;
+  text-decoration-thickness: 0.055em;
+  text-underline-offset: 0.14em;
 }
 
 @layer base {
