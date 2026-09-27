@@ -98,7 +98,11 @@ const groupLayout =
     src={leaf.src}
     alt={leaf.alt}
     class:list={[common, mediaSize, leaf.fit === 'cover' ? 'object-cover' : 'object-contain']}
-    style={{ ...vars, objectPosition: leaf.position }}
+    style={{
+      ...vars,
+      objectPosition: leaf.position,
+      ...(leaf.border ? { outline: `1px solid ${leaf.border}`, outlineOffset: '-1px' } : {}),
+    }}
     widths={[400, 800, 1200, 1920, 2560]}
     sizes={sizes}
     data-placeholder={leaf.placeholder ? 'image' : undefined}
@@ -109,7 +113,11 @@ const groupLayout =
     src={leaf.src}
     alt={leaf.alt}
     class:list={[common, mediaSize, leaf.fit === 'cover' ? 'object-cover' : 'object-contain']}
-    style={{ ...vars, objectPosition: leaf.position }}
+    style={{
+      ...vars,
+      objectPosition: leaf.position,
+      ...(leaf.border ? { outline: `1px solid ${leaf.border}`, outlineOffset: '-1px' } : {}),
+    }}
     widths={[400, 800, 1200, 1920]}
     sizes={sizes}
     data-video-source={leaf.source}

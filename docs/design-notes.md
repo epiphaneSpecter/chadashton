@@ -402,3 +402,29 @@ Détail par écran dans `docs/screens/*.md`. Récapitulatif :
   de remplacement, faute de Futura PT.
 - **Note dev** : après l'ajout d'un nouveau fichier `.astro`, relancer `npm run dev` si des classes
   Tailwind semblent absentes (le serveur ne rescanne pas toujours les nouveaux fichiers).
+
+## 9. Pages projet (étape 5)
+
+- **Gabarit unique** : `src/pages/portfolio/[category]/[id].astro` + `src/components/project/Block.astro`.
+  Chaque fichier `src/content/projects/<id>.md` décrit l'en-tête (description, EXIT, couleurs) et une liste
+  de **blocs** (`image`, `text`, `video`, `swatch` = aplat de couleur, `group` = rangée / grille / carrousel mobile) :
+  - `box: [x, y, largeur, hauteur]` = position dans la maquette bureau (px à 1920) ; sans `box`, les blocs
+    s'empilent simplement (cas d'un futur projet sans maquette) ;
+  - `m: { w, h, gap, align }` = placement mobile (empilé, dans l'ordre de la maquette mobile) ;
+  - `desktopHidden` / `m.hidden` = contenu propre au mobile / au bureau ; `position` = cadrage ; `border` = liseré.
+- **Pages** : Miles Clayton, Davie, Rossignol Magazine, Matong'eau, Yarha', L'erreur inspire, Mind-bogglers,
+  Miscellaneous Print Works, Curly Sox, Wear a Suit. Écarts mesurés : bureau 0–3 px (en-têtes compris),
+  mobile 0–6 px sauf cas signalés (Mind-bogglers mobile décalé d'environ 30 px par la hauteur du carrousel).
+- **Sources** : images recadrées sur la maquette par corrélation (`scripts/match-crop.py`), images fixes des vidéos
+  (`scripts/match-frame.py`), dépliant C2 rendu depuis le PDF (PyMuPDF). Captures macOS sans profil « Display ».
+- **Placeholders** (recadrages de la maquette, `placeholder: true` / fichiers `*-from-mockup.*`) :
+  Miles Clayton (hero, 5 pochettes, affiche), tout Matong'eau, Yarha' (illustrations, storyboards, ferme, polaroïds…),
+  chaussettes Curly Sox, vidéo « Look Good In Any Situation ». Aplats (vidéos manquantes) : hero et animations de logo de Yarha'.
+- **Vidéos** : pour l'instant image fixe ; `source` (fichier d'origine) et `youtube` (Davie : `cA5gXrh74H0`) servent à l'étape 6.
+  La calèche de Yarha' est recadrée dans le GIF : appliquer le même recadrage à la vidéo.
+- **Textes gardés tels quels** (maquette) : « necssities », « MILES CLAYTON 's », « panphlet », « togheter »,
+  « Cofee Crisp », « academic projectac » ; en-tête Rossignol « Poster/panphlet for C2 conference » (erreur de la maquette,
+  vrai titre à demander).
+- **Polices** : intro/conclusion Miles Clayton en serif droit de remplacement ; légendes et « Visit » en italique de type
+  Bodoni dans la maquette, rendues en CA Scholar ; slogan Matong'eau en Futura PT (remplacement).
+- **Poids** : les images d'illustration de l'étape 4 ont été réduites (200 Mo → 18 Mo) au double de leur taille d'affichage.

@@ -49,6 +49,7 @@ blocks:
   - kind: swatch
     color: '#000000'
     label: Black band
+    placeholder: false
     box: [0, 2628, 1920, 586]
     m: { hidden: true }
   - kind: image

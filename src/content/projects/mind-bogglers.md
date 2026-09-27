@@ -91,6 +91,7 @@ blocks:
   - kind: swatch
     color: '#b9b9b9'
     label: Divider
+    placeholder: false
     desktopHidden: true
     m: { w: bleed, h: 2, align: left, gap: 13 }
   - kind: text

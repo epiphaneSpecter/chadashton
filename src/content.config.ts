@@ -53,6 +53,8 @@ const media = (image: SchemaContext['image']) => ({
   fit: z.enum(['cover', 'contain']).default('cover'),
   /** CSS object-position used when the image is cropped (e.g. 'left top', '30% 50%'). */
   position: z.string().default('center'),
+  /** Thin frame color around the media (desktop and mobile). */
+  border: hex.optional(),
   /** Temporary crop of the mockup or stand-in, to replace with the original file. */
   placeholder: z.boolean().default(false),
   src: image(),
@@ -76,9 +78,10 @@ const leafBlocks = (image: SchemaContext['image']) =>
     }),
     z.object({
       kind: z.literal('swatch'),
-      /** Plain color area (placeholder for a missing video or image). */
+      /** Plain color area: a placeholder for a missing video or image, or a decorative band. */
       color: hex,
       label: z.string(),
+      placeholder: z.boolean().default(true),
       ...placement,
     }),
   ]);
@@ -126,6 +129,8 @@ const projects = defineCollection({
           mobileSize: z.number().default(15),
           /** Desktop left edge of the description and right edge of EXIT, in mockup px. */
           left: z.number().default(137),
+          /** Desktop top of the description line box, in mockup px (EXIT stays at 60). */
+          top: z.number().default(60),
           right: z.number().default(137),
         })
         .optional(),
