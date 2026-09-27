@@ -8,8 +8,10 @@ thumbnailAlt: Matong'eau logo, white on blue
 thumbnailPlaceholder: true
 header:
   text: Logo and brand design according to client's specific needs and demands.
+  mobileText: "Logo and brand design according\nto client's specific needs and demands."
   color: '#3284c6'
   exitColor: '#4d4d4d'
+  mobileExitColor: '#000000'
 background: '#ffffff'
 height: 4129
 mobilePaddingTop: 207

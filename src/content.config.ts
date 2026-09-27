@@ -25,6 +25,14 @@ const mobile = z.object({
 
 const box = z.tuple([z.number(), z.number(), z.number(), z.number()]);
 
+/** Fields shared by every block: desktop box, mobile placement, mobile-only flag. */
+const placement = {
+  box: box.optional(),
+  m: mobile.optional(),
+  /** Mobile-only block (the desktop mockup does not show it). */
+  desktopHidden: z.boolean().default(false),
+};
+
 const text = z.object({
   kind: z.literal('text'),
   /** Plain text; `[label](url)` makes a link, a line break starts a new line. */
@@ -43,6 +51,8 @@ const text = z.object({
 const media = (image: SchemaContext['image']) => ({
   alt: z.string(),
   fit: z.enum(['cover', 'contain']).default('cover'),
+  /** CSS object-position used when the image is cropped (e.g. 'left top', '30% 50%'). */
+  position: z.string().default('center'),
   /** Temporary crop of the mockup or stand-in, to replace with the original file. */
   placeholder: z.boolean().default(false),
   src: image(),
@@ -50,12 +60,11 @@ const media = (image: SchemaContext['image']) => ({
 
 const leafBlocks = (image: SchemaContext['image']) =>
   z.discriminatedUnion('kind', [
-    text.extend({ box: box.optional(), m: mobile.optional() }),
+    text.extend(placement),
     z.object({
       kind: z.literal('image'),
       ...media(image),
-      box: box.optional(),
-      m: mobile.optional(),
+      ...placement,
     }),
     z.object({
       kind: z.literal('video'),
@@ -63,16 +72,14 @@ const leafBlocks = (image: SchemaContext['image']) =>
       /** Source file in assets-source/, converted to WebM/MP4 in step 6. */
       source: z.string().optional(),
       youtube: z.string().optional(),
-      box: box.optional(),
-      m: mobile.optional(),
+      ...placement,
     }),
     z.object({
       kind: z.literal('swatch'),
       /** Plain color area (placeholder for a missing video or image). */
       color: hex,
       label: z.string(),
-      box: box.optional(),
-      m: mobile.optional(),
+      ...placement,
     }),
   ]);
 
@@ -86,6 +93,7 @@ const projects = defineCollection({
       layout: z.enum(['row', 'grid', 'carousel']),
       gap: z.number().default(10),
       m: mobile.optional(),
+      desktopHidden: z.boolean().default(false),
       items: z.array(leaf),
     });
     return z.object({
@@ -106,10 +114,14 @@ const projects = defineCollection({
       header: z
         .object({
           text: z.string(),
+          /** Mobile description; a line break starts a new line. */
           mobileText: z.string().optional(),
           color: hex.default('#000000'),
           exitColor: hex.default('#4d4d4d'),
           exitUnderline: z.boolean().default(false),
+          /** EXIT color and underline on mobile when they differ from desktop. */
+          mobileExitColor: hex.optional(),
+          mobileExitUnderline: z.boolean().optional(),
           /** Mobile font size of the description, in px. */
           mobileSize: z.number().default(15),
           /** Desktop left edge of the description and right edge of EXIT, in mockup px. */

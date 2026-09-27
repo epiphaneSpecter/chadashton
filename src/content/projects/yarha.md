@@ -8,10 +8,12 @@ thumbnailAlt: Yarha' Formations logo with an owl
 thumbnailPlaceholder: true
 header:
   text: Yarha' - First employment
-  mobileText: Yarha' Premier emploi
+  mobileText: "Yarha'\nPremier emploi"
   color: '#000000'
   exitColor: '#c5a58a'
   exitUnderline: true
+  mobileExitColor: '#000000'
+  mobileExitUnderline: false
   right: 98
 background: '#ffffff'
 mobileBackground: '#f7f7f7'
@@ -155,7 +157,7 @@ blocks:
     src: ../../assets/projects/yarha/office-supplies-mobile-from-mockup.png
     alt: Filing cabinet, clipboard, calendar and calculator
     placeholder: true
-    box: [0, 0, 0, 0]
+    desktopHidden: true
     m: { w: 350, h: 197, align: left, gap: 48 }
   - kind: image
     src: ../../assets/projects/yarha/montreal-4-from-mockup.jpg
@@ -212,7 +214,7 @@ blocks:
     src: ../../assets/projects/yarha/cat-sofa-mobile-from-mockup.jpg
     alt: Cats climbing the curtains and a lamp above a sofa
     placeholder: true
-    box: [0, 0, 0, 0]
+    desktopHidden: true
     m: { w: 350, h: 195, align: left, gap: 24 }
   - kind: image
     src: ../../assets/projects/yarha/cat-1-from-mockup.jpg
@@ -248,7 +250,7 @@ blocks:
     src: ../../assets/projects/yarha/conductor-mobile-from-mockup.png
     alt: Conductor surrounded by office icons, a rocket taking off and megaphones throwing confetti
     placeholder: true
-    box: [0, 0, 0, 0]
+    desktopHidden: true
     m: { w: bleed, h: 362, align: left, gap: 65 }
   # Farm illustration: desktop only (cut at the bottom of the mockup).
   - kind: image

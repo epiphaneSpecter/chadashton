@@ -7,11 +7,11 @@ thumbnail: ../../assets/projects/lerreur-inspire/thumbnail.jpg
 thumbnailAlt: "L'erreur inspire: illustration of a pink leaning tower"
 header:
   text: Advertising campaign for an event by Fail Camp, an academic project
-  # Mobile mockup breaks the text on 3 lines; the header has no line-break support, so the
-  # line breaks are forced with non-breaking spaces (\_) that push "academic" to the next line.
-  mobileText: "Advertising campaign for an event by\_Fail\_Camp\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ academic project"
+  mobileText: "Advertising campaign for an event\nby Fail Camp\nacademic project"
   exitColor: '#000000'
   exitUnderline: true
+  mobileExitColor: '#000000'
+  mobileExitUnderline: false
   left: 137
   right: 99
 background: '#ffffff'

@@ -10,9 +10,11 @@ interface Props {
   block: AnyBlock;
   /** Inside a group, the mobile width comes from the group layout. */
   inGroup?: boolean;
+  /** Carousel items keep their own mobile width, even wider than the screen. */
+  inCarousel?: boolean;
 }
 
-const { block, inGroup = false } = Astro.props;
+const { block, inGroup = false, inCarousel = false } = Astro.props;
 const m = block.m ?? { w: 'full' as const, gap: 24, align: 'center' as const, hidden: false };
 const placed = 'box' in block && block.box !== undefined;
 
@@ -32,8 +34,11 @@ const mobileWidth =
       ? '-mx-[20px] w-[calc(100%+40px)] max-w-none'
       : m.w === 'full'
         ? 'w-full'
-        : 'w-[calc(var(--mw)*1px)] max-w-full';
-const mobileAlign = { left: 'mr-auto', center: 'mx-auto', right: 'ml-auto' }[m.align];
+        : inCarousel
+          ? 'w-[calc(var(--mw)*1px)]'
+          : 'w-[calc(var(--mw)*1px)] max-w-full';
+const mobileAlign =
+  m.w === 'bleed' ? '' : { left: 'mr-auto', center: 'mx-auto', right: 'ml-auto' }[m.align];
 
 const common = [
   'block mt-[calc(var(--m-gap)*1px)]',
@@ -41,9 +46,11 @@ const common = [
   mobileAlign,
   m.h !== undefined && 'h-[calc(var(--mh)*1px)]',
   m.hidden && 'hidden',
-  placed
-    ? 'desktop:absolute desktop:top-[calc(var(--y)*var(--u))] desktop:left-[calc(var(--x)*var(--u))] desktop:m-0 desktop:block desktop:w-[calc(var(--w)*var(--u))] desktop:max-w-none'
-    : 'desktop:mx-auto desktop:mt-[calc(var(--m-gap)*var(--u))]',
+  block.desktopHidden
+    ? 'desktop:hidden'
+    : placed
+      ? 'desktop:absolute desktop:top-[calc(var(--y)*var(--u))] desktop:left-[calc(var(--x)*var(--u))] desktop:m-0 desktop:block desktop:w-[calc(var(--w)*var(--u))] desktop:max-w-none'
+      : 'desktop:mx-auto desktop:mt-[calc(var(--m-gap)*var(--u))]',
 ];
 const mediaSize = placed ? 'desktop:h-[calc(var(--h)*var(--u))]' : 'desktop:h-auto';
 
@@ -67,7 +74,8 @@ const groupLayout =
 {block.kind === 'group' && (
   <div
     class:list={[
-      'mt-[calc(var(--m-gap)*1px)] desktop:contents',
+      'mt-[calc(var(--m-gap)*1px)]',
+      block.desktopHidden ? 'desktop:hidden' : 'desktop:contents',
       block.layout === 'grid' ? 'gap-y-[calc(var(--gap)*1px)]' : 'gap-[calc(var(--gap)*1px)]',
       groupLayout,
       m.w === 'bleed' && '-mx-[20px] px-[20px]',
@@ -81,7 +89,7 @@ const groupLayout =
     }}
   >
     {block.items.map((item) => (
-      <Astro.self block={item} inGroup />
+      <Astro.self block={item} inGroup inCarousel={block.layout === 'carousel'} />
     ))}
   </div>
 )}
@@ -90,7 +98,7 @@ const groupLayout =
     src={leaf.src}
     alt={leaf.alt}
     class:list={[common, mediaSize, leaf.fit === 'cover' ? 'object-cover' : 'object-contain']}
-    style={vars}
+    style={{ ...vars, objectPosition: leaf.position }}
     widths={[400, 800, 1200, 1920, 2560]}
     sizes={sizes}
     data-placeholder={leaf.placeholder ? 'image' : undefined}
@@ -101,7 +109,7 @@ const groupLayout =
     src={leaf.src}
     alt={leaf.alt}
     class:list={[common, mediaSize, leaf.fit === 'cover' ? 'object-cover' : 'object-contain']}
-    style={vars}
+    style={{ ...vars, objectPosition: leaf.position }}
     widths={[400, 800, 1200, 1920]}
     sizes={sizes}
     data-video-source={leaf.source}

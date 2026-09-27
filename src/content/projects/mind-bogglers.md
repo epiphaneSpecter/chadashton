@@ -6,21 +6,19 @@ thumbnail: ../../assets/projects/mind-bogglers/thumbnail.jpg
 thumbnailAlt: Cover of the pamphlet Logical Philosophy About Rock Paper Scissors
 header:
   text: Digital pamphlet design, vector illustrations and text composition, personal project
-  # Mobile mockup: 3 lines, the 2nd one ("vector illustrations and text composition") wider than
-  # the 280 px header box; non-breaking spaces (\_) keep it on one line.
-  mobileText: "Digital pamphlet design, vector\_illustrations\_and\_text\_composition personal project"
+  mobileText: "Digital pamphlet design,\nvector illustrations and text composition\npersonal project"
   color: '#f7f7f7'
   exitColor: '#b2b2b2'
+  mobileExitColor: '#f7f7f7'
   right: 100
 background: '#000000'
 height: 2386
 mobilePaddingTop: 144
-# +37 px: the carousel pages are 37 px shorter than in the mockup (353 px max width).
-mobilePaddingBottom: 113
+mobilePaddingBottom: 76
 blocks:
   # The 10 pages of the pamphlet: horizontal carousel on mobile. On desktop the mockup shows only
-  # pages 1-2 and the left part of page 3 (cut by the right edge): pages 3-10 get an empty box
-  # (desktop-hidden) and page 3 is shown by the desktop-only crop below.
+  # pages 1-2 and the left part of page 3 (cut by the right edge): pages 3-10 are mobile only
+  # and page 3 is shown by the desktop-only crop below.
   - kind: group
     layout: carousel
     gap: 0
@@ -39,61 +37,61 @@ blocks:
       - kind: image
         src: ../../assets/projects/mind-bogglers/page-03.jpg
         alt: 'Pamphlet page 3: text about chess and rock paper scissors next to a chess king'
-        box: [0, 0, 0, 0]
+        desktopHidden: true
         m: { w: 382 }
       - kind: image
         src: ../../assets/projects/mind-bogglers/page-04.jpg
         alt: 'Pamphlet Logical Philosophy About Rock Paper Scissors, page 4'
-        box: [0, 0, 0, 0]
+        desktopHidden: true
         m: { w: 382 }
       - kind: image
         src: ../../assets/projects/mind-bogglers/page-05.jpg
         alt: 'Pamphlet Logical Philosophy About Rock Paper Scissors, page 5'
-        box: [0, 0, 0, 0]
+        desktopHidden: true
         m: { w: 382 }
       - kind: image
         src: ../../assets/projects/mind-bogglers/page-06.jpg
         alt: 'Pamphlet Logical Philosophy About Rock Paper Scissors, page 6'
-        box: [0, 0, 0, 0]
+        desktopHidden: true
         m: { w: 382 }
       - kind: image
         src: ../../assets/projects/mind-bogglers/page-07.jpg
         alt: 'Pamphlet Logical Philosophy About Rock Paper Scissors, page 7'
-        box: [0, 0, 0, 0]
+        desktopHidden: true
         m: { w: 382 }
       - kind: image
         src: ../../assets/projects/mind-bogglers/page-08.jpg
         alt: 'Pamphlet Logical Philosophy About Rock Paper Scissors, page 8'
-        box: [0, 0, 0, 0]
+        desktopHidden: true
         m: { w: 382 }
       - kind: image
         src: ../../assets/projects/mind-bogglers/page-09.jpg
         alt: 'Pamphlet Logical Philosophy About Rock Paper Scissors, page 9'
-        box: [0, 0, 0, 0]
+        desktopHidden: true
         m: { w: 382 }
       - kind: image
         src: ../../assets/projects/mind-bogglers/page-10.jpg
         alt: 'Pamphlet Logical Philosophy About Rock Paper Scissors, page 10'
-        box: [0, 0, 0, 0]
+        desktopHidden: true
         m: { w: 382 }
   - kind: image
     src: ../../assets/projects/mind-bogglers/page-03-desktop-crop.jpg
     alt: 'Pamphlet page 3: text about chess and rock paper scissors next to a chess king'
     box: [1488, 141, 432, 928]
     m: { hidden: true }
-  # Mobile only (desktop: empty box, font size 0).
+  # Mobile only.
   - kind: text
     text: SCROLL→
-    size: [0, 16]
+    size: [16, 16]
     color: '#f7f7f7'
     align: right
-    box: [0, 0, 0, 0]
+    desktopHidden: true
     m: { w: 352, align: left, gap: 15 }
-  # Mobile only: grey divider (desktop: empty box).
+  # Mobile only: grey divider.
   - kind: swatch
     color: '#b9b9b9'
     label: Divider
-    box: [0, 0, 0, 0]
+    desktopHidden: true
     m: { w: bleed, h: 2, align: left, gap: 13 }
   - kind: text
     text: Think inside the box design
