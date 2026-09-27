@@ -1,0 +1,157 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import RichText from './RichText.astro';
+
+type AnyBlock = CollectionEntry<'projects'>['data']['blocks'][number];
+type Leaf = Exclude<AnyBlock, { kind: 'group' }>;
+
+interface Props {
+  block: AnyBlock;
+  /** Inside a group, the mobile width comes from the group layout. */
+  inGroup?: boolean;
+}
+
+const { block, inGroup = false } = Astro.props;
+const m = block.m ?? { w: 'full' as const, gap: 24, align: 'center' as const, hidden: false };
+const placed = 'box' in block && block.box !== undefined;
+
+/** CSS variables read by the static utility classes below (no dynamic class names). */
+const vars: Record<string, string | number> = { '--m-gap': inGroup ? 0 : m.gap };
+if (typeof m.w === 'number') vars['--mw'] = m.w;
+if (m.h !== undefined) vars['--mh'] = m.h;
+if (placed && 'box' in block && block.box) {
+  const [x, y, w, h] = block.box;
+  Object.assign(vars, { '--x': x, '--y': y, '--w': w, '--h': h });
+}
+
+const mobileWidth =
+  inGroup && m.w === 'full'
+    ? 'w-full'
+    : m.w === 'bleed'
+      ? '-mx-[20px] w-[calc(100%+40px)] max-w-none'
+      : m.w === 'full'
+        ? 'w-full'
+        : 'w-[calc(var(--mw)*1px)] max-w-full';
+const mobileAlign = { left: 'mr-auto', center: 'mx-auto', right: 'ml-auto' }[m.align];
+
+const common = [
+  'block mt-[calc(var(--m-gap)*1px)]',
+  mobileWidth,
+  mobileAlign,
+  m.h !== undefined && 'h-[calc(var(--mh)*1px)]',
+  m.hidden && 'hidden',
+  placed
+    ? 'desktop:absolute desktop:top-[calc(var(--y)*var(--u))] desktop:left-[calc(var(--x)*var(--u))] desktop:m-0 desktop:block desktop:w-[calc(var(--w)*var(--u))] desktop:max-w-none'
+    : 'desktop:mx-auto desktop:mt-[calc(var(--m-gap)*var(--u))]',
+];
+const mediaSize = placed ? 'desktop:h-[calc(var(--h)*var(--u))]' : 'desktop:h-auto';
+
+const leaf = block.kind === 'group' ? undefined : (block as Leaf);
+const sizes = (() => {
+  if (!leaf || !('box' in leaf) || !leaf.box) return '(min-width: 1024px) 85vw, 100vw';
+  const mobileSize = typeof m.w === 'number' ? `${m.w}px` : '100vw';
+  return `(min-width: 1024px) ${((leaf.box[2] / 1920) * 100).toFixed(1)}vw, ${mobileSize}`;
+})();
+const groupLayout =
+  block.kind === 'group'
+    ? {
+        row: 'flex items-start',
+        grid: 'grid grid-cols-2 justify-items-center',
+        carousel:
+          'flex snap-x snap-mandatory overflow-x-auto [scrollbar-width:none] [&>*]:shrink-0 [&>*]:snap-start',
+      }[block.layout]
+    : '';
+---
+
+{block.kind === 'group' && (
+  <div
+    class:list={[
+      'mt-[calc(var(--m-gap)*1px)] desktop:contents',
+      block.layout === 'grid' ? 'gap-y-[calc(var(--gap)*1px)]' : 'gap-[calc(var(--gap)*1px)]',
+      groupLayout,
+      m.w === 'bleed' && '-mx-[20px] px-[20px]',
+      typeof m.w === 'number' && 'mx-auto w-[calc(var(--mw)*1px)] max-w-full',
+      m.hidden && 'hidden',
+    ]}
+    style={{
+      '--m-gap': m.gap,
+      '--gap': block.gap,
+      '--mw': typeof m.w === 'number' ? m.w : undefined,
+    }}
+  >
+    {block.items.map((item) => (
+      <Astro.self block={item} inGroup />
+    ))}
+  </div>
+)}
+{leaf?.kind === 'image' && (
+  <Image
+    src={leaf.src}
+    alt={leaf.alt}
+    class:list={[common, mediaSize, leaf.fit === 'cover' ? 'object-cover' : 'object-contain']}
+    style={vars}
+    widths={[400, 800, 1200, 1920, 2560]}
+    sizes={sizes}
+    data-placeholder={leaf.placeholder ? 'image' : undefined}
+  />
+)}
+{leaf?.kind === 'video' && (
+  <Image
+    src={leaf.src}
+    alt={leaf.alt}
+    class:list={[common, mediaSize, leaf.fit === 'cover' ? 'object-cover' : 'object-contain']}
+    style={vars}
+    widths={[400, 800, 1200, 1920]}
+    sizes={sizes}
+    data-video-source={leaf.source}
+    data-youtube={leaf.youtube}
+    data-placeholder={leaf.placeholder ? 'video' : undefined}
+  />
+)}
+{leaf?.kind === 'swatch' && (
+  <div
+    role="img"
+    aria-label={leaf.label}
+    class:list={[common, mediaSize, m.h === undefined && 'aspect-video']}
+    style={{ ...vars, backgroundColor: leaf.color }}
+    data-placeholder="swatch"
+  />
+)}
+{leaf?.kind === 'text' && (
+  <p
+    class:list={[
+      common,
+      'text-[calc(var(--mfs)*1px)] leading-(--lh) tracking-(--tr) desktop:text-[calc(var(--fs)*var(--u))]',
+      {
+        'font-futura not-italic': leaf.font === 'futura',
+        'font-serif not-italic': leaf.font === 'serif',
+        uppercase: leaf.uppercase,
+        'text-left': leaf.align === 'left',
+        'text-center': leaf.align === 'center',
+        'text-right': leaf.align === 'right',
+      },
+    ]}
+    style={{
+      ...vars,
+      '--fs': leaf.size[0],
+      '--mfs': leaf.size[1],
+      '--lh': leaf.lineHeight,
+      '--tr': `${leaf.tracking}em`,
+      color: leaf.color,
+    }}
+  >
+    {leaf.mobileText ? (
+      <>
+        <span class="desktop:hidden">
+          <RichText text={leaf.mobileText} />
+        </span>
+        <span class="hidden desktop:inline">
+          <RichText text={leaf.text} />
+        </span>
+      </>
+    ) : (
+      <RichText text={leaf.text} />
+    )}
+  </p>
+)}

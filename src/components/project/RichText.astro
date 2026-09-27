@@ -1,0 +1,43 @@
+---
+/**
+ * Renders a short text: a line break starts a new line, `[label](url)` becomes an underlined link
+ * (external links open in a new tab).
+ */
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+const lines = text.split('\n').map((line) => {
+  const parts: { label: string; href?: string }[] = [];
+  const pattern = /\[([^\]]+)\]\(([^)]+)\)/g;
+  let last = 0;
+  for (const match of line.matchAll(pattern)) {
+    if (match.index > last) parts.push({ label: line.slice(last, match.index) });
+    parts.push({ label: match[1] ?? '', href: match[2] });
+    last = match.index + match[0].length;
+  }
+  if (last < line.length) parts.push({ label: line.slice(last) });
+  return parts;
+});
+const external = (href: string) => /^https?:\/\//.test(href);
+---
+
+{lines.map((parts, index) => (
+  <>
+    {index > 0 && <br />}
+    {parts.map((part) =>
+      part.href ? (
+        <a
+          href={part.href}
+          class="underline"
+          {...(external(part.href) ? { target: '_blank', rel: 'noopener' } : {})}
+        >
+          {part.label}
+        </a>
+      ) : (
+        part.label
+      ),
+    )}
+  </>
+))}
