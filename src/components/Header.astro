@@ -6,6 +6,8 @@ import { categories, categoryHref } from '../config/categories';
 import { site } from '../config/site';
 
 const pathname = Astro.url.pathname;
+/** The Portfolio page already lists the categories: no sub-navigation there. */
+const showCategories = pathname.replace(/(\.html|\/)$/, '') !== '/portfolio';
 ---
 
 {/* `group/header`: hovering the header reveals the categories under the logo (desktop, XD prototype). */}
@@ -35,27 +37,29 @@ const pathname = Astro.url.pathname;
 
   {/* Categories sub-navigation: hidden until the header is hovered or a link is focused; the
        transparent top padding bridges the gap from the menu so it stays open while the pointer moves. */}
-  <nav
-    aria-label="Portfolio categories"
-    class="absolute top-[calc(102*var(--u))] left-[calc(140*var(--u))] hidden pt-[calc(39*var(--u))] opacity-0 transition-opacity duration-300 ease-out group-focus-within/header:opacity-100 group-hover/header:opacity-100 motion-reduce:transition-none desktop:block"
-  >
-    <ul class="flex gap-[calc(42*var(--u))] text-[max(12px,calc(26*var(--u)))] leading-[1.1] tracking-[-0.065em] uppercase">
-      {categories.map((category) => {
-        const current = isActive(categoryHref(category.slug), pathname);
-        return (
-          <li>
-            <a
-              href={categoryHref(category.slug)}
-              class:list={[current && '[-webkit-text-stroke:0.03em_currentColor]']}
-              aria-current={current ? 'page' : undefined}
-            >
-              {category.label}
-            </a>
-          </li>
-        );
-      })}
-    </ul>
-  </nav>
+  {showCategories && (
+    <nav
+      aria-label="Portfolio categories"
+      class="absolute top-[calc(102*var(--u))] left-[calc(140*var(--u))] hidden pt-[calc(39*var(--u))] opacity-0 transition-opacity duration-300 ease-out group-focus-within/header:opacity-100 group-hover/header:opacity-100 motion-reduce:transition-none desktop:block"
+    >
+      <ul class="flex gap-[calc(42*var(--u))] text-[max(12px,calc(26*var(--u)))] leading-[1.1] tracking-[-0.065em] uppercase">
+        {categories.map((category) => {
+          const current = isActive(categoryHref(category.slug), pathname);
+          return (
+            <li>
+              <a
+                href={categoryHref(category.slug)}
+                class:list={[current && '[-webkit-text-stroke:0.03em_currentColor]']}
+                aria-current={current ? 'page' : undefined}
+              >
+                {category.label}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+  )}
 
   <button
     type="button"
