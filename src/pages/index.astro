@@ -52,36 +52,57 @@ const person = {
       <span class="sr-only">Enter the portfolio</span>
     </a>
     {homeVideo && (
-      <button
-        type="button"
-        class="absolute right-[20px] bottom-[20px] z-20 text-[14px] uppercase desktop:right-[calc(40*var(--u))] desktop:bottom-[calc(40*var(--u))] desktop:text-[calc(20*var(--u))]"
-        data-home-video-toggle
-      >
-        Pause
-      </button>
+      <div class="absolute right-[20px] bottom-[20px] z-20 flex gap-[16px] text-[14px] uppercase desktop:right-[calc(40*var(--u))] desktop:bottom-[calc(40*var(--u))] desktop:gap-[calc(32*var(--u))] desktop:text-[max(12px,calc(20*var(--u)))]">
+        {/* Browsers only start a video on their own when it is muted: the sound needs a click. */}
+        {homeVideo.sound && (
+          <button type="button" class="uppercase" data-home-video-sound>
+            Sound on
+          </button>
+        )}
+        <button type="button" class="uppercase" data-home-video-toggle>
+          Pause
+        </button>
+      </div>
     )}
   </main>
 </BaseLayout>
 
 <script>
-  // Pause / play control of the home animation (the link above covers the video).
+  // Pause / play and sound controls of the home animation (the link above covers the video).
+  function play(video: HTMLVideoElement) {
+    delete video.dataset.userPaused;
+    video.play().catch(() => undefined);
+  }
+
   function init() {
     const button = document.querySelector<HTMLButtonElement>('[data-home-video-toggle]');
+    const sound = document.querySelector<HTMLButtonElement>('[data-home-video-sound]');
     const video = document.querySelector<HTMLVideoElement>('video[data-home-video]');
     if (!button || !video || 'ready' in button.dataset) return;
     button.dataset.ready = '';
-    const sync = () => (button.textContent = video.paused ? 'Play' : 'Pause');
+
+    const sync = () => {
+      button.textContent = video.paused ? 'Play' : 'Pause';
+      if (sound) {
+        sound.textContent = video.muted ? 'Sound on' : 'Sound off';
+      }
+    };
     video.addEventListener('play', sync);
     video.addEventListener('pause', sync);
+    video.addEventListener('volumechange', sync);
     sync();
+
     button.addEventListener('click', () => {
-      if (video.paused) {
-        delete video.dataset.userPaused;
-        video.play().catch(() => undefined);
-      } else {
+      if (video.paused) play(video);
+      else {
         video.dataset.userPaused = '';
         video.pause();
       }
+    });
+    sound?.addEventListener('click', () => {
+      video.muted = !video.muted;
+      // Turning the sound on means the visitor wants to hear it: start the video if it was paused.
+      if (!video.muted && video.paused) play(video);
     });
   }
 
