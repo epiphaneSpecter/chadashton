@@ -584,3 +584,6 @@ Détail par écran dans `docs/screens/*.md`. Récapitulatif :
 - Réglages dans `src/config/home.ts`. Nom et slogan toujours à 0–1 px de la maquette.
 - **Point d'attention** : pendant les scènes sombres de la vidéo (vers 7 à 10 s), le nom et le slogan noirs se
   lisent mal sur le fond noir.
+- **Son** : les navigateurs ne lancent seuls qu'une vidéo muette ; un bouton `SOUND ON` / `SOUND OFF` (à côté de
+  `PAUSE`, réglage `sound: true` dans `src/config/home.ts`) active ou coupe le son au clic, et relance la vidéo si
+  elle était en pause. Le reste de l'écran mène toujours au Portfolio.

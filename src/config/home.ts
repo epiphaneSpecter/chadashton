@@ -14,6 +14,8 @@ export interface HomeVideo {
   fit?: 'cover' | 'contain';
   /** Same on screens under 1024 px (portrait): `contain` by default, so the 16:9 frame stays whole. */
   mobileFit?: 'cover' | 'contain';
+  /** The video has a sound track: shows a SOUND button (browsers only autoplay videos muted). */
+  sound?: boolean;
 }
 
 /**
@@ -28,4 +30,5 @@ export const homeVideo: HomeVideo | undefined = {
   background: '#fef8f7',
   fit: 'cover',
   mobileFit: 'contain',
+  sound: true,
 };
