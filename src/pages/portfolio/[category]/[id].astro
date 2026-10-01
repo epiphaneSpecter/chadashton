@@ -19,6 +19,7 @@ const header = data.header ?? {
   color: '#000000',
   exitColor: '#4d4d4d',
   exitUnderline: false,
+  exitHoverColor: '#000000',
   mobileSize: 15,
   left: 137,
   top: 60,
@@ -68,12 +69,13 @@ const positioned = data.height !== undefined;
         href={categoryHref(data.category)}
         class:list={[
           '-mt-[2px] shrink-0 text-[20px] leading-[1.1] tracking-[0.03em] uppercase desktop:absolute desktop:top-[calc(60*var(--u))] desktop:right-[calc(var(--hr)*var(--u))] desktop:m-0 desktop:text-[calc(32*var(--u))] desktop:tracking-normal',
-          'text-(--exit-mc) desktop:text-(--exit-c)',
+          'text-(--exit-mc) desktop:text-(--exit-c) desktop:transition-colors desktop:hover:text-(--exit-hc) desktop:hover:underline desktop:focus-visible:text-(--exit-hc) desktop:focus-visible:underline',
           (header.mobileExitUnderline ?? header.exitUnderline) && 'underline',
           header.exitUnderline ? 'desktop:underline' : 'desktop:no-underline',
         ]}
         style={{
           '--exit-c': header.exitColor,
+          '--exit-hc': header.exitHoverColor,
           '--exit-mc': header.mobileExitColor ?? header.exitColor,
           '--hr': header.right,
         }}

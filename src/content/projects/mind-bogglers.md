@@ -9,6 +9,7 @@ header:
   mobileText: "Digital pamphlet design,\nvector illustrations and text composition\npersonal project"
   color: '#f7f7f7'
   exitColor: '#b2b2b2'
+  exitHoverColor: '#f7f7f7'
   mobileExitColor: '#f7f7f7'
   right: 100
 background: '#000000'

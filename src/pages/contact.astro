@@ -16,13 +16,59 @@ import { contact } from '../config/navigation';
       <h1 class="mt-[141px] text-display leading-[1.1] text-lilac uppercase desktop:mt-[calc(187*var(--u))]">
         Write to me
       </h1>
-      <a
-        href={`mailto:${contact.email}`}
-        class="mt-[75px] inline-block text-[25px] leading-[1.1] desktop:mt-[calc(97*var(--u))] desktop:font-futura desktop:text-[calc(44*var(--u))] desktop:font-medium desktop:not-italic"
-      >
-        {contact.email}
-      </a>
+      {/* Desktop hover / focus (mockup): the address is underlined and a "copy" bubble appears below it.
+          The bubble's top padding bridges the gap so the pointer can reach it. */}
+      <div class="group relative mt-[75px] inline-block desktop:mt-[calc(97*var(--u))]">
+        <a
+          href={`mailto:${contact.email}`}
+          class="inline-block text-[25px] leading-[1.1] desktop:font-futura desktop:text-[calc(44*var(--u))] desktop:font-medium desktop:not-italic desktop:group-hover:underline desktop:group-focus-within:underline"
+        >
+          {contact.email}
+        </a>
+        <div class="pointer-events-none absolute top-full left-1/2 hidden -translate-x-1/2 pt-[calc(26*var(--u))] opacity-0 transition-opacity duration-200 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100 desktop:block">
+          <button
+            type="button"
+            class="relative flex h-[calc(50*var(--u))] min-w-[calc(116*var(--u))] cursor-pointer items-center justify-center rounded-[calc(14*var(--u))] bg-ink px-[calc(22*var(--u))] text-[calc(28*var(--u))] leading-none text-paper"
+            aria-label={`Copy the e-mail address ${contact.email}`}
+            data-copy-email={contact.email}
+          >
+            <span
+              class="absolute bottom-[calc(100%-1px)] left-1/2 size-[calc(20*var(--u))] -translate-x-1/2 bg-ink [clip-path:polygon(50%_0,100%_100%,0_100%)]"
+              aria-hidden="true"
+            ></span>
+            <span data-copy-label aria-live="polite">
+              copy
+            </span>
+          </button>
+        </div>
+      </div>
       <SocialLinks class="mt-[381px] pl-[8px] justify-center desktop:pl-0 desktop:[&>li:first-child]:translate-x-[calc(21*var(--u))] text-[17px] leading-[1.1] desktop:mt-[calc(301*var(--u))] desktop:text-[calc(40*var(--u))] [&>li]:w-[124px] desktop:[&>li]:w-[calc(495*var(--u))]" />
     </main>
   </div>
 </BaseLayout>
+
+<script>
+  function init() {
+    document.querySelectorAll<HTMLButtonElement>('[data-copy-email]').forEach((button) => {
+      if ('ready' in button.dataset) return;
+      button.dataset.ready = '';
+      const label = button.querySelector<HTMLElement>('[data-copy-label]');
+      let timer: number | undefined;
+      button.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(button.dataset.copyEmail ?? '');
+        } catch {
+          return;
+        }
+        if (!label) return;
+        label.textContent = 'copied';
+        window.clearTimeout(timer);
+        timer = window.setTimeout(() => (label.textContent = 'copy'), 1500);
+      });
+    });
+  }
+
+  init();
+  // Pages loaded by client-side navigation.
+  document.addEventListener('astro:page-load', init);
+</script>

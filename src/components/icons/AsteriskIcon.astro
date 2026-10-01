@@ -8,9 +8,11 @@
 interface Props {
   variant: 'burger' | 'sparkle' | 'circled';
   class?: string;
+  /** `circled` only: color class of the asterisk on hover (by default it is cut out to the background). */
+  hoverAsteriskClass?: string;
 }
 
-const { variant, class: className } = Astro.props;
+const { variant, class: className, hoverAsteriskClass } = Astro.props;
 // Unique mask id, in case the icon appears more than once on a page.
 const maskId = `asterisk-knockout-${Math.random().toString(36).slice(2, 8)}`;
 ---
@@ -62,5 +64,15 @@ const maskId = `asterisk-knockout-${Math.random().toString(36).slice(2, 8)}`;
       mask={`url(#${maskId})`}
       class="opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
     />
+    {hoverAsteriskClass && (
+      <path
+        d="M27 14v26M14 27h26M17.5 17.5l19 19M36.5 17.5l-19 19"
+        stroke-width="2.2"
+        class:list={[
+          'opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100',
+          hoverAsteriskClass,
+        ]}
+      />
+    )}
   </svg>
 )}

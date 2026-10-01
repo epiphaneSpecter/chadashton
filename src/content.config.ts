@@ -130,6 +130,8 @@ const projects = defineCollection({
           color: hex.default('#000000'),
           exitColor: hex.default('#4d4d4d'),
           exitUnderline: z.boolean().default(false),
+          /** Desktop EXIT color on hover / keyboard focus (it is also underlined then). */
+          exitHoverColor: hex.default('#000000'),
           /** EXIT color and underline on mobile when they differ from desktop. */
           mobileExitColor: hex.optional(),
           mobileExitUnderline: z.boolean().optional(),

@@ -4,10 +4,12 @@ import AsteriskIcon from './icons/AsteriskIcon.astro';
 interface Props {
   /** Desktop label at the left of the row (plain text: on desktop only the circled asterisk is the link). */
   desktopLabel?: string;
+  /** Color class of the asterisk on hover (by default it is cut out to the page background). */
+  hoverAsteriskClass?: string;
   class?: string;
 }
 
-const { desktopLabel, class: className } = Astro.props;
+const { desktopLabel, hoverAsteriskClass, class: className } = Astro.props;
 const href = '/ashton-font';
 ---
 
@@ -29,6 +31,7 @@ const href = '/ashton-font';
     </span>
     <AsteriskIcon
       variant="circled"
+      hoverAsteriskClass={hoverAsteriskClass}
       class="ml-[26px] size-[43px] desktop:ml-0 desktop:size-[calc(55*var(--u))]"
     />
   </a>
