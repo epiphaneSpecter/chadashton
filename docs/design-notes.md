@@ -433,9 +433,9 @@ Détail par écran dans `docs/screens/*.md`. Récapitulatif :
 
 - **Conversion** : `scripts/encode-videos.sh` (ffmpeg, relançable) lit `assets-source/Animation/` sans le modifier et écrit
   `public/videos/<nom>.webm` (VP9) + `<nom>.mp4` (H.264, `faststart`), plus `<nom>-m.*` (960 px) pour les écrans < 1024 px
-  quand la vidéo est affichée pleine largeur. Boucles sans piste son ; vidéos à son : AAC 128k / Opus 96k.
-  Les GIF identiques à la maquette sont convertis tels quels ; quand une version MP4 HD de la même animation existe
-  (la rue, ball and box, dinner, geometrical), c'est elle qui est utilisée.
+  quand la vidéo est affichée pleine largeur. Boucles sans piste son ; vidéos à son (lues à la demande) : AAC 128k / Opus 96k.
+  Le WebM est gardé partout : certains navigateurs (Chromium sans codecs propriétaires, dont celui des tests) ne lisent
+  pas le H.264. Débit plafonné à « largeur » kbit/s (1920 px ≈ 1,9 Mbit/s).
 - **Composant** `src/components/media/Video.astro`, trois modes :
   - `loop` (équivalent GIF) : `muted loop playsinline` + poster ; lecture seulement quand la vidéo est à l'écran
     (IntersectionObserver), aucune lecture si `prefers-reduced-motion` ; clic / Entrée / Espace = pause / lecture

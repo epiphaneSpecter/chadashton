@@ -39,10 +39,12 @@ const {
 } = Astro.props;
 
 const exists = (file: string) => fs.existsSync(path.join(process.cwd(), 'public/videos', file));
-if (!exists(`${name}.mp4`) || !exists(`${name}.webm`)) {
-  throw new Error(`Missing video public/videos/${name}.{mp4,webm}: run scripts/encode-videos.sh`);
+if (!exists(`${name}.mp4`)) {
+  throw new Error(`Missing video public/videos/${name}.mp4: run scripts/encode-videos.sh`);
 }
-const hasMobile = exists(`${name}-m.mp4`) && exists(`${name}-m.webm`);
+/** WebM (lighter) for the silent loops; the videos with sound are MP4 only. */
+const hasWebm = exists(`${name}.webm`);
+const hasMobile = exists(`${name}-m.mp4`);
 const posterImage = await getImage({
   src: poster,
   width: Math.min(poster.width, displayWidth * 2),
@@ -70,11 +72,13 @@ const interactive = mode !== 'controls';
 >
   {hasMobile && (
     <>
-      <source src={`/videos/${name}-m.webm`} type="video/webm" media="(max-width: 1023px)" />
+      {hasWebm && (
+        <source src={`/videos/${name}-m.webm`} type="video/webm" media="(max-width: 1023px)" />
+      )}
       <source src={`/videos/${name}-m.mp4`} type="video/mp4" media="(max-width: 1023px)" />
     </>
   )}
-  <source src={`/videos/${name}.webm`} type="video/webm" />
+  {hasWebm && <source src={`/videos/${name}.webm`} type="video/webm" />}
   <source src={`/videos/${name}.mp4`} type="video/mp4" />
 </video>
 
