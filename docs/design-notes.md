@@ -428,3 +428,27 @@ Détail par écran dans `docs/screens/*.md`. Récapitulatif :
 - **Polices** : intro/conclusion Miles Clayton en serif droit de remplacement ; légendes et « Visit » en italique de type
   Bodoni dans la maquette, rendues en CA Scholar ; slogan Matong'eau en Futura PT (remplacement).
 - **Poids** : les images d'illustration de l'étape 4 ont été réduites (200 Mo → 18 Mo) au double de leur taille d'affichage.
+
+## 10. Médias (étape 6)
+
+- **Conversion** : `scripts/encode-videos.sh` (ffmpeg, relançable) lit `assets-source/Animation/` sans le modifier et écrit
+  `public/videos/<nom>.webm` (VP9) + `<nom>.mp4` (H.264, `faststart`), plus `<nom>-m.*` (960 px) pour les écrans < 1024 px
+  quand la vidéo est affichée pleine largeur. Boucles sans piste son ; vidéos à son : AAC 128k / Opus 96k.
+  Les GIF identiques à la maquette sont convertis tels quels ; quand une version MP4 HD de la même animation existe
+  (la rue, ball and box, dinner, geometrical), c'est elle qui est utilisée.
+- **Composant** `src/components/media/Video.astro`, trois modes :
+  - `loop` (équivalent GIF) : `muted loop playsinline` + poster ; lecture seulement quand la vidéo est à l'écran
+    (IntersectionObserver), aucune lecture si `prefers-reduced-motion` ; clic / Entrée / Espace = pause / lecture
+    (WCAG 2.2.2). La vidéo d'ouverture (au-dessus de la ligne de flottaison) a l'attribut `autoplay` ; les autres
+    sont en `preload="none"` et démarrent à l'approche de l'écran, pour ne pas charger toute la page d'un coup.
+  - `toggle` (« tap » play/pause du prototype XD) : vidéos avec son de Wear a Suit, une seule joue à la fois.
+  - `controls` : lecteur natif pour la vidéo longue avec son « Portfolio evening » (60 s).
+- **YouTube** : `src/components/media/YouTubeEmbed.astro` (Davie) : lien vers YouTube avec le poster (fonctionne sans JS),
+  remplacé au clic par le lecteur `youtube-nocookie` ; rien n'est chargé depuis YouTube avant le clic.
+- **Blocs projet** : `kind: video` + `video: <nom>` (+ `mode`) ; `youtube` prioritaire ; sans `video` ni `youtube`,
+  l'image fixe reste affichée (placeholder « Look Good In Any Situation », aplats de Yarha').
+- **Vidéo d'ouverture de la page Animation** : `Dog_animation_footage.mp4` (sa 1re image est le crème `#FFFAEE` de la
+  maquette bureau, sans son) — **à confirmer avec le client** (autre candidat : `1_Reflect_your_ambitions.mp4`, dont la
+  1re image a le rose de la maquette mobile). Sur mobile, la vidéo 16:9 est affichée en entier (contain) au milieu de la
+  section de 852 px.
+- **Sous-titres** : aucune piste de sous-titres fournie pour les vidéos avec son (à demander).

@@ -5,8 +5,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import CategoryNav from '../../components/CategoryNav.astro';
+import Video from '../../components/media/Video.astro';
 import { projectHref } from '../../config/categories';
-// Still frames of each animation, picked to match the mockup; the videos themselves come in step 6.
+// Posters: still frame of each animation matching the mockup (videos in public/videos/).
 import portfolioEvening from '../../assets/animation/portfolio-evening.jpg';
 import cyclist from '../../assets/animation/cyclist.jpg';
 import geometrical from '../../assets/animation/geometrical-animation.jpg';
@@ -17,10 +18,13 @@ import ballAndBox from '../../assets/animation/the-ball-and-box.jpg';
 import dinner from '../../assets/animation/a-classic-european-dinner.jpg';
 import reflect from '../../assets/animation/reflect-your-ambitions.jpg';
 import embrace from '../../assets/animation/embrace-every-moment.jpg';
+import heroPoster from '../../assets/animation/animation-hero-poster.jpg';
 // PLACEHOLDER: crop of the mockup, the "Look Good In Any Situation" video was not provided.
 import lookGood from '../../assets/animation/look-good-in-any-situation-from-mockup.png';
 
 interface Piece {
+  /** Video name in public/videos/ (see scripts/encode-videos.sh) and its poster. */
+  video: string;
   src: ImageMetadata;
   alt: string;
   caption: string;
@@ -37,6 +41,7 @@ const pieces: Piece[] = [
     src: portfolioEvening,
     alt: 'Yellow plane flying over a city, from the Portfolio evening animation',
     caption: 'Portfolio evening',
+    video: 'portfolio-evening',
     box: [0, 1088, 1920, 1083],
     captionY: 2205,
     mobile: [347, 197, 24, 22],
@@ -45,6 +50,7 @@ const pieces: Piece[] = [
     src: recordPlayer,
     alt: 'Hand putting a record on a turntable',
     caption: 'Record player cinemagraph',
+    video: 'record-player-cinemagraph',
     box: [623, 3852, 674, 512],
     captionY: 4423,
     mobile: [241, 183, 50, 29],
@@ -53,6 +59,7 @@ const pieces: Piece[] = [
     src: vanderberg,
     alt: 'The Vanderberg magazine cover with a snowy forest path',
     caption: 'Vanderberg magazine cover',
+    video: 'vanderberg-magazine-cover',
     box: [960, 2460, 812, 1051],
     captionY: 3541,
     mobile: [345, 446, 109, 20],
@@ -61,6 +68,7 @@ const pieces: Piece[] = [
     src: laRue,
     alt: 'Night street with lamp posts and a bench',
     caption: '" La rue s\'anime "',
+    video: 'la-rue-sanime',
     box: [0, 4636, 1920, 1080],
     captionY: 5766,
     mobile: [349, 196, 110, 20],
@@ -69,6 +77,7 @@ const pieces: Piece[] = [
     src: ballAndBox,
     alt: 'Yellow door on a blue floor',
     caption: 'The ball and box',
+    video: 'the-ball-and-box',
     mobileCaption: 'Ball and box',
     box: [0, 5937, 1920, 1079],
     captionY: 7066,
@@ -78,6 +87,7 @@ const pieces: Piece[] = [
     src: dinner,
     alt: 'Dining room with red walls',
     caption: 'A classic European dinner',
+    video: 'a-classic-european-dinner',
     box: [571, 7254, 779, 585],
     captionY: 7870,
     mobile: [332, 248, 109, 20],
@@ -89,6 +99,7 @@ const pair: Piece[] = [
     src: cyclist,
     alt: 'Man riding a bicycle, black and white line drawing',
     caption: 'Cyclist',
+    video: 'cyclist',
     box: [318, 2460, 388, 363],
     captionY: 2862,
     mobile: [156, 156, 63, 10],
@@ -97,27 +108,36 @@ const pair: Piece[] = [
     src: geometrical,
     alt: 'Black and turquoise geometric shapes',
     caption: 'Geometrical animation',
+    video: 'geometrical-animation',
     box: [318, 3073, 388, 363],
     captionY: 3476,
     mobile: [156, 156, 63, 10],
   },
 ];
 
-const wearASuit = [
-  {
-    src: reflect,
-    alt: 'Tailor fitting a suit in front of a mirror',
-    caption: 'Reflect Your Ambitions',
-    x: 133,
-  },
-  { src: embrace, alt: 'Man in a suit at a party', caption: 'Embrace Every Momment', x: 690 },
-  {
-    src: lookGood,
-    alt: 'Train passing between buildings at sunset',
-    caption: 'Look Good In Any Situation',
-    x: 1247,
-  },
-];
+const wearASuit: { src: ImageMetadata; alt: string; caption: string; x: number; video?: string }[] =
+  [
+    {
+      src: reflect,
+      alt: 'Tailor fitting a suit in front of a mirror',
+      caption: 'Reflect Your Ambitions',
+      x: 133,
+      video: 'reflect-your-ambitions',
+    },
+    {
+      src: embrace,
+      alt: 'Man in a suit at a party',
+      caption: 'Embrace Every Momment',
+      x: 690,
+      video: 'embrace-every-moment',
+    },
+    {
+      src: lookGood,
+      alt: 'Train passing between buildings at sunset',
+      caption: 'Look Good In Any Situation',
+      x: 1247,
+    },
+  ];
 
 const vars = (piece: Piece) => ({
   '--x': piece.box[0],
@@ -131,12 +151,11 @@ const vars = (piece: Piece) => ({
   '--mgap': piece.mobile[2],
   '--mcap': piece.mobile[3],
 });
-const sizes = (piece: Piece) =>
-  `(min-width: 1024px) ${((piece.box[2] / 1920) * 100).toFixed(1)}vw, ${piece.mobile[0]}px`;
 const mediaClass =
   'block h-[calc(var(--mh)*1px)] w-[calc(var(--mw)*1px)] object-cover desktop:absolute desktop:top-[calc(var(--y)*var(--u))] desktop:left-[calc(var(--x)*var(--u))] desktop:h-[calc(var(--h)*var(--u))] desktop:w-[calc(var(--w)*var(--u))]';
 const captionClass =
   'mt-[calc(var(--mcap)*1px)] text-center text-[12px] leading-[1.1] tracking-[0.04em] whitespace-nowrap uppercase desktop:absolute desktop:top-[calc(var(--cy)*var(--u))] desktop:left-[calc(var(--cx)*var(--u))] desktop:m-0 desktop:-translate-x-1/2 desktop:text-[calc(30*var(--u))] desktop:tracking-[0.037em]';
+const thumbClass = 'h-[130px] w-[233px] object-cover desktop:h-[calc(297*var(--u))] desktop:w-full';
 const wearASuitHref = projectHref('animation', 'wear-a-suit');
 ---
 
@@ -147,11 +166,18 @@ const wearASuitHref = projectHref('animation', 'wear-a-suit');
     </div>
     <main class="relative desktop:h-[calc(8700*var(--u))]">
       <h1 class="sr-only">Animation</h1>
-      <!-- Opening video (step 6); the mockup only shows its first, almost blank frame. -->
+      <!-- Opening video: the mockup only shows its first, almost blank frame (to confirm: Dog_animation_footage.mp4). -->
       <section
         class="relative h-[852px] bg-blush desktop:h-[calc(1080*var(--u))] desktop:bg-[#fffaee]"
-        aria-label="Wear a Suit"
+        aria-label="Opening animation"
       >
+        <Video
+          name="animation-hero"
+          poster={heroPoster}
+          label="Animated short: a man and his dog in a desert landscape"
+          eager
+          class="absolute inset-0 size-full object-contain desktop:object-cover"
+        />
         <a
           href={wearASuitHref}
           class="absolute top-[742px] left-1/2 -translate-x-1/2 text-[16px] leading-[1.1] whitespace-nowrap underline desktop:top-[calc(1006*var(--u))] desktop:right-[calc(102*var(--u))] desktop:left-auto desktop:translate-x-0 desktop:text-[calc(30*var(--u))] desktop:tracking-[0.037em] desktop:no-underline"
@@ -167,12 +193,13 @@ const wearASuitHref = projectHref('animation', 'wear-a-suit');
             class="mt-[calc(var(--mgap)*1px)] flex flex-col items-center desktop:contents"
             style={vars(piece)}
           >
-            <Image
-              src={piece.src}
-              alt={piece.alt}
+            <Video
+              name={piece.video}
+              poster={piece.src}
+              label={piece.alt}
+              mode="controls"
+              displayWidth={piece.box[2]}
               class={mediaClass}
-              widths={[347, 694, 1200, 1920]}
-              sizes={sizes(piece)}
             />
             <figcaption class={captionClass}>{piece.caption}</figcaption>
           </figure>
@@ -180,12 +207,12 @@ const wearASuitHref = projectHref('animation', 'wear-a-suit');
         <div class="mt-[63px] flex -translate-x-[4px] gap-[26px] desktop:contents">
           {pair.map((piece) => (
             <figure class="flex flex-col items-center desktop:contents" style={vars(piece)}>
-              <Image
-                src={piece.src}
-                alt={piece.alt}
+              <Video
+                name={piece.video}
+                poster={piece.src}
+                label={piece.alt}
+                displayWidth={piece.box[2]}
                 class={mediaClass}
-                widths={[156, 312, 388, 776]}
-                sizes={sizes(piece)}
               />
               <figcaption class={captionClass}>{piece.caption}</figcaption>
             </figure>
@@ -196,12 +223,12 @@ const wearASuitHref = projectHref('animation', 'wear-a-suit');
             class="mt-[calc(var(--mgap)*1px)] flex flex-col items-center desktop:contents"
             style={vars(piece)}
           >
-            <Image
-              src={piece.src}
-              alt={piece.alt}
+            <Video
+              name={piece.video}
+              poster={piece.src}
+              label={piece.alt}
+              displayWidth={piece.box[2]}
               class={mediaClass}
-              widths={[350, 700, 1200, 1920]}
-              sizes={sizes(piece)}
             />
             <figcaption class={captionClass}>
               {piece.mobileCaption ? (
@@ -235,13 +262,24 @@ const wearASuitHref = projectHref('animation', 'wear-a-suit');
               ]}
               style={{ '--x': video.x }}
             >
-              <Image
-                src={video.src}
-                alt={video.alt}
-                class="h-[130px] w-[233px] object-cover desktop:h-[calc(297*var(--u))] desktop:w-full"
-                widths={[233, 466, 532, 1064]}
-                sizes="(min-width: 1024px) 28vw, 233px"
-              />
+              {video.video ? (
+                <Video
+                  name={video.video}
+                  poster={video.src}
+                  label={video.alt}
+                  mode="toggle"
+                  displayWidth={532}
+                  class={thumbClass}
+                />
+              ) : (
+                <Image
+                  src={video.src}
+                  alt={video.alt}
+                  class={thumbClass}
+                  widths={[233, 466, 532, 1064]}
+                  sizes="(min-width: 1024px) 28vw, 233px"
+                />
+              )}
               <figcaption class="mt-[10px] text-[12px] leading-[1.1] desktop:mt-[calc(34*var(--u))] desktop:text-[calc(25*var(--u))]">
                 {video.caption}
               </figcaption>

@@ -1,0 +1,61 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+
+/**
+ * Long video hosted on YouTube. Renders a link with the poster (works without JavaScript);
+ * the click swaps it for the privacy-enhanced player, so nothing loads from YouTube before.
+ */
+interface Props {
+  id: string;
+  poster: ImageMetadata;
+  /** Video title, used for the link and the iframe. */
+  label: string;
+  sizes?: string;
+  class?: string;
+  style?: Record<string, string | number | undefined>;
+}
+
+const { id, poster, label, sizes, class: className, style } = Astro.props;
+---
+
+<a
+  href={`https://www.youtube.com/watch?v=${id}`}
+  class:list={[className, 'aspect-video overflow-hidden']}
+  style={style}
+  data-youtube={id}
+  data-label={label}
+  aria-label={`Play on YouTube: ${label}`}
+>
+  <Image
+    src={poster}
+    alt=""
+    class="size-full object-cover"
+    widths={[400, 800, 1200, 1920]}
+    sizes={sizes}
+  />
+</a>
+
+<script>
+  function init() {
+    document.querySelectorAll<HTMLAnchorElement>('a[data-youtube]').forEach((link) => {
+      if ('ready' in link.dataset) return;
+      link.dataset.ready = '';
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        const iframe = document.createElement('iframe');
+        iframe.src = `https://www.youtube-nocookie.com/embed/${link.dataset.youtube}?autoplay=1&rel=0`;
+        iframe.title = link.dataset.label ?? 'YouTube video';
+        iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+        iframe.allowFullscreen = true;
+        iframe.className = link.className;
+        iframe.setAttribute('style', link.getAttribute('style') ?? '');
+        link.replaceWith(iframe);
+        iframe.focus();
+      });
+    });
+  }
+
+  init();
+  document.addEventListener('astro:page-load', init);
+</script>

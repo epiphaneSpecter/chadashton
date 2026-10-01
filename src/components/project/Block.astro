@@ -2,6 +2,8 @@
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import RichText from './RichText.astro';
+import Video from '../media/Video.astro';
+import YouTubeEmbed from '../media/YouTubeEmbed.astro';
 
 type AnyBlock = CollectionEntry<'projects'>['data']['blocks'][number];
 type Leaf = Exclude<AnyBlock, { kind: 'group' }>;
@@ -55,6 +57,11 @@ const common = [
 const mediaSize = placed ? 'desktop:h-[calc(var(--h)*var(--u))]' : 'desktop:h-auto';
 
 const leaf = block.kind === 'group' ? undefined : (block as Leaf);
+/** Thin frame drawn inside the media box. */
+const frame =
+  leaf && 'border' in leaf && leaf.border
+    ? { outline: `1px solid ${leaf.border}`, outlineOffset: '-1px' }
+    : {};
 const sizes = (() => {
   if (!leaf || !('box' in leaf) || !leaf.box) return '(min-width: 1024px) 85vw, 100vw';
   const mobileSize = typeof m.w === 'number' ? `${m.w}px` : '100vw';
@@ -101,27 +108,42 @@ const groupLayout =
     style={{
       ...vars,
       objectPosition: leaf.position,
-      ...(leaf.border ? { outline: `1px solid ${leaf.border}`, outlineOffset: '-1px' } : {}),
+      ...frame,
     }}
     widths={[400, 800, 1200, 1920, 2560]}
     sizes={sizes}
     data-placeholder={leaf.placeholder ? 'image' : undefined}
   />
 )}
-{leaf?.kind === 'video' && (
+{leaf?.kind === 'video' && leaf.youtube && (
+  <YouTubeEmbed
+    id={leaf.youtube}
+    poster={leaf.src}
+    label={leaf.alt}
+    sizes={sizes}
+    class:list={[common, mediaSize]}
+    style={{ ...vars, ...frame }}
+  />
+)}
+{leaf?.kind === 'video' && !leaf.youtube && leaf.video && (
+  <Video
+    name={leaf.video}
+    poster={leaf.src}
+    label={leaf.alt}
+    mode={leaf.mode}
+    displayWidth={leaf.box?.[2]}
+    class:list={[common, mediaSize, leaf.fit === 'cover' ? 'object-cover' : 'object-contain']}
+    style={{ ...vars, objectPosition: leaf.position, ...frame }}
+  />
+)}
+{leaf?.kind === 'video' && !leaf.youtube && !leaf.video && (
   <Image
     src={leaf.src}
     alt={leaf.alt}
     class:list={[common, mediaSize, leaf.fit === 'cover' ? 'object-cover' : 'object-contain']}
-    style={{
-      ...vars,
-      objectPosition: leaf.position,
-      ...(leaf.border ? { outline: `1px solid ${leaf.border}`, outlineOffset: '-1px' } : {}),
-    }}
+    style={{ ...vars, objectPosition: leaf.position, ...frame }}
     widths={[400, 800, 1200, 1920]}
     sizes={sizes}
-    data-video-source={leaf.source}
-    data-youtube={leaf.youtube}
     data-placeholder={leaf.placeholder ? 'video' : undefined}
   />
 )}

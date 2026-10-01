@@ -54,6 +54,7 @@ blocks:
     alt: Animated illustration of a horse pulling a carriage
     fit: contain
     source: assets-source/Animation/Caleche_1.gif
+    video: yarha-caleche
     box: [647, 3560, 723, 268]
     m: { w: 338, gap: 102 }
   - kind: text

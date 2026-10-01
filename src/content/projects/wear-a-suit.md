@@ -19,12 +19,16 @@ blocks:
     src: ../../assets/projects/wear-a-suit/reflect-your-ambitions.jpg
     alt: 'Reflect Your Ambitions: animated advertisement for Surmesur suits (first frame, blank)'
     source: assets-source/Animation/1_Reflect_your_ambitions.mp4
+    video: reflect-your-ambitions
+    mode: toggle
     box: [144, 158, 1632, 918]
     m: { w: 350, align: left, gap: 0 }
   - kind: video
     src: ../../assets/projects/wear-a-suit/embrace-every-moment.jpg
     alt: 'Embrace Every Moment: a couple dining in a restaurant, the man wearing a suit'
     source: assets-source/Animation/2_Embrace_every_moment.mp4
+    video: embrace-every-moment
+    mode: toggle
     box: [140, 1189, 1640, 922]
     m: { w: 350, align: left, gap: 42 }
   # PLACEHOLDER: the third video (Look Good In Any Situation) is not in assets-source; still cropped
