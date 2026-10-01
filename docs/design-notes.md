@@ -452,3 +452,21 @@ Détail par écran dans `docs/screens/*.md`. Récapitulatif :
   1re image a le rose de la maquette mobile). Sur mobile, la vidéo 16:9 est affichée en entier (contain) au milieu de la
   section de 852 px.
 - **Sous-titres** : aucune piste de sous-titres fournie pour les vidéos avec son (à demander).
+
+## 11. Accueil animé (étape 7)
+
+- **Constat** : l'animation d'accueil n'existe ni dans la maquette (seul l'état initial `landing-page` est exporté ; le
+  « trait » en bas à droite est un élément presque entièrement hors cadre, au bord droit vers y 1036), ni dans le
+  prototype (aucune vidéo ni transition minutée sur l'accueil), ni dans `assets-source/`. Décision : **fichier à fournir
+  par le client** ; en attendant, l'accueil reste statique, conforme à la maquette.
+- **Technique retenue : vidéo en boucle** (pas GSAP). Les animations de Chad sont des rendus image par image (vidéo/GIF) ;
+  GSAP n'aurait de sens qu'avec les calques séparés d'une illustration, non fournis, et reviendrait à inventer le mouvement.
+- **Emplacement prêt** : `src/config/home.ts` (`homeVideo`, vide). Pour l'activer : ajouter une ligne à
+  `scripts/encode-videos.sh`, lancer le script, mettre l'image d'affiche dans `src/assets/home/`, renseigner `homeVideo`
+  (nom, affiche, description, `fit`, couleur de fond assortie aux bords de la vidéo). La vidéo passe en plein écran
+  derrière le nom et le slogan, démarre seule (muette, en boucle), ne démarre pas avec `prefers-reduced-motion`, et un
+  bouton discret `PAUSE` / `PLAY` en bas à droite permet de l'arrêter (WCAG 2.2.2 ; absent de la maquette, affiché
+  seulement quand la vidéo existe). Testé avec une vidéo existante puis remis à vide.
+- **Navigation** : l'accueil n'a pas de menu dans la maquette ; tout l'écran est un lien vers Portfolio
+  (« Enter the portfolio » pour les lecteurs d'écran, contour visible au clavier).
+- **Mesures** : nom et slogan à 0–1 px de la maquette (1920 et 393).

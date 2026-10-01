@@ -1,15 +1,76 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Video from '../components/media/Video.astro';
 import { site } from '../config/site';
+import { homeVideo } from '../config/home';
 ---
 
 <BaseLayout bodyClass="bg-blush">
-  <main class="relative h-svh overflow-hidden">
-    <h1 class="absolute top-[47.8%] desktop:top-[49.9%] left-1/2 -translate-x-1/2 -translate-y-1/2 text-hero whitespace-nowrap">
+  <main
+    class="relative h-svh overflow-hidden"
+    style={homeVideo?.background ? { backgroundColor: homeVideo.background } : undefined}
+  >
+    {homeVideo && (
+      <Video
+        name={homeVideo.name}
+        poster={homeVideo.poster}
+        label={homeVideo.label}
+        eager
+        clickable={false}
+        class:list={[
+          'pointer-events-none absolute inset-0 size-full',
+          homeVideo.fit === 'contain' ? 'object-contain' : 'object-cover',
+        ]}
+        data-home-video
+      />
+    )}
+    <h1 class="absolute top-[47.8%] left-1/2 -translate-x-1/2 -translate-y-1/2 text-hero whitespace-nowrap desktop:top-[49.9%]">
       Chad ASHTON
     </h1>
     <p class="absolute bottom-[13.3svh] left-1/2 -translate-x-1/2 text-center text-title whitespace-nowrap desktop:bottom-[8svh]">
       {site.tagline}
     </p>
+    {/* The landing has no menu in the mockup: the whole screen leads to the portfolio. */}
+    <a
+      href="/portfolio"
+      class="absolute inset-0 z-10 focus-visible:outline-2 focus-visible:-outline-offset-8 focus-visible:outline-ink"
+    >
+      <span class="sr-only">Enter the portfolio</span>
+    </a>
+    {homeVideo && (
+      <button
+        type="button"
+        class="absolute right-[20px] bottom-[20px] z-20 text-[14px] uppercase desktop:right-[calc(40*var(--u))] desktop:bottom-[calc(40*var(--u))] desktop:text-[calc(20*var(--u))]"
+        data-home-video-toggle
+      >
+        Pause
+      </button>
+    )}
   </main>
 </BaseLayout>
+
+<script>
+  // Pause / play control of the home animation (the link above covers the video).
+  function init() {
+    const button = document.querySelector<HTMLButtonElement>('[data-home-video-toggle]');
+    const video = document.querySelector<HTMLVideoElement>('video[data-home-video]');
+    if (!button || !video || 'ready' in button.dataset) return;
+    button.dataset.ready = '';
+    const sync = () => (button.textContent = video.paused ? 'Play' : 'Pause');
+    video.addEventListener('play', sync);
+    video.addEventListener('pause', sync);
+    sync();
+    button.addEventListener('click', () => {
+      if (video.paused) {
+        delete video.dataset.userPaused;
+        video.play().catch(() => undefined);
+      } else {
+        video.dataset.userPaused = '';
+        video.pause();
+      }
+    });
+  }
+
+  init();
+  document.addEventListener('astro:page-load', init);
+</script>

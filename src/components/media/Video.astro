@@ -23,6 +23,8 @@ interface Props {
   eager?: boolean;
   /** Largest displayed width in CSS px, used to size the poster (2× for dense screens). */
   displayWidth?: number;
+  /** False when another control handles pause / play (the video is then neither focusable nor clickable). */
+  clickable?: boolean;
   class?: string;
   style?: Record<string, string | number | undefined>;
 }
@@ -34,15 +36,17 @@ const {
   mode = 'loop',
   eager = false,
   displayWidth = 1920,
+  clickable = true,
   class: className,
   style,
+  ...attributes
 } = Astro.props;
 
 const exists = (file: string) => fs.existsSync(path.join(process.cwd(), 'public/videos', file));
 if (!exists(`${name}.mp4`)) {
   throw new Error(`Missing video public/videos/${name}.mp4: run scripts/encode-videos.sh`);
 }
-/** WebM (lighter) for the silent loops; the videos with sound are MP4 only. */
+/** WebM (lighter) is optional: browsers without it fall back to MP4. */
 const hasWebm = exists(`${name}.webm`);
 const hasMobile = exists(`${name}-m.mp4`);
 const posterImage = await getImage({
@@ -51,7 +55,7 @@ const posterImage = await getImage({
   format: 'webp',
 });
 const loop = mode === 'loop';
-const interactive = mode !== 'controls';
+const interactive = mode !== 'controls' && clickable;
 ---
 
 <video
@@ -69,6 +73,8 @@ const interactive = mode !== 'controls';
   aria-label={label}
   data-video={mode}
   data-label={label}
+  data-no-click={interactive ? undefined : ''}
+  {...attributes}
 >
   {hasMobile && (
     <>
@@ -102,7 +108,14 @@ const interactive = mode !== 'controls';
   function setUp(video: HTMLVideoElement) {
     video.dataset.ready = '';
     const mode = video.dataset.video;
-    if (mode === 'controls') return;
+    if (mode === 'loop') {
+      if (reducedMotion.matches) {
+        video.removeAttribute('autoplay');
+        video.pause();
+      }
+      visibility.observe(video);
+    }
+    if (mode === 'controls' || 'noClick' in video.dataset) return;
 
     const label = video.dataset.label ?? '';
     const sync = () =>
@@ -133,14 +146,6 @@ const interactive = mode !== 'controls';
         toggle();
       }
     });
-
-    if (mode === 'loop') {
-      if (reducedMotion.matches) {
-        video.removeAttribute('autoplay');
-        video.pause();
-      }
-      visibility.observe(video);
-    }
   }
 
   function init() {
