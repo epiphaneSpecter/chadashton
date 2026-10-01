@@ -10,6 +10,8 @@ import { getImage } from 'astro:assets';
  * Web video encoded by scripts/encode-videos.sh into public/videos/<name>.{webm,mp4}
  * (and <name>-m.* for screens under 1024 px when that variant exists).
  * - `loop`: silent animation, plays muted in a loop while visible (like a GIF); click pauses it.
+ * - `once`: plays once, muted, when it comes on screen (Adobe XD "time" trigger), then goes back to its
+ *   first frame; a click plays or pauses it with sound.
  * - `toggle`: video with sound, a click plays or pauses it (Adobe XD "tap" behavior).
  * - `controls`: native player controls (long video with sound).
  */
@@ -18,7 +20,7 @@ interface Props {
   poster: ImageMetadata;
   /** Accessible name of the video. */
   label: string;
-  mode?: 'loop' | 'toggle' | 'controls';
+  mode?: 'loop' | 'once' | 'toggle' | 'controls';
   /** Above the fold: starts loading and playing right away (`autoplay`). */
   eager?: boolean;
   /** Largest displayed width in CSS px, used to size the poster (2× for dense screens). */
@@ -56,6 +58,8 @@ const [posterImage, mobilePosterImage] = await Promise.all([
   getImage({ src: poster, width: Math.min(poster.width, 800), format: 'webp' }),
 ]);
 const loop = mode === 'loop';
+/** Starts on its own (muted, as browsers require): the loops and the play-once videos. */
+const auto = loop || mode === 'once';
 const interactive = mode !== 'controls' && clickable;
 
 /*
@@ -83,8 +87,8 @@ const positioned = wrapperClass.some((token) => /^(absolute|fixed|relative|stick
       data-poster={posterImage.src}
       data-poster-m={mobilePosterImage.src}
       preload={eager ? 'auto' : 'none'}
-      autoplay={loop && eager}
-      muted={loop}
+      autoplay={auto && eager}
+      muted={auto}
       loop={loop}
       playsinline
       aria-hidden="true"
@@ -118,8 +122,8 @@ const positioned = wrapperClass.some((token) => /^(absolute|fixed|relative|stick
     data-poster={posterImage.src}
     data-poster-m={mobilePosterImage.src}
     preload={eager ? 'auto' : 'none'}
-    autoplay={loop && eager}
-    muted={loop}
+    autoplay={auto && eager}
+    muted={auto}
     loop={loop}
     playsinline
     controls={mode === 'controls'}
@@ -145,13 +149,18 @@ const positioned = wrapperClass.some((token) => /^(absolute|fixed|relative|stick
 <script>
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-  // Silent loops only play while on screen, unless the visitor paused them or prefers less motion.
+  // Automatic videos only play while on screen, unless the visitor paused them or prefers less motion;
+  // a play-once video does not start again after its end.
   const visibility = new IntersectionObserver(
     (entries) => {
       for (const { target, isIntersecting } of entries) {
         const video = target as HTMLVideoElement;
         if (!isIntersecting) video.pause();
-        else if (!reducedMotion.matches && !('userPaused' in video.dataset)) {
+        else if (
+          !reducedMotion.matches &&
+          !('userPaused' in video.dataset) &&
+          !('ended' in video.dataset)
+        ) {
           video.play().catch(() => undefined);
         }
       }
@@ -182,7 +191,17 @@ const positioned = wrapperClass.some((token) => /^(absolute|fixed|relative|stick
     video.dataset.ready = '';
     nearScreen.observe(video);
     const mode = video.dataset.video;
-    if (mode === 'loop') {
+    if (mode === 'once') {
+      // Back to the first frame at the end, as in the prototype.
+      video.addEventListener('ended', () => {
+        video.dataset.ended = '';
+        video.currentTime = 0;
+      });
+    }
+    if (mode === 'loop' || mode === 'once') {
+      // Always start muted: after a click on a link the browser would allow sound, which would make
+      // the page behave differently depending on how the visitor arrived.
+      video.muted = true;
       if (reducedMotion.matches) {
         video.removeAttribute('autoplay');
         video.pause();
@@ -203,11 +222,14 @@ const positioned = wrapperClass.some((token) => /^(absolute|fixed|relative|stick
     const toggle = () => {
       if (video.paused) {
         delete video.dataset.userPaused;
-        // Only one video with sound at a time.
-        if (mode === 'toggle') {
+        if (mode === 'toggle' || mode === 'once') {
+          // A click is a visitor's gesture: the sound is allowed. Only one video with sound at a time.
+          video.muted = false;
           document
-            .querySelectorAll<HTMLVideoElement>('video[data-video="toggle"]')
-            .forEach((other) => other !== video && other.pause());
+            .querySelectorAll<HTMLVideoElement>(
+              'video[data-video="toggle"], video[data-video="once"]',
+            )
+            .forEach((other) => other !== video && !other.muted && other.pause());
         }
         video.play().catch(() => undefined);
       } else {

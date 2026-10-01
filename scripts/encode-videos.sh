@@ -13,7 +13,6 @@ mkdir -p "$OUT"
 # name | source | width | mobile width (0 = none) | audio (yes/no) | extra filter before scaling
 TABLE=$(
   cat <<'EOF'
-animation-hero|Dog_animation_footage.mp4|1920|960|no|
 portfolio-evening|Animation.mp4|1920|960|yes|
 cyclist|cyclist_GIF_B&W.gif|800|0|no|
 geometrical-animation|01_grenier_ch_AT1.mp4|800|0|no|

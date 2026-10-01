@@ -20,7 +20,8 @@ blocks:
     alt: 'Reflect Your Ambitions: animated advertisement for Surmesur suits (first frame, blank)'
     source: assets-source/Animation/1_Reflect_your_ambitions.mp4
     video: reflect-your-ambitions
-    mode: toggle
+    # Starts on its own when the page opens, as in the prototype (muted: browser rule; a click adds the sound).
+    mode: once
     box: [144, 158, 1632, 918]
     m: { w: 350, align: left, gap: 0 }
   - kind: video

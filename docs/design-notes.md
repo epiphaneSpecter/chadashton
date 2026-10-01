@@ -600,3 +600,17 @@ Détail par écran dans `docs/screens/*.md`. Récapitulatif :
 - Bureau seulement (pas de survol au toucher) ; même état au focus clavier ; pas d'animation si mouvement réduit.
   La zone de survol couvre l'image, comme le composant XD, pour que le libellé qui descend ne fasse pas clignoter
   l'état. Écarts : images et phrases à 0–7 px des captures.
+
+## 18. Sous-navigation de l'en-tête et vidéo d'ouverture de la page Animation
+
+- **En-tête (bureau)** : au survol de l'en-tête, comme dans le prototype, la ligne `DESIGN  ILLUSTRATION  ANIMATION`
+  apparaît sous le logo (x 140, capitales de 16 px à y 144, ≈ 26 px), catégorie courante en gras (épaississement du
+  trait : pas de graisse bold fournie). Fondu 0,3 s ; visible aussi au clavier ; la zone transparente au-dessus des
+  liens la garde ouverte pendant que la souris descend du menu. Pas sur mobile (barre de catégories existante).
+- **Vidéo d'ouverture de la page Animation** (précision du client, prototype XD) : « Reflect Your Ambitions », lue
+  **une seule fois** à l'arrivée sur la page puis revenue à sa première image (nouveau mode vidéo `once`). Elle remplace
+  `Dog_animation_footage.mp4`, retiré du site (−5,6 Mo).
+- **Page Wear a Suit** : la première vidéo (Reflect) démarre aussi d'elle-même à l'ouverture (mode `once`) ; les deux
+  autres restent à lancer au clic.
+- Les lectures automatiques sont toujours muettes (règle des navigateurs, et même comportement quelle que soit la façon
+  d'arriver sur la page) ; un clic sur la vidéo la met en pause ou la relance avec le son.
