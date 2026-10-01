@@ -26,16 +26,15 @@ const projects = (await getCollection('projects', ({ data }) => data.category ==
     <main id="main">
       <h1 class="sr-only">Design</h1>
       <figure class="mx-[28px] mt-[39px] desktop:mx-0 desktop:mt-[calc(73*var(--u))] desktop:flex desktop:items-end desktop:pl-[calc(615*var(--u))]">
-        <a href={projectHref('design', 'miles-clayton')} class="block">
-          <Image
-            src={youGiveMe}
-            alt="You Give Me, single artwork for Miles Clayton"
-            class="block aspect-square w-full desktop:w-[calc(691*var(--u))]"
-            widths={[337, 674, 691]}
-            sizes="(min-width: 1024px) 36vw, 337px"
-            loading="eager"
-          />
-        </a>
+        {/* Not a link: "You Give Me" is a single, it has no project page. */}
+        <Image
+          src={youGiveMe}
+          alt="You Give Me, single artwork for Miles Clayton"
+          class="block aspect-square w-full desktop:w-[calc(691*var(--u))]"
+          widths={[337, 674, 691]}
+          sizes="(min-width: 1024px) 36vw, 337px"
+          loading="eager"
+        />
         <figcaption class="mt-[9px] text-[8px] leading-[10px] desktop:mt-0 desktop:mb-[calc(7*var(--u))] desktop:ml-[calc(31*var(--u))] desktop:text-[max(12px,calc(20*var(--u)))] desktop:leading-[1.1]">
           You Give Me
           <br />

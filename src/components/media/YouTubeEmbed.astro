@@ -17,11 +17,13 @@ interface Props {
 }
 
 const { id, poster, label, sizes, class: className, style } = Astro.props;
+/** The link positions the play icon: relative, unless the caller already positions it. */
+const positioned = /(^|\s)(absolute|fixed|relative|sticky)(\s|$)/.test(className ?? '');
 ---
 
 <a
   href={`https://www.youtube.com/watch?v=${id}`}
-  class:list={[className, 'aspect-video overflow-hidden']}
+  class:list={[className, !positioned && 'relative', 'group aspect-video overflow-hidden']}
   style={style}
   data-youtube={id}
   data-label={label}
@@ -34,6 +36,15 @@ const { id, poster, label, sizes, class: className, style } = Astro.props;
     widths={[400, 800, 1200, 1920]}
     sizes={sizes}
   />
+  {/* Play icon: the poster alone does not tell that it is a video. */}
+  <span
+    class="absolute top-1/2 left-1/2 flex size-[44px] -translate-1/2 items-center justify-center rounded-full bg-black/60 text-white transition-transform duration-200 group-hover:scale-110 group-focus-visible:scale-110 motion-reduce:transition-none desktop:size-[calc(110*var(--u))] desktop:min-w-[56px] desktop:min-h-[56px]"
+    aria-hidden="true"
+  >
+    <svg viewBox="0 0 24 24" class="ml-[8%] size-[45%]" fill="currentColor">
+      <path d="M6 4l15 8-15 8z" />
+    </svg>
+  </span>
 </a>
 
 <script>
