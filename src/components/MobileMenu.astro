@@ -1,0 +1,105 @@
+---
+import AsteriskIcon from './icons/AsteriskIcon.astro';
+import Footer from './Footer.astro';
+import { mainNav } from '../config/navigation';
+import { site } from '../config/site';
+---
+
+<div
+  id="mobile-menu"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Menu"
+  class="fixed inset-0 z-50 flex flex-col overflow-y-auto bg-gold text-paper desktop:hidden"
+  hidden
+  data-menu
+>
+  <div class="flex items-start justify-between pt-[48px] pr-[23px] pl-[27px]">
+    <a href="/" class="mt-[7px] text-logo">
+      {site.name}
+    </a>
+    <button type="button" class="size-[34px]" aria-label="Close menu" data-menu-close>
+      <AsteriskIcon variant="sparkle" class="size-full" />
+    </button>
+  </div>
+
+  <nav aria-label="Main" class="flex flex-1 items-center justify-center">
+    <ul class="flex flex-col items-center gap-[73px] text-nav">
+      {mainNav.map((link) => (
+        <li>
+          <a href={link.href}>{link.label}</a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+
+  <Footer class="text-paper [&_hr]:bg-paper" />
+</div>
+
+<script>
+  // Elements of the current page (the header is re-rendered on each client-side navigation).
+  let menu: HTMLElement | null = null;
+  let openButton: HTMLButtonElement | null = null;
+
+  function focusables(): HTMLElement[] {
+    return menu ? [...menu.querySelectorAll<HTMLElement>('a[href], button')] : [];
+  }
+
+  function onKeydown(event: KeyboardEvent) {
+    if (event.key === 'Escape') {
+      closeMenu();
+      return;
+    }
+    if (event.key !== 'Tab') return;
+    // Keep keyboard focus inside the open menu.
+    const items = focusables();
+    const first = items[0];
+    const last = items[items.length - 1];
+    if (!first || !last) return;
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  }
+
+  function openMenu() {
+    if (!menu || !openButton) return;
+    menu.hidden = false;
+    openButton.setAttribute('aria-expanded', 'true');
+    document.documentElement.style.overflow = 'hidden';
+    document.addEventListener('keydown', onKeydown);
+    menu.querySelector<HTMLButtonElement>('[data-menu-close]')?.focus();
+  }
+
+  function closeMenu(restoreFocus = true) {
+    if (!menu || !openButton) return;
+    menu.hidden = true;
+    openButton.setAttribute('aria-expanded', 'false');
+    document.documentElement.style.overflow = '';
+    document.removeEventListener('keydown', onKeydown);
+    if (restoreFocus) openButton.focus();
+  }
+
+  function init() {
+    menu = document.querySelector<HTMLElement>('[data-menu]');
+    openButton = document.querySelector<HTMLButtonElement>('[data-menu-open]');
+    if (!menu || !openButton || 'ready' in menu.dataset) return;
+    menu.dataset.ready = '';
+    openButton.addEventListener('click', openMenu);
+    menu.querySelector('[data-menu-close]')?.addEventListener('click', () => closeMenu());
+  }
+
+  init();
+  document.addEventListener('astro:page-load', init);
+  // Leaving the page from the open menu: release the keyboard trap (the new page has its own menu).
+  document.addEventListener('astro:before-swap', () => {
+    if (menu && !menu.hidden) closeMenu(false);
+  });
+  // Close when the desktop layout kicks in (the menu is mobile only).
+  window.matchMedia('(width >= 64rem)').addEventListener('change', (event) => {
+    if (event.matches && menu && !menu.hidden) closeMenu();
+  });
+</script>

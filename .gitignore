@@ -4,3 +4,14 @@ dist/
 .env
 .env.*
 .DS_Store
+
+# Source assets (2.2 GB, copy of the Drive folder) — kept local only
+assets-source/*
+!assets-source/README.md
+design/original/
+
+# logs
+npm-debug.log*
+
+# editors
+.idea/

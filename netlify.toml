@@ -1,0 +1,5 @@
+# Netlify (chosen host). Node version comes from .node-version; HTTP headers from public/_headers.
+# Set SITE_URL (final address of the site) in Site configuration > Environment variables.
+[build]
+  command = "npm run build"
+  publish = "dist"

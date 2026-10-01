@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import SocialLinks from '../components/SocialLinks.astro';
+import { contact } from '../config/navigation';
+// PLACEHOLDER font: the desktop email uses Futura PT, which was not provided (fallback fonts meanwhile).
+---
+
+<BaseLayout
+  title="Contact"
+  description="Contact Chad Ashton by e-mail, or on Instagram, LinkedIn and Behance."
+>
+  <div class="min-h-svh text-lilac desktop:text-ink">
+    <Header />
+    <main id="main" class="text-center">
+      <h1 class="mt-[141px] text-display leading-[1.1] text-lilac uppercase desktop:mt-[calc(187*var(--u))]">
+        Write to me
+      </h1>
+      <a
+        href={`mailto:${contact.email}`}
+        class="mt-[75px] inline-block text-[25px] leading-[1.1] desktop:mt-[calc(97*var(--u))] desktop:font-futura desktop:text-[calc(44*var(--u))] desktop:font-medium desktop:not-italic"
+      >
+        {contact.email}
+      </a>
+      <SocialLinks class="mt-[381px] pl-[8px] justify-center desktop:pl-0 desktop:[&>li:first-child]:translate-x-[calc(21*var(--u))] text-[17px] leading-[1.1] desktop:mt-[calc(301*var(--u))] desktop:text-[calc(40*var(--u))] [&>li]:w-[124px] desktop:[&>li]:w-[calc(495*var(--u))]" />
+    </main>
+  </div>
+</BaseLayout>

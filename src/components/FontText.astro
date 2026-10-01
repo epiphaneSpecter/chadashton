@@ -1,0 +1,20 @@
+---
+/**
+ * Text in the site font where `{r}` and `{s}` render the alternate glyphs of the Ashton font
+ * (OpenType `aalt`: handwritten "r", which looks like a π, and handwritten "s").
+ */
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+const parts = text.split(/(\{[rs]\})/);
+---
+
+{parts.map((part) =>
+  part === '{r}' || part === '{s}' ? (
+    <span class="[font-feature-settings:'aalt']">{part[1]}</span>
+  ) : (
+    part
+  ),
+)}

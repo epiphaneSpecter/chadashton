@@ -1,0 +1,41 @@
+---
+/**
+ * Asterisk icons drawn from the mockup:
+ * - `burger`: 8 equal branches in a square (mobile menu button)
+ * - `sparkle`: long vertical/horizontal branches, short diagonals, center dot (close button)
+ * - `circled`: burger asterisk inside a circle (link to the Ashton font page)
+ */
+interface Props {
+  variant: 'burger' | 'sparkle' | 'circled';
+  class?: string;
+}
+
+const { variant, class: className } = Astro.props;
+---
+
+{variant === 'burger' && (
+  <svg
+    class={className}
+    viewBox="0 0 32 32"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2.5"
+    aria-hidden="true"
+  >
+    <path d="M16 1v30M1 16h30M3 3l26 26M29 3 3 29" />
+  </svg>
+)}
+{variant === 'sparkle' && (
+  <svg class={className} viewBox="0 0 34 34" fill="none" stroke="currentColor" aria-hidden="true">
+    <path d="M17 0v34" stroke-width="1.8" />
+    <path d="M0 17h34" stroke-width="2.2" />
+    <path d="M8.5 8.5l17 17M25.5 8.5l-17 17" stroke-width="1.3" />
+    <circle cx="17" cy="17" r="2.6" fill="currentColor" stroke="none" />
+  </svg>
+)}
+{variant === 'circled' && (
+  <svg class={className} viewBox="0 0 54 54" fill="none" stroke="currentColor" aria-hidden="true">
+    <circle cx="27" cy="27" r="26" stroke-width="1.8" />
+    <path d="M27 14v26M14 27h26M17.5 17.5l19 19M36.5 17.5l-19 19" stroke-width="1.6" />
+  </svg>
+)}

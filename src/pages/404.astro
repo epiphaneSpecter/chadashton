@@ -1,0 +1,87 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import errorTable from '../assets/404/error-table.png';
+import errorGuitar from '../assets/404/error-guitar.png';
+
+// The mockup has two versions of this page; one of them is picked at random on each visit.
+const variants = [
+  {
+    image: errorTable,
+    alt: 'Drawing of a man sitting at a table with a cup',
+    title: 'The 404 page has been found.',
+    imageClass:
+      'w-[260px] desktop:absolute desktop:top-[calc(211*var(--u))] desktop:left-[calc(720*var(--u))] desktop:w-[calc(480*var(--u))]',
+    errorClass:
+      'top-[46px] left-[calc(50%-78px)] desktop:top-[calc(331*var(--u))] desktop:left-[calc(820*var(--u))]',
+  },
+  {
+    image: errorGuitar,
+    alt: 'Drawing of a man playing the guitar',
+    title: 'The 404 page has been found',
+    imageClass:
+      'w-[246px] desktop:absolute desktop:top-[calc(207*var(--u))] desktop:left-[calc(756*var(--u))] desktop:w-[calc(453*var(--u))]',
+    errorClass:
+      'top-[104px] left-[calc(50%+68px)] desktop:top-[calc(438*var(--u))] desktop:left-[calc(1090*var(--u))]',
+  },
+];
+---
+
+<BaseLayout title="Page not found" noindex>
+  <main
+    id="main"
+    class="relative flex min-h-svh flex-col overflow-hidden text-center desktop:block"
+  >
+    <p class="pt-[40px] pl-[20px] text-left text-[20px] leading-[1.1] uppercase desktop:absolute desktop:top-[calc(60*var(--u))] desktop:left-[calc(140*var(--u))] desktop:p-0 desktop:text-[calc(30*var(--u))]">
+      Page #404
+    </p>
+    <div class="my-auto pt-[20px] pb-[60px] desktop:contents">
+      {variants.map((variant, index) => (
+        <div data-variant hidden={index > 0}>
+          <div class="relative mx-auto mt-[40px] w-fit desktop:static desktop:m-0">
+            <Image
+              src={variant.image}
+              alt={variant.alt}
+              class:list={['mx-auto', variant.imageClass]}
+              widths={[260, 520, 960]}
+              sizes="(min-width: 1024px) 25vw, 260px"
+              loading="eager"
+            />
+            <p
+              aria-hidden="true"
+              class:list={[
+                'absolute text-[20px] leading-[1.1] whitespace-nowrap desktop:text-[calc(37*var(--u))]',
+                variant.errorClass,
+              ]}
+            >
+              Error !
+            </p>
+          </div>
+          <h1 class="mt-[24px] px-[20px] text-[20px] leading-[1.1] uppercase desktop:absolute desktop:top-[calc(657*var(--u))] desktop:right-0 desktop:left-0 desktop:m-0 desktop:text-[calc(33*var(--u))]">
+            {variant.title}
+          </h1>
+        </div>
+      ))}
+      <p class="mt-[18px] px-[20px] text-[16px] leading-[1.1] desktop:absolute desktop:top-[calc(728*var(--u))] desktop:right-0 desktop:left-0 desktop:m-0 desktop:text-[calc(28*var(--u))]">
+        The page you were looking for has not.
+      </p>
+      <a
+        href="/"
+        class="mt-[60px] inline-block text-[16px] leading-[1.1] uppercase desktop:absolute desktop:top-[calc(914*var(--u))] desktop:left-1/2 desktop:m-0 desktop:-translate-x-1/2 desktop:text-[calc(25*var(--u))]"
+      >
+        Back to home
+      </a>
+    </div>
+  </main>
+</BaseLayout>
+
+<script>
+  function pickVariant() {
+    const variants = document.querySelectorAll<HTMLElement>('[data-variant]');
+    const pick = Math.floor(Math.random() * variants.length);
+    variants.forEach((variant, index) => (variant.hidden = index !== pick));
+  }
+
+  pickVariant();
+  document.addEventListener('astro:page-load', pickVariant);
+</script>

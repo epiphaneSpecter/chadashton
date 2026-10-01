@@ -1,0 +1,99 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Block from '../../../components/project/Block.astro';
+import { categoryHref } from '../../../config/categories';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { category: project.data.category, id: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { data } = project;
+const header = data.header ?? {
+  text: data.title,
+  color: '#000000',
+  exitColor: '#4d4d4d',
+  exitUnderline: false,
+  mobileSize: 15,
+  left: 137,
+  top: 60,
+  right: 137,
+};
+const positioned = data.height !== undefined;
+---
+
+<BaseLayout title={data.title} description={header.text}>
+  <div
+    class="relative min-h-svh bg-(--mbg) desktop:bg-(--bg)"
+    style={{
+      '--bg': data.background,
+      '--mbg': data.mobileBackground ?? data.background,
+      '--page-h': data.height ?? 0,
+      '--m-pt': data.mobilePaddingTop,
+      '--m-pb': data.mobilePaddingBottom,
+    }}
+  >
+    <header class="absolute inset-x-0 top-0 z-10 flex items-start justify-between gap-[16px] pt-[54px] pr-[22px] pl-[20px] desktop:block desktop:p-0">
+      <h1
+        class="max-w-[280px] text-[calc(var(--hs)*1px)] leading-[1.17] tracking-[0.04em] desktop:absolute desktop:top-[calc(var(--ht)*var(--u))] desktop:left-[calc(var(--hl)*var(--u))] desktop:max-w-none desktop:text-[calc(32*var(--u))] desktop:leading-[1.1] desktop:tracking-normal"
+        style={{
+          color: header.color,
+          '--hl': header.left,
+          '--ht': header.top,
+          '--hs': header.mobileSize,
+        }}
+      >
+        {header.mobileText ? (
+          <>
+            <span class="whitespace-nowrap max-[379px]:whitespace-normal desktop:hidden">
+              {header.mobileText.split('\n').map((line, index) => (
+                <>
+                  {index > 0 && <br />}
+                  {line}
+                </>
+              ))}
+            </span>
+            <span class="hidden desktop:inline">{header.text}</span>
+          </>
+        ) : (
+          header.text
+        )}
+      </h1>
+      <a
+        href={categoryHref(data.category)}
+        class:list={[
+          '-mt-[2px] shrink-0 text-[20px] leading-[1.1] tracking-[0.03em] uppercase desktop:absolute desktop:top-[calc(60*var(--u))] desktop:right-[calc(var(--hr)*var(--u))] desktop:m-0 desktop:text-[calc(32*var(--u))] desktop:tracking-normal',
+          'text-(--exit-mc) desktop:text-(--exit-c)',
+          (header.mobileExitUnderline ?? header.exitUnderline) && 'underline',
+          header.exitUnderline ? 'desktop:underline' : 'desktop:no-underline',
+        ]}
+        style={{
+          '--exit-c': header.exitColor,
+          '--exit-mc': header.mobileExitColor ?? header.exitColor,
+          '--hr': header.right,
+        }}
+      >
+        Exit
+      </a>
+    </header>
+
+    <main
+      id="main"
+      class:list={[
+        'flex flex-col px-[20px] pt-[calc(var(--m-pt)*1px)] pb-[calc(var(--m-pb)*1px)]',
+        positioned
+          ? 'desktop:relative desktop:block desktop:h-[calc(var(--page-h)*var(--u))] desktop:p-0'
+          : 'desktop:px-[calc(137*var(--u))] desktop:pt-[calc(180*var(--u))] desktop:pb-[calc(160*var(--u))]',
+      ]}
+    >
+      {data.blocks.map((block) => (
+        <Block block={block} />
+      ))}
+    </main>
+  </div>
+</BaseLayout>

@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import AshtonFontLink from '../components/AshtonFontLink.astro';
+import { categories, categoryHref } from '../config/categories';
+
+// Desktop x position of each label (mockup px at 1920), the spacing is irregular in the mockup.
+const desktopLeft: Record<string, string> = {
+  design: 'desktop:left-[calc(446*var(--u))]',
+  illustration: 'desktop:left-[calc(861*var(--u))]',
+  animation: 'desktop:left-[calc(1297*var(--u))]',
+};
+---
+
+<BaseLayout
+  title="Portfolio"
+  description="Portfolio of Chad Ashton (C. ASHTON): design, illustration and animation."
+>
+  <Header />
+  <main id="main" class="relative desktop:h-[calc(1019*var(--u))]">
+    <h1 class="sr-only">Portfolio</h1>
+    <ul class="mt-[118px] flex flex-col items-center gap-[133px] text-[23px] leading-[1.1] uppercase desktop:m-0 desktop:text-[calc(30*var(--u))]">
+      {categories.map((category) => (
+        <li
+          class:list={[
+            'desktop:absolute desktop:top-[calc(457*var(--u))]',
+            desktopLeft[category.slug],
+          ]}
+        >
+          <a href={categoryHref(category.slug)} class="hover:underline-active">
+            {category.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+    <AshtonFontLink class="mt-[164px] desktop:absolute desktop:top-[calc(823*var(--u))] desktop:right-0 desktop:m-0" />
+  </main>
+  <Footer spacious class="mt-[159px] desktop:mt-0" />
+</BaseLayout>

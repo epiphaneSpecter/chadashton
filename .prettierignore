@@ -1,0 +1,8 @@
+dist/
+.astro/
+node_modules/
+assets-source/
+design/
+public/
+package-lock.json
+docs/assets-inventory.md

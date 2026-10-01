@@ -1,0 +1,110 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { songs, songsShown } from '../data/songs';
+
+/**
+ * Hidden page: C. ASHTON's random song recommendations (texts verbatim from the mockup).
+ * Not linked from the navigation; RELOAD draws the list again in a random order.
+ */
+const shown = songs.slice(0, songsShown);
+---
+
+<BaseLayout title="Song generator" bodyClass="bg-lilac" noindex>
+  <main
+    id="main"
+    class="relative flex min-h-svh flex-col bg-lilac px-[19px] pb-[60px] text-paper desktop:block desktop:h-[calc(1080*var(--u))] desktop:p-0"
+  >
+    <h1 class="pt-[57px] pl-[9px] desktop:absolute desktop:top-[calc(49*var(--u))] desktop:left-[calc(130*var(--u))] desktop:p-0 desktop:text-[calc(51*var(--u))] desktop:leading-[1.1] desktop:tracking-[-0.009em]">
+      <span class="block text-[30px] leading-[1.1] desktop:inline desktop:text-[length:inherit]">
+        C. ASHTON's
+      </span>{' '}
+      <span class="mt-0 -ml-[2px] block text-[19px] leading-[1.1] tracking-[-0.028em] whitespace-nowrap max-[379px]:whitespace-normal desktop:tracking-[inherit] desktop:m-0 desktop:inline desktop:text-[length:inherit]">
+        <span class="desktop:hidden">random song recomendations generator</span>
+        <span class="hidden desktop:inline">random song reccomendations generator page</span>
+      </span>
+    </h1>
+
+    <ol
+      class="mt-[43px] flex flex-col gap-[25px] text-[20px] leading-[21px] tracking-[0.01em] desktop:absolute desktop:top-[calc(217*var(--u))] desktop:left-0 desktop:m-0 desktop:block desktop:w-full desktop:pr-[calc(44*var(--u))] desktop:text-center desktop:text-[calc(42*var(--u))] desktop:leading-[calc(66.67*var(--u))] desktop:tracking-[-0.02em]"
+      aria-live="polite"
+      data-songs={JSON.stringify(songs)}
+      data-shown={songsShown}
+    >
+      {shown.map((song) => (
+        <li>
+          <span data-title>{song.title}</span>{' '}
+          <br class:list={['desktop:hidden', !song.mobileBreak && 'hidden']} data-break />
+          <span data-artist>- {song.artist}</span>
+        </li>
+      ))}
+    </ol>
+
+    <button
+      type="button"
+      class="mx-auto mt-[48px] h-[31px] w-[100px] rounded-[5px] bg-paper font-futura text-[17px] tracking-[0.1em] text-lilac uppercase desktop:absolute desktop:top-[calc(942*var(--u))] desktop:left-[calc(140*var(--u))] desktop:m-0 desktop:h-[calc(55*var(--u))] desktop:w-[calc(180*var(--u))] desktop:rounded-[calc(8*var(--u))] desktop:text-[calc(32*var(--u))]"
+      data-reload
+    >
+      Reload
+    </button>
+    <a
+      href="/"
+      class="mx-auto mt-[70px] font-futura text-[18px] leading-none not-italic desktop:absolute desktop:top-[calc(960*var(--u))] desktop:left-1/2 desktop:m-0 desktop:-translate-x-1/2 desktop:text-[calc(23*var(--u))] desktop:underline desktop:decoration-1 desktop:underline-offset-[0.15em]"
+    >
+      BACK TO HOME
+    </a>
+    <p class="hidden text-[calc(33*var(--u))] leading-[1.1] tracking-[-0.02em] desktop:absolute desktop:top-[calc(971*var(--u))] desktop:right-[calc(139*var(--u))] desktop:block">
+      You discovered a hidden page
+    </p>
+  </main>
+</BaseLayout>
+
+<script>
+  interface Song {
+    title: string;
+    artist: string;
+    mobileBreak?: boolean;
+  }
+
+  function shuffle<T>(items: T[]): T[] {
+    const copy = [...items];
+    for (let i = copy.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copy[i], copy[j]] = [copy[j] as T, copy[i] as T];
+    }
+    return copy;
+  }
+
+  function init() {
+    const list = document.querySelector<HTMLOListElement>('[data-songs]');
+    const button = document.querySelector<HTMLButtonElement>('[data-reload]');
+    if (!list || !button || 'ready' in button.dataset) return;
+    button.dataset.ready = '';
+    const pool = JSON.parse(list.dataset.songs ?? '[]') as Song[];
+    const shown = Number(list.dataset.shown);
+
+    button.addEventListener('click', () => {
+      const current = [...list.querySelectorAll('[data-title]')].map((el) => el.textContent);
+      let next = shuffle(pool).slice(0, shown);
+      // Always show a different order than the current one.
+      for (
+        let tries = 0;
+        tries < 5 && next.every((song, i) => song.title === current[i]);
+        tries += 1
+      ) {
+        next = shuffle(pool).slice(0, shown);
+      }
+      list.querySelectorAll('li').forEach((item, index) => {
+        const song = next[index];
+        if (!song) return;
+        const title = item.querySelector('[data-title]');
+        const artist = item.querySelector('[data-artist]');
+        if (title) title.textContent = song.title;
+        if (artist) artist.textContent = `- ${song.artist}`;
+        item.querySelector('[data-break]')?.classList.toggle('hidden', !song.mobileBreak);
+      });
+    });
+  }
+
+  init();
+  document.addEventListener('astro:page-load', init);
+</script>
