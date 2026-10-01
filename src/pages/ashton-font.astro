@@ -34,7 +34,11 @@ const W = 'desktop:w-[calc(var(--w)*var(--u))]';
 const exitHref = '/portfolio';
 ---
 
-<BaseLayout title="Ashton font" bodyClass="bg-black">
+<BaseLayout
+  title="Ashton font"
+  description="The Ashton font by Chad Ashton: a geometric, intensely italic sans-serif based on his handwriting."
+  bodyClass="bg-black"
+>
   <div
     class="ashton relative bg-black text-cream data-[blueprint=on]:bg-cream data-[blueprint=on]:text-ink desktop:h-[calc(4226*var(--u))]"
     data-blueprint="off"
@@ -44,7 +48,7 @@ const exitHref = '/portfolio';
       <Header />
     </div>
 
-    <main>
+    <main id="main">
       {/* Hero: same layout in both states, outlined in the Technical View. */}
       <section
         class="relative flex flex-col items-center pt-[167px] desktop:static desktop:block desktop:p-0"
@@ -64,7 +68,7 @@ const exitHref = '/portfolio';
         </h1>
         <hr
           class:list={[
-            'rule -mt-[11px] h-px w-[323px] border-0 bg-cream/55 desktop:h-[calc(4*var(--u))] desktop:bg-cream',
+            'rule -mt-[11px] h-px w-[min(323px,calc(100vw-70px))] border-0 bg-cream/55 desktop:h-[calc(4*var(--u))] desktop:bg-cream',
             D,
             W,
           ]}
@@ -72,11 +76,8 @@ const exitHref = '/portfolio';
         />
 
         {/* Desktop only: vertical words and rules around the tagline. */}
-        <p
-          class:list={['hidden desktop:flex', D]}
-          style={at(489, 607)}
-          aria-label={t.inProgress.join(' ')}
-        >
+        <p class:list={['hidden desktop:flex', D]} style={at(489, 607)}>
+          <span class="sr-only">{t.inProgress.join(' ')}</span>
           {t.inProgress.map((word) => (
             <span
               class="outline-text flex w-[calc(30*var(--u))] flex-col items-center text-[calc(28*var(--u))] leading-[calc(32*var(--u))] desktop:mr-[calc(20*var(--u))]"
@@ -153,7 +154,12 @@ const exitHref = '/portfolio';
         >
           <span class="outline-text">{t.designedBy}</span>
         </p>
-        <hr class:list={['rule mt-[28px] h-px w-[323px] border-0 bg-cream/55 desktop:hidden', D]} />
+        <hr
+          class:list={[
+            'rule mt-[28px] h-px w-[min(323px,calc(100vw-70px))] border-0 bg-cream/55 desktop:hidden',
+            D,
+          ]}
+        />
 
         {/* Toggle: vertical and fixed on the right edge on mobile, under the hero on desktop. */}
         <div class="fixed right-[18.5px] bottom-[129px] z-30 flex translate-x-1/2 translate-y-1/2 -rotate-90 items-center gap-[8px] font-futura not-italic desktop:absolute desktop:top-[calc(989*var(--u))] desktop:right-auto desktop:bottom-auto desktop:left-[calc(1733*var(--u))] desktop:w-[calc(139*var(--u))] desktop:translate-0 desktop:rotate-0 desktop:flex-col desktop:gap-[calc(13*var(--u))]">
@@ -167,7 +173,7 @@ const exitHref = '/portfolio';
             type="button"
             role="switch"
             aria-checked="false"
-            aria-labelledby="blueprint-label"
+            aria-labelledby="blueprint-label blueprint-state"
             class="toggle relative flex h-[20px] w-[46px] items-center rounded-full bg-cream px-[2px] text-ink desktop:h-[calc(30*var(--u))] desktop:w-[calc(88*var(--u))] desktop:px-[calc(3*var(--u))]"
             data-blueprint-toggle
           >
@@ -177,7 +183,7 @@ const exitHref = '/portfolio';
             ></span>
             <span
               class="state flex-1 text-center text-[13px] leading-none uppercase desktop:text-[calc(22*var(--u))]"
-              aria-hidden="true"
+              id="blueprint-state"
               data-off="OFF"
               data-on="ON"
             >
@@ -190,13 +196,13 @@ const exitHref = '/portfolio';
       {/* ---------------- Default state: the font ---------------- */}
       <div class="flex flex-col items-start pl-[14px] desktop:contents" data-state="off">
         <section
-          class="mt-[48px] w-[343px] desktop:absolute desktop:top-[calc(1092*var(--u))] desktop:left-0 desktop:m-0 desktop:flex desktop:h-[calc(1182*var(--u))] desktop:w-full desktop:justify-center desktop:bg-cream"
+          class="mt-[48px] w-[min(343px,calc(100vw-50px))] desktop:absolute desktop:top-[calc(1092*var(--u))] desktop:left-0 desktop:m-0 desktop:flex desktop:h-[calc(1182*var(--u))] desktop:w-full desktop:justify-center desktop:bg-cream"
           aria-label="Uppercase alphabet"
         >
           <Image
             src={alphabet}
             alt={`The 26 capital letters of the Ashton font, A to Z, with the caption "${t.alphabetCaption}"`}
-            class="block size-[343px] desktop:size-[calc(1184*var(--u))]"
+            class="block aspect-square w-[min(343px,calc(100vw-50px))] object-cover desktop:size-[calc(1184*var(--u))]"
             widths={[343, 686, 1184, 1798]}
             sizes="(min-width: 1024px) 62vw, 343px"
           />
@@ -230,7 +236,7 @@ const exitHref = '/portfolio';
               <Image
                 src={card.src}
                 alt={card.alt}
-                class="block size-[343px] desktop:size-[calc(433*var(--u))]"
+                class="block aspect-square w-[min(343px,calc(100vw-50px))] object-cover desktop:size-[calc(433*var(--u))]"
                 widths={[343, 433, 686, 866]}
                 sizes="(min-width: 1024px) 23vw, 343px"
               />
@@ -300,17 +306,17 @@ const exitHref = '/portfolio';
           style={at(267, 3248)}
           aria-hidden="true"
         >
-          <span class="relative flex h-[109px] w-[109px] items-center justify-center bg-[#51430a] text-[#f2eaf4] desktop:h-[calc(244*var(--u))] desktop:w-[calc(244*var(--u))]">
+          <span class="relative flex size-[min(109px,calc((100vw-66px)/3))] items-center justify-center bg-[#51430a] text-[#f2eaf4] desktop:h-[calc(244*var(--u))] desktop:w-[calc(244*var(--u))]">
             <span class="absolute inset-[4px] border border-[#f2eaf4]/70 desktop:inset-[calc(10*var(--u))]"></span>
             <span class="absolute inset-x-[4px] top-[21px] bottom-[21px] border-y border-[#f2eaf4]/70 desktop:inset-x-[calc(10*var(--u))] desktop:top-[calc(56*var(--u))] desktop:bottom-[calc(56*var(--u))]"></span>
             <span class="relative">Aa</span>
           </span>
-          <span class="flex h-[109px] w-[109px] items-center justify-center bg-[#1c1c12] desktop:h-[calc(244*var(--u))] desktop:w-[calc(244*var(--u))]">
-            <span class="flex size-[89px] items-center justify-center rounded-[12px] bg-[#fdfcee] text-[0.75em] text-[#1c1c12] desktop:size-[calc(224*var(--u))] desktop:rounded-[calc(28*var(--u))]">
+          <span class="flex size-[min(109px,calc((100vw-66px)/3))] items-center justify-center bg-[#1c1c12] desktop:h-[calc(244*var(--u))] desktop:w-[calc(244*var(--u))]">
+            <span class="flex size-[min(89px,calc((100vw-66px)/3-20px))] items-center justify-center rounded-[12px] bg-[#fdfcee] text-[0.75em] text-[#1c1c12] desktop:size-[calc(224*var(--u))] desktop:rounded-[calc(28*var(--u))]">
               Nn
             </span>
           </span>
-          <span class="relative flex h-[109px] w-[109px] items-center justify-center bg-[#42033e] text-[#f9eaf8] desktop:h-[calc(244*var(--u))] desktop:w-[calc(250*var(--u))]">
+          <span class="relative flex size-[min(109px,calc((100vw-66px)/3))] items-center justify-center bg-[#42033e] text-[#f9eaf8] desktop:h-[calc(244*var(--u))] desktop:w-[calc(250*var(--u))]">
             <span class="absolute inset-[4px] border-2 border-[#f7bfec] desktop:inset-[calc(10*var(--u))] desktop:border-[calc(4*var(--u))]"></span>
             <span class="relative">Zz</span>
           </span>
@@ -318,7 +324,7 @@ const exitHref = '/portfolio';
 
         <p
           class:list={[
-            'mt-[99px] -ml-[14px] w-[393px] text-center text-[14px] leading-[22px] tracking-[0.06em] desktop:text-[calc(33*var(--u))] desktop:leading-[calc(44*var(--u))] desktop:tracking-[-0.01em] desktop:pr-[calc(46*var(--u))]',
+            'mt-[99px] -ml-[14px] w-[calc(100%+14px)] text-center text-[14px] leading-[22px] tracking-[0.06em] desktop:text-[calc(33*var(--u))] desktop:leading-[calc(44*var(--u))] desktop:tracking-[-0.01em] desktop:pr-[calc(46*var(--u))]',
             D,
             W,
           ]}
@@ -350,7 +356,7 @@ const exitHref = '/portfolio';
             style={at(243, 73, 1415)}
           />
           {/* Card 1 (mobile) / first row (desktop). */}
-          <div class="relative h-[343px] w-[343px] bg-black px-[21px] pt-[24px] text-cream desktop:static desktop:h-auto desktop:w-auto desktop:bg-transparent desktop:p-0">
+          <div class="relative aspect-square w-[min(343px,calc(100vw-50px))] bg-black desktop:aspect-auto px-[21px] pt-[24px] text-cream desktop:static desktop:h-auto desktop:w-auto desktop:bg-transparent desktop:p-0">
             <p
               class:list={[
                 'desktop:tracking-(--tr) text-[14px] leading-[16px] tracking-[0.04em] desktop:text-[calc(33*var(--u))] desktop:leading-[calc(44*var(--u))]',
@@ -410,7 +416,7 @@ const exitHref = '/portfolio';
             style={at(243, 642, 1415)}
           />
           {/* Card 2 (mobile) / second row (desktop). */}
-          <div class="relative h-[343px] w-[343px] bg-black px-[21px] pt-[17px] text-cream desktop:static desktop:h-auto desktop:w-auto desktop:bg-transparent desktop:p-0">
+          <div class="relative aspect-square w-[min(343px,calc(100vw-50px))] bg-black desktop:aspect-auto px-[21px] pt-[17px] text-cream desktop:static desktop:h-auto desktop:w-auto desktop:bg-transparent desktop:p-0">
             <p
               class:list={[
                 'desktop:tracking-(--tr) text-[14px] leading-[16px] tracking-[0.04em] desktop:text-[calc(33*var(--u))] desktop:leading-[calc(44*var(--u))]',
@@ -469,7 +475,7 @@ const exitHref = '/portfolio';
         </section>
 
         <section
-          class="mt-[28px] -ml-[14px] flex w-[393px] flex-col items-center desktop:contents"
+          class="mt-[28px] -ml-[14px] flex w-[calc(100%+14px)] flex-col items-center desktop:contents"
           aria-label="Italics"
         >
           <p
@@ -572,7 +578,7 @@ const exitHref = '/portfolio';
             </a>
           </p>
 
-          <div class="mt-[50px] flex w-[305px] translate-x-[3px] justify-between desktop:contents">
+          <div class="mt-[50px] flex w-[min(305px,calc(100vw-74px))] translate-x-[3px] justify-between desktop:contents">
             {[
               {
                 glyphs: ['{r}', 'r'],

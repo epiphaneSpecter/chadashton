@@ -152,19 +152,23 @@ const vars = (piece: Piece) => ({
   '--mcap': piece.mobile[3],
 });
 const mediaClass =
-  'block h-[calc(var(--mh)*1px)] w-[calc(var(--mw)*1px)] object-cover desktop:absolute desktop:top-[calc(var(--y)*var(--u))] desktop:left-[calc(var(--x)*var(--u))] desktop:h-[calc(var(--h)*var(--u))] desktop:w-[calc(var(--w)*var(--u))]';
+  'block h-[calc(var(--mh)*1px)] w-[calc(var(--mw)*1px)] max-w-[calc(100vw-40px)] object-cover desktop:max-w-none desktop:absolute desktop:top-[calc(var(--y)*var(--u))] desktop:left-[calc(var(--x)*var(--u))] desktop:h-[calc(var(--h)*var(--u))] desktop:w-[calc(var(--w)*var(--u))]';
 const captionClass =
   'mt-[calc(var(--mcap)*1px)] text-center text-[12px] leading-[1.1] tracking-[0.04em] whitespace-nowrap uppercase desktop:absolute desktop:top-[calc(var(--cy)*var(--u))] desktop:left-[calc(var(--cx)*var(--u))] desktop:m-0 desktop:-translate-x-1/2 desktop:text-[calc(30*var(--u))] desktop:tracking-[0.037em]';
 const thumbClass = 'h-[130px] w-[233px] object-cover desktop:h-[calc(297*var(--u))] desktop:w-full';
 const wearASuitHref = projectHref('animation', 'wear-a-suit');
 ---
 
-<BaseLayout title="Animation" bodyClass="pb-[56px] desktop:pb-0">
+<BaseLayout
+  title="Animation"
+  description="Animations by Chad Ashton, including the Wear a Suit advertisement project."
+  bodyClass="pb-[56px] desktop:pb-0"
+>
   <div class="relative">
     <div class="absolute inset-x-0 top-0 z-10">
       <Header />
     </div>
-    <main class="relative desktop:h-[calc(8700*var(--u))]">
+    <main id="main" class="relative desktop:h-[calc(8700*var(--u))]">
       <h1 class="sr-only">Animation</h1>
       <!-- Opening video: the mockup only shows its first, almost blank frame (to confirm: Dog_animation_footage.mp4). -->
       <section
@@ -180,7 +184,7 @@ const wearASuitHref = projectHref('animation', 'wear-a-suit');
         />
         <a
           href={wearASuitHref}
-          class="absolute top-[742px] left-1/2 -translate-x-1/2 text-[16px] leading-[1.1] whitespace-nowrap underline desktop:top-[calc(1006*var(--u))] desktop:right-[calc(102*var(--u))] desktop:left-auto desktop:translate-x-0 desktop:text-[calc(30*var(--u))] desktop:tracking-[0.037em] desktop:no-underline"
+          class="absolute top-[738px] left-1/2 -translate-x-1/2 py-[4px] text-[16px] desktop:py-0 leading-[1.1] whitespace-nowrap underline desktop:top-[calc(1006*var(--u))] desktop:right-[calc(102*var(--u))] desktop:left-auto desktop:translate-x-0 desktop:text-[calc(30*var(--u))] desktop:tracking-[0.037em] desktop:no-underline"
         >
           <span class="desktop:hidden">View SURMESUR project</span>
           <span class="hidden desktop:inline">View 'WEAR A SUIT' project</span>
@@ -204,7 +208,7 @@ const wearASuitHref = projectHref('animation', 'wear-a-suit');
             <figcaption class={captionClass}>{piece.caption}</figcaption>
           </figure>
         ))}
-        <div class="mt-[63px] flex -translate-x-[4px] gap-[26px] desktop:contents">
+        <div class="mt-[63px] flex -translate-x-[4px] gap-[26px] desktop:contents [&_figure]:min-w-0 [&_figure>span]:max-w-[calc(50vw-33px)] desktop:[&_figure>span]:max-w-none">
           {pair.map((piece) => (
             <figure class="flex flex-col items-center desktop:contents" style={vars(piece)}>
               <Video

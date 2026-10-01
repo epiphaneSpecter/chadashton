@@ -50,7 +50,7 @@ const positioned = data.height !== undefined;
       >
         {header.mobileText ? (
           <>
-            <span class="whitespace-nowrap desktop:hidden">
+            <span class="whitespace-nowrap max-[379px]:whitespace-normal desktop:hidden">
               {header.mobileText.split('\n').map((line, index) => (
                 <>
                   {index > 0 && <br />}
@@ -67,7 +67,7 @@ const positioned = data.height !== undefined;
       <a
         href={categoryHref(data.category)}
         class:list={[
-          '-mt-[2px] text-[20px] leading-[1.1] tracking-[0.03em] uppercase desktop:absolute desktop:top-[calc(60*var(--u))] desktop:right-[calc(var(--hr)*var(--u))] desktop:m-0 desktop:text-[calc(32*var(--u))] desktop:tracking-normal',
+          '-mt-[2px] shrink-0 text-[20px] leading-[1.1] tracking-[0.03em] uppercase desktop:absolute desktop:top-[calc(60*var(--u))] desktop:right-[calc(var(--hr)*var(--u))] desktop:m-0 desktop:text-[calc(32*var(--u))] desktop:tracking-normal',
           'text-(--exit-mc) desktop:text-(--exit-c)',
           (header.mobileExitUnderline ?? header.exitUnderline) && 'underline',
           header.exitUnderline ? 'desktop:underline' : 'desktop:no-underline',
@@ -83,6 +83,7 @@ const positioned = data.height !== undefined;
     </header>
 
     <main
+      id="main"
       class:list={[
         'flex flex-col px-[20px] pt-[calc(var(--m-pt)*1px)] pb-[calc(var(--m-pb)*1px)]',
         positioned

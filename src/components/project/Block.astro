@@ -45,6 +45,8 @@ const mobileAlign =
 const common = [
   'block mt-[calc(var(--m-gap)*1px)]',
   mobileWidth,
+  // Side-by-side items shrink together on screens narrower than the 393 px mockup.
+  inGroup && !inCarousel && 'min-w-0',
   mobileAlign,
   m.h !== undefined && 'h-[calc(var(--mh)*1px)]',
   m.hidden && 'hidden',
@@ -89,6 +91,9 @@ const groupLayout =
       typeof m.w === 'number' && 'mx-auto w-[calc(var(--mw)*1px)] max-w-full',
       m.hidden && 'hidden',
     ]}
+    {...(block.layout === 'carousel'
+      ? { tabindex: 0, role: 'region', 'aria-label': 'Images, scroll horizontally' }
+      : {})}
     style={{
       '--m-gap': m.gap,
       '--gap': block.gap,

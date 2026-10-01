@@ -13,9 +13,12 @@ const desktopLeft: Record<string, string> = {
 };
 ---
 
-<BaseLayout title="Portfolio">
+<BaseLayout
+  title="Portfolio"
+  description="Portfolio of Chad Ashton (C. ASHTON): design, illustration and animation."
+>
   <Header />
-  <main class="relative desktop:h-[calc(1019*var(--u))]">
+  <main id="main" class="relative desktop:h-[calc(1019*var(--u))]">
     <h1 class="sr-only">Portfolio</h1>
     <ul class="mt-[118px] flex flex-col items-center gap-[133px] text-[23px] leading-[1.1] uppercase desktop:m-0 desktop:text-[calc(30*var(--u))]">
       {categories.map((category) => (

@@ -16,10 +16,14 @@ const projects = (await getCollection('projects', ({ data }) => data.category ==
 );
 ---
 
-<BaseLayout title="Design" bodyClass="bg-green pb-[56px] desktop:pb-0">
+<BaseLayout
+  title="Design"
+  description="Design projects by Chad Ashton: branding, editorial design, posters and brochures."
+  bodyClass="bg-green pb-[56px] desktop:pb-0"
+>
   <div class="bg-ink pb-[42px] text-paper desktop:pb-[calc(148*var(--u))]">
     <Header />
-    <main>
+    <main id="main">
       <h1 class="sr-only">Design</h1>
       <figure class="mx-[28px] mt-[39px] desktop:mx-0 desktop:mt-[calc(73*var(--u))] desktop:flex desktop:items-end desktop:pl-[calc(615*var(--u))]">
         <a href={projectHref('design', 'miles-clayton')} class="block">
@@ -69,21 +73,24 @@ const projects = (await getCollection('projects', ({ data }) => data.category ==
     </main>
   </div>
 
-  <div class="text-paper desktop:pb-[calc(13*var(--u))]">
-    <Image
-      src={indoorSquash}
-      alt="Indoor Squash poster set in the Ashton typeface"
-      class="mx-auto mt-[42px] w-[300px] desktop:mt-[calc(182*var(--u))] desktop:w-[calc(646*var(--u))]"
-      widths={[288, 576, 617, 1234]}
-      sizes="(min-width: 1024px) 32vw, 288px"
-    />
-    <AshtonFontLink
-      desktopLabel="Ashton font display catalogue"
-      class="mt-[73px] desktop:-mt-[calc(13*var(--u))]"
-    />
+  {/* White (not the #f7f7f7 of the mockup) for a 4.5:1 contrast on the green. */}
+  <div class="text-white desktop:pb-[calc(13*var(--u))]">
+    <section aria-label="The Ashton font">
+      <Image
+        src={indoorSquash}
+        alt="Indoor Squash poster set in the Ashton typeface"
+        class="mx-auto mt-[42px] w-[300px] desktop:mt-[calc(182*var(--u))] desktop:w-[calc(646*var(--u))]"
+        widths={[288, 576, 617, 1234]}
+        sizes="(min-width: 1024px) 32vw, 288px"
+      />
+      <AshtonFontLink
+        desktopLabel="Ashton font display catalogue"
+        class="mt-[73px] desktop:-mt-[calc(13*var(--u))]"
+      />
+    </section>
     <div class="mt-[149px] desktop:mt-[calc(430*var(--u))]">
       <CategoryNav current="design" barClass="bg-ink text-paper" />
     </div>
-    <Footer class="mt-[118px] desktop:mt-[calc(380*var(--u))] [&_hr]:bg-paper" />
+    <Footer class="mt-[118px] desktop:mt-[calc(380*var(--u))] [&_hr]:bg-white" />
   </div>
 </BaseLayout>

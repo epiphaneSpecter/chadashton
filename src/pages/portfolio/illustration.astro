@@ -181,9 +181,13 @@ const sizes = (width: number) =>
   `(min-width: 1024px) ${((width / 1920) * 100).toFixed(1)}vw, 350px`;
 ---
 
-<BaseLayout title="Illustration" bodyClass="pb-[56px] desktop:pb-0">
+<BaseLayout
+  title="Illustration"
+  description="Illustrations by Chad Ashton (C. ASHTON)."
+  bodyClass="pb-[56px] desktop:pb-0"
+>
   <Header />
-  <main class="pr-[23px] pl-[20px] desktop:px-0">
+  <main id="main" class="pr-[23px] pl-[20px] desktop:px-0">
     <h1 class="sr-only">Illustration</h1>
     {rows.map((row, rowIndex) => (
       <div

@@ -6,10 +6,13 @@ import { contact } from '../config/navigation';
 // PLACEHOLDER font: the desktop email uses Futura PT, which was not provided (fallback fonts meanwhile).
 ---
 
-<BaseLayout title="Contact">
+<BaseLayout
+  title="Contact"
+  description="Contact Chad Ashton by e-mail, or on Instagram, LinkedIn and Behance."
+>
   <div class="min-h-svh text-lilac desktop:text-ink">
     <Header />
-    <main class="text-center">
+    <main id="main" class="text-center">
       <h1 class="mt-[141px] text-display leading-[1.1] text-lilac uppercase desktop:mt-[calc(187*var(--u))]">
         Write to me
       </h1>
@@ -19,7 +22,7 @@ import { contact } from '../config/navigation';
       >
         {contact.email}
       </a>
-      <SocialLinks class="mt-[381px] translate-x-[4px] justify-center desktop:translate-x-0 desktop:[&>li:first-child]:translate-x-[calc(21*var(--u))] text-[17px] leading-[1.1] desktop:mt-[calc(301*var(--u))] desktop:text-[calc(40*var(--u))] [&>li]:w-[124px] desktop:[&>li]:w-[calc(495*var(--u))]" />
+      <SocialLinks class="mt-[381px] pl-[8px] justify-center desktop:pl-0 desktop:[&>li:first-child]:translate-x-[calc(21*var(--u))] text-[17px] leading-[1.1] desktop:mt-[calc(301*var(--u))] desktop:text-[calc(40*var(--u))] [&>li]:w-[124px] desktop:[&>li]:w-[calc(495*var(--u))]" />
     </main>
   </div>
 </BaseLayout>

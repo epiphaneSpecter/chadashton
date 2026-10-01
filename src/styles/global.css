@@ -144,3 +144,11 @@ html[data-transition='fade']::view-transition-new(root) {
     animation: none !important;
   }
 }
+
+/* Visitors who ask their system for more contrast: the light lilac of the mockup (1.7:1 with the
+   off-white) becomes a deep lilac, enough for 4.5:1 with the off-white and with black text. */
+@media (prefers-contrast: more) {
+  :root {
+    --color-lilac: #6c4a70;
+  }
+}

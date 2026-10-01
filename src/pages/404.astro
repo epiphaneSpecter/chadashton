@@ -27,8 +27,11 @@ const variants = [
 ];
 ---
 
-<BaseLayout title="Page not found">
-  <main class="relative flex min-h-svh flex-col overflow-hidden text-center desktop:block">
+<BaseLayout title="Page not found" noindex>
+  <main
+    id="main"
+    class="relative flex min-h-svh flex-col overflow-hidden text-center desktop:block"
+  >
     <p class="pt-[40px] pl-[20px] text-left text-[20px] leading-[1.1] uppercase desktop:absolute desktop:top-[calc(60*var(--u))] desktop:left-[calc(140*var(--u))] desktop:p-0 desktop:text-[calc(30*var(--u))]">
       Page #404
     </p>

@@ -522,3 +522,35 @@ Détail par écran dans `docs/screens/*.md`. Récapitulatif :
   **Accès** : aucun lien vers cette page n'est identifiable dans la maquette ni le prototype → accessible par son URL
   seulement, déclencheur à décider avec le client.
 - **Rock Paper Scissors** : c'est la page projet « Mind-bogglers » (dépliant), déjà faite à l'étape 5 selon la maquette.
+
+## 14. Référencement, accessibilité, performance (étape 10)
+
+- **Référencement** : titre et description par page (descriptions écrites à partir du contenu existant), URL
+  canonique, balises Open Graph / X (image de partage `public/og-image.png` = capture de l'accueil en 1200 × 630),
+  `sitemap-index.xml` (@astrojs/sitemap, sans la page cachée ni la 404), `robots.txt`, données structurées `Person`
+  sur l'accueil, `noindex` sur la 404 et le Song Generator. Adresse du site : variable `SITE_URL` au build,
+  **PLACEHOLDER** `https://chadashton.pages.dev` tant que le domaine n'est pas connu. URL sans barre finale
+  (`trailingSlash: 'never'`), comme les liens internes.
+- **Favicon** : SVG + PNG 180 / 512 redessinés depuis le glyphe « A » de la police, couleurs du favicon 16 × 16 fourni
+  (`scripts/make-icons.py`) ; le 16 × 16 d'origine reste en secours.
+- **Accessibilité** (axe-core, WCAG 2.1 AA + bonnes pratiques, 20 pages × 2 largeurs) :
+  - lien « Skip to content » (visible au clavier), `id="main"` sur chaque page, h1 caché sur About ;
+  - vidéos cliquables : vrai `<button>` posé sur la vidéo (« Play / Pause : … ») au lieu d'un `role="button"` sur
+    `<video>` ; carrousels mobiles atteignables au clavier (`tabindex`, région nommée) ;
+  - interrupteur BLUPRINT MODE : nom accessible « BLUPRINT MODE OFF/ON » (contient le texte visible) ;
+  - section verte de Design : texte blanc pur au lieu de `#f7f7f7` (contraste 4,66:1, différence invisible) ;
+  - **contrastes de la maquette gardés** : lilas `#CFBAD1` sur gris clair (Contact, Song Generator : 1,7:1),
+    en-tête noir sur l'image bleue de Yarha' (2,9:1), bleu de Matong'eau (4,0:1). Pour les visiteurs qui demandent plus
+    de contraste à leur système (`prefers-contrast: more`), le lilas devient `#6C4A70` : 0 erreur de contraste dans ce
+    mode.
+- **Performance** : affiches des vidéos chargées à l'approche de l'écran et en 800 px sur mobile (seule la vidéo
+  d'ouverture a la sienne dans le HTML). Sans JavaScript, les vidéos hors vidéo d'ouverture n'ont pas d'affiche.
+- **Lighthouse** (site construit, mobile et bureau) : 100 partout sur Accueil, Portfolio, Design, About,
+  Ashton font, pages projet testées ; Illustration mobile perf 92 ; Animation mobile perf 96 ; Contact et
+  Song Generator accessibilité 95 (contrastes de la maquette) ; Song Generator SEO 63 (exclu des moteurs, voulu).
+- **Petits écrans** : aucun débordement horizontal de 320 à 1920 px (20 pages, 8 largeurs) ; en dessous de 380 px,
+  les en-têtes de projet et le sous-titre du Song Generator passent à la ligne, les images côte à côte rétrécissent.
+- **Navigateurs** : seul Chromium est disponible dans l'environnement de test. Points à vérifier sur Safari et
+  Firefox : glyphes alternatifs via `font-feature-settings: 'aalt'` (π, s manuscrit), lecture WebM / MP4 (le MP4 est
+  toujours proposé en secours), View Transitions (sans l'API : changement de page instantané). Tailwind 4 vise
+  Safari 16.4+, Chrome 111+, Firefox 128+.

@@ -10,12 +10,15 @@ const shown = songs.slice(0, songsShown);
 ---
 
 <BaseLayout title="Song generator" bodyClass="bg-lilac" noindex>
-  <main class="relative flex min-h-svh flex-col bg-lilac px-[19px] pb-[60px] text-paper desktop:block desktop:h-[calc(1080*var(--u))] desktop:p-0">
+  <main
+    id="main"
+    class="relative flex min-h-svh flex-col bg-lilac px-[19px] pb-[60px] text-paper desktop:block desktop:h-[calc(1080*var(--u))] desktop:p-0"
+  >
     <h1 class="pt-[57px] pl-[9px] desktop:absolute desktop:top-[calc(49*var(--u))] desktop:left-[calc(130*var(--u))] desktop:p-0 desktop:text-[calc(51*var(--u))] desktop:leading-[1.1] desktop:tracking-[-0.009em]">
       <span class="block text-[30px] leading-[1.1] desktop:inline desktop:text-[length:inherit]">
         C. ASHTON's
       </span>{' '}
-      <span class="mt-0 -ml-[2px] block text-[19px] leading-[1.1] tracking-[-0.028em] whitespace-nowrap desktop:tracking-[inherit] desktop:m-0 desktop:inline desktop:text-[length:inherit]">
+      <span class="mt-0 -ml-[2px] block text-[19px] leading-[1.1] tracking-[-0.028em] whitespace-nowrap max-[379px]:whitespace-normal desktop:tracking-[inherit] desktop:m-0 desktop:inline desktop:text-[length:inherit]">
         <span class="desktop:hidden">random song recomendations generator</span>
         <span class="hidden desktop:inline">random song reccomendations generator page</span>
       </span>

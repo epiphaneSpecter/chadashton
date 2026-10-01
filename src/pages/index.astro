@@ -2,11 +2,24 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Video from '../components/media/Video.astro';
 import { site } from '../config/site';
+import { contact } from '../config/navigation';
+
+/** Structured data for search engines. */
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.author,
+  url: Astro.site?.href,
+  email: `mailto:${contact.email}`,
+  jobTitle: 'Designer, illustrator and animator',
+};
 import { homeVideo } from '../config/home';
 ---
 
 <BaseLayout bodyClass="bg-blush">
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(person)} />
   <main
+    id="main"
     class="relative h-svh overflow-hidden"
     style={homeVideo?.background ? { backgroundColor: homeVideo.background } : undefined}
   >

@@ -10,7 +10,7 @@ import { getImage } from 'astro:assets';
  * Web video encoded by scripts/encode-videos.sh into public/videos/<name>.{webm,mp4}
  * (and <name>-m.* for screens under 1024 px when that variant exists).
  * - `loop`: silent animation, plays muted in a loop while visible (like a GIF); click pauses it.
- * - `toggle`: video with sound, click / Enter / Space plays or pauses it (Adobe XD "tap" behavior).
+ * - `toggle`: video with sound, a click plays or pauses it (Adobe XD "tap" behavior).
  * - `controls`: native player controls (long video with sound).
  */
 interface Props {
@@ -49,44 +49,98 @@ if (!exists(`${name}.mp4`)) {
 /** WebM (lighter) is optional: browsers without it fall back to MP4. */
 const hasWebm = exists(`${name}.webm`);
 const hasMobile = exists(`${name}-m.mp4`);
-const posterImage = await getImage({
-  src: poster,
-  width: Math.min(poster.width, displayWidth * 2),
-  format: 'webp',
-});
+// Posters: one sized for the desktop box, a lighter one for small screens. Only the opening video
+// gets its poster in the HTML; the others receive theirs when they come near the screen.
+const [posterImage, mobilePosterImage] = await Promise.all([
+  getImage({ src: poster, width: Math.min(poster.width, displayWidth * 2), format: 'webp' }),
+  getImage({ src: poster, width: Math.min(poster.width, 800), format: 'webp' }),
+]);
 const loop = mode === 'loop';
 const interactive = mode !== 'controls' && clickable;
+
+/*
+ * A clickable video is wrapped with a real button over it (a <video> cannot take the button role):
+ * the layout classes go to the wrapper, the object-fit / object-position ones stay on the video.
+ */
+const tokens = (className ?? '').split(/\s+/).filter(Boolean);
+const isMediaClass = (token: string) => /(^|:)object-/.test(token);
+const videoClass = tokens.filter(isMediaClass);
+const wrapperClass = tokens.filter((token) => !isMediaClass(token));
+const { objectPosition, ...wrapperStyle } = style ?? {};
+/** The wrapper positions the button: relative, unless the caller already positions it. */
+const positioned = wrapperClass.some((token) => /^(absolute|fixed|relative|sticky)$/.test(token));
 ---
 
-<video
-  class:list={[className, interactive && 'cursor-pointer']}
-  style={style}
-  poster={posterImage.src}
-  preload={eager ? 'auto' : 'none'}
-  autoplay={loop && eager}
-  muted={loop}
-  loop={loop}
-  playsinline
-  controls={mode === 'controls'}
-  role={interactive ? 'button' : undefined}
-  tabindex={interactive ? 0 : undefined}
-  aria-label={label}
-  data-video={mode}
-  data-label={label}
-  data-no-click={interactive ? undefined : ''}
-  {...attributes}
->
-  {hasMobile && (
-    <>
-      {hasWebm && (
-        <source src={`/videos/${name}-m.webm`} type="video/webm" media="(max-width: 1023px)" />
+{interactive ? (
+  <span
+    class:list={[wrapperClass, !positioned && 'relative', 'block overflow-hidden']}
+    style={{ aspectRatio: `${poster.width} / ${poster.height}`, ...wrapperStyle }}
+  >
+    <video
+      class:list={[videoClass, 'block size-full']}
+      style={{ objectPosition }}
+      poster={eager ? mobilePosterImage.src : undefined}
+      data-poster={posterImage.src}
+      data-poster-m={mobilePosterImage.src}
+      preload={eager ? 'auto' : 'none'}
+      autoplay={loop && eager}
+      muted={loop}
+      loop={loop}
+      playsinline
+      aria-hidden="true"
+      data-video={mode}
+      data-label={label}
+      {...attributes}
+    >
+      {hasMobile && (
+        <>
+          {hasWebm && (
+            <source src={`/videos/${name}-m.webm`} type="video/webm" media="(max-width: 1023px)" />
+          )}
+          <source src={`/videos/${name}-m.mp4`} type="video/mp4" media="(max-width: 1023px)" />
+        </>
       )}
-      <source src={`/videos/${name}-m.mp4`} type="video/mp4" media="(max-width: 1023px)" />
-    </>
-  )}
-  {hasWebm && <source src={`/videos/${name}.webm`} type="video/webm" />}
-  <source src={`/videos/${name}.mp4`} type="video/mp4" />
-</video>
+      {hasWebm && <source src={`/videos/${name}.webm`} type="video/webm" />}
+      <source src={`/videos/${name}.mp4`} type="video/mp4" />
+    </video>
+    <button
+      type="button"
+      class="absolute inset-0 size-full cursor-pointer focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-current"
+      aria-label={`Play: ${label}`}
+      data-video-toggle
+    />
+  </span>
+) : (
+  <video
+    class={className}
+    style={style}
+    poster={eager ? mobilePosterImage.src : undefined}
+    data-poster={posterImage.src}
+    data-poster-m={mobilePosterImage.src}
+    preload={eager ? 'auto' : 'none'}
+    autoplay={loop && eager}
+    muted={loop}
+    loop={loop}
+    playsinline
+    controls={mode === 'controls'}
+    aria-label={label}
+    data-video={mode}
+    data-label={label}
+    data-no-click=""
+    {...attributes}
+  >
+    {hasMobile && (
+      <>
+        {hasWebm && (
+          <source src={`/videos/${name}-m.webm`} type="video/webm" media="(max-width: 1023px)" />
+        )}
+        <source src={`/videos/${name}-m.mp4`} type="video/mp4" media="(max-width: 1023px)" />
+      </>
+    )}
+    {hasWebm && <source src={`/videos/${name}.webm`} type="video/webm" />}
+    <source src={`/videos/${name}.mp4`} type="video/mp4" />
+  </video>
+)}
 
 <script>
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -105,8 +159,28 @@ const interactive = mode !== 'controls' && clickable;
     { rootMargin: '200px 0px' },
   );
 
+  const smallScreen = window.matchMedia('(max-width: 1023px)');
+
+  /** Sets the poster sized for the screen (the HTML only carries the opening video's small one). */
+  function setPoster(video: HTMLVideoElement) {
+    const src = smallScreen.matches ? video.dataset.posterM : video.dataset.poster;
+    if (src && video.getAttribute('poster') !== src) video.poster = src;
+  }
+
+  const nearScreen = new IntersectionObserver(
+    (entries) => {
+      for (const { target, isIntersecting } of entries) {
+        if (!isIntersecting) continue;
+        setPoster(target as HTMLVideoElement);
+        nearScreen.unobserve(target);
+      }
+    },
+    { rootMargin: '800px 0px' },
+  );
+
   function setUp(video: HTMLVideoElement) {
     video.dataset.ready = '';
+    nearScreen.observe(video);
     const mode = video.dataset.video;
     if (mode === 'loop') {
       if (reducedMotion.matches) {
@@ -117,9 +191,11 @@ const interactive = mode !== 'controls' && clickable;
     }
     if (mode === 'controls' || 'noClick' in video.dataset) return;
 
+    const button = video.parentElement?.querySelector<HTMLButtonElement>('[data-video-toggle]');
+    if (!button) return;
     const label = video.dataset.label ?? '';
     const sync = () =>
-      video.setAttribute('aria-label', `${video.paused ? 'Play' : 'Pause'}: ${label}`);
+      button.setAttribute('aria-label', `${video.paused ? 'Play' : 'Pause'}: ${label}`);
     video.addEventListener('play', sync);
     video.addEventListener('pause', sync);
     sync();
@@ -139,13 +215,7 @@ const interactive = mode !== 'controls' && clickable;
         video.pause();
       }
     };
-    video.addEventListener('click', toggle);
-    video.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        toggle();
-      }
-    });
+    button.addEventListener('click', toggle);
   }
 
   function init() {
@@ -157,5 +227,8 @@ const interactive = mode !== 'controls' && clickable;
   init();
   // Pages loaded by client-side navigation.
   document.addEventListener('astro:page-load', init);
-  document.addEventListener('astro:before-swap', () => visibility.disconnect());
+  document.addEventListener('astro:before-swap', () => {
+    visibility.disconnect();
+    nearScreen.disconnect();
+  });
 </script>
