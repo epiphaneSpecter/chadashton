@@ -3,7 +3,7 @@
  * Asterisk icons drawn from the mockup:
  * - `burger`: 8 equal branches in a square (mobile menu button)
  * - `sparkle`: long vertical/horizontal branches, short diagonals, center dot (close button)
- * - `circled`: burger asterisk inside a circle (link to the Ashton font page)
+ * - `circled`: burger asterisk inside a circle (link to the Ashton font page), filled on hover of a `.group` parent
  */
 interface Props {
   variant: 'burger' | 'sparkle' | 'circled';
@@ -11,6 +11,8 @@ interface Props {
 }
 
 const { variant, class: className } = Astro.props;
+// Unique mask id, in case the icon appears more than once on a page.
+const maskId = `asterisk-knockout-${Math.random().toString(36).slice(2, 8)}`;
 ---
 
 {variant === 'burger' && (
@@ -36,6 +38,29 @@ const { variant, class: className } = Astro.props;
 {variant === 'circled' && (
   <svg class={className} viewBox="0 0 54 54" fill="none" stroke="currentColor" aria-hidden="true">
     <circle cx="27" cy="27" r="26" stroke-width="1.8" />
-    <path d="M27 14v26M14 27h26M17.5 17.5l19 19M36.5 17.5l-19 19" stroke-width="1.6" />
+    <path
+      d="M27 14v26M14 27h26M17.5 17.5l19 19M36.5 17.5l-19 19"
+      stroke-width="1.6"
+      class="group-hover:opacity-0 group-focus-visible:opacity-0"
+    />
+    {/* Hover state of the parent link (.group): a filled disc with the asterisk cut out,
+        so the page background shows through it whatever its color. */}
+    <mask id={maskId}>
+      <rect width="54" height="54" fill="white" />
+      <path
+        d="M27 14v26M14 27h26M17.5 17.5l19 19M36.5 17.5l-19 19"
+        stroke="black"
+        stroke-width="2.2"
+      />
+    </mask>
+    <circle
+      cx="27"
+      cy="27"
+      r="26.9"
+      fill="currentColor"
+      stroke="none"
+      mask={`url(#${maskId})`}
+      class="opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
+    />
   </svg>
 )}

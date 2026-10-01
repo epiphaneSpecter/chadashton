@@ -1,0 +1,76 @@
+---
+import { Image, getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import type { CategorySlug } from '../config/categories';
+import designImage from '../assets/projects/ashton-font/indoor-squash.png';
+import illustrationImage from '../assets/portfolio/illustration-ninja-otter.jpg';
+import animationImage from '../assets/animation/geometrical-animation.jpg';
+
+/**
+ * Desktop hover preview of a category link (XD prototype): a portrait image, or for Animation a
+ * silent loop (like a GIF) that only plays while its link (the `.group` parent) is hovered or focused.
+ * Decorative: the link label names the category.
+ */
+interface Props {
+  slug: CategorySlug;
+  class?: string;
+}
+
+const { slug, class: className } = Astro.props;
+
+const previews: Record<CategorySlug, { image: ImageMetadata; video?: string }> = {
+  design: { image: designImage },
+  illustration: { image: illustrationImage },
+  animation: { image: animationImage, video: 'geometrical-animation' },
+};
+const { image, video } = previews[slug];
+const classes = [
+  'hidden max-w-none object-cover opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100 group-focus-visible:opacity-100 desktop:block',
+  className,
+];
+const poster = video ? await getImage({ src: image, width: 484, format: 'webp' }) : undefined;
+---
+
+{video && poster ? (
+  <video
+    class:list={classes}
+    poster={poster.src}
+    preload="none"
+    muted
+    loop
+    playsinline
+    aria-hidden="true"
+    data-category-preview
+  >
+    <source src={`/videos/${video}.webm`} type="video/webm" />
+    <source src={`/videos/${video}.mp4`} type="video/mp4" />
+  </video>
+) : (
+  <Image src={image} alt="" class:list={classes} widths={[242, 484]} sizes="13vw" />
+)}
+
+<script>
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function init() {
+    document
+      .querySelectorAll<HTMLVideoElement>('video[data-category-preview]:not([data-ready])')
+      .forEach((video) => {
+        video.dataset.ready = '';
+        const link = video.closest('a');
+        if (!link) return;
+        const play = () => {
+          if (!reducedMotion.matches) video.play().catch(() => undefined);
+        };
+        const stop = () => video.pause();
+        link.addEventListener('mouseenter', play);
+        link.addEventListener('focus', play);
+        link.addEventListener('mouseleave', stop);
+        link.addEventListener('blur', stop);
+      });
+  }
+
+  init();
+  // Pages loaded by client-side navigation.
+  document.addEventListener('astro:page-load', init);
+</script>
