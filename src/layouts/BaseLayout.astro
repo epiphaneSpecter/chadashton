@@ -14,7 +14,9 @@ interface Props {
 
 const { title, description = site.description, bodyClass = '', noindex = false } = Astro.props;
 const pageTitle = title ? `${title} | ${site.name}` : `${site.author} | ${site.tagline}`;
-const canonical = new URL(Astro.url.pathname, Astro.site);
+// Pages are built as about.html but served as /about: the public URL has no extension.
+const publicPath = Astro.url.pathname.replace(/(\/index)?\.html$/, '') || '/';
+const canonical = new URL(publicPath, Astro.site);
 const socialImage = new URL('/og-image.png', Astro.site);
 ---
 

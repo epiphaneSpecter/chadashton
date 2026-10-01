@@ -32,6 +32,7 @@ export const contact: { email: string; socials: SocialLink[] } = {
 
 /** True when `href` is the current page or one of its sub-pages. */
 export function isActive(href: string, pathname: string): boolean {
-  const path = pathname.replace(/\/$/, '') || '/';
+  // Built pages are about.html, portfolio/design.html…: compare without extension or trailing slash.
+  const path = pathname.replace(/(\/index)?\.html$/, '').replace(/\/$/, '') || '/';
   return path === href || path.startsWith(`${href}/`);
 }
