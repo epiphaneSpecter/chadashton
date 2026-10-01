@@ -1,4 +1,4 @@
-# HTTP headers, read by Cloudflare Pages and Netlify (same format).
+# HTTP headers, read by Netlify (the same format works on Cloudflare Pages).
 /*
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN

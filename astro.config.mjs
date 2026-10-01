@@ -9,13 +9,13 @@ import tailwindcss from '@tailwindcss/vite';
  * Public address of the site (canonical URLs, sitemap, social cards).
  * PLACEHOLDER: the final domain is not known yet; set SITE_URL when deploying (see README).
  */
-const site = process.env.SITE_URL ?? 'https://chadashton.pages.dev';
+const site = process.env.SITE_URL ?? 'https://chadashton.netlify.app';
 
 export default defineConfig({
   site,
   // Internal links are written without a trailing slash (/about); canonical URLs and sitemap follow.
   trailingSlash: 'never',
-  // about.html rather than about/index.html: Cloudflare Pages and Netlify serve /about without redirect.
+  // about.html rather than about/index.html: Netlify serves /about without redirect (Pretty URLs).
   build: { format: 'file' },
   integrations: [
     sitemap({

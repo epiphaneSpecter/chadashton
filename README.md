@@ -119,34 +119,33 @@ renseignée dans `src/config/navigation.ts`.
 **Remettre la boutique plus tard** : la navigation vient d'une liste (`mainNav`) ; ajouter l'entrée Shop et
 passer `features.shop` à `true` dans `src/config/navigation.ts`, puis créer les pages.
 
-## Mise en ligne
+## Mise en ligne (Netlify)
 
-Le site est un dossier statique (`dist/`) : n'importe quel hébergeur statique convient. Deux configurations
-sont prêtes ; les en-têtes HTTP (cache, sécurité) sont dans `public/_headers`, lu par les deux.
+Le site est un dossier statique (`dist/`), hébergé sur **Netlify**. La configuration est prête :
+`netlify.toml` (commande et dossier de build), `.node-version` (Node 22) et `public/_headers`
+(cache et en-têtes de sécurité).
 
-Dans tous les cas, définir la variable d'environnement **`SITE_URL`** avec l'adresse définitive du site
-(par exemple `https://www.chadashton.com`) : elle sert aux adresses canoniques, au plan du site
-(`/sitemap-index.xml`) et aux aperçus sur les réseaux sociaux. Sans elle, l'adresse provisoire
-`https://chadashton.pages.dev` est utilisée.
+1. Netlify → **Add new project** → **Import an existing project** → GitHub → choisir le dépôt `chadashton`.
+2. Les réglages de build sont lus dans `netlify.toml` (commande `npm run build`, dossier `dist`) : rien à changer.
+3. **Project configuration → Environment variables** : ajouter **`SITE_URL`** avec l'adresse définitive du site
+   (par exemple `https://www.chadashton.com`). Elle sert aux adresses canoniques, au plan du site
+   (`/sitemap-index.xml`) et aux aperçus sur les réseaux sociaux. Sans elle, l'adresse provisoire
+   `https://chadashton.netlify.app` est utilisée (à ajuster si Netlify attribue un autre nom).
+4. Lancer le déploiement. Ensuite, chaque push sur la branche de production met le site à jour.
 
-### Cloudflare Pages (recommandé)
+**Domaine** : **Domain management → Add a domain**, suivre les indications DNS de Netlify (certificat HTTPS
+automatique), puis mettre `SITE_URL` à jour et redéployer. La page `404.html` est servie automatiquement pour
+les adresses inconnues ; `/about` est servi depuis `about.html` sans redirection.
 
-1. Cloudflare → Workers & Pages → Create → Pages → connecter le dépôt GitHub.
-2. Préréglage **Astro** : commande de build `npm run build`, dossier de sortie `dist`.
-3. Variables d'environnement : `SITE_URL` (et `NODE_VERSION` = `22` si besoin ; `.node-version` est lu).
-4. Chaque push sur la branche principale met le site à jour ; chaque branche ou PR a son aperçu.
+**Offre gratuite : à surveiller.** Netlify fonctionne avec des crédits mensuels (300 en offre gratuite, sans
+dépassement possible) : chaque déploiement de production en consomme 15 et la bande passante 20 par Go, soit
+environ 15 Go par mois au total. Quand les crédits sont épuisés, le site est mis en pause jusqu'au mois suivant.
+Ce site contient environ 97 Mo de vidéos (une visite complète de la page Animation peut charger de 10 à 30 Mo) :
+regrouper les modifications avant de déployer, suivre la consommation dans **Usage & billing**, et passer à
+une offre payante ou déplacer les vidéos (YouTube / Vimeo, ou un stockage dédié) si la fréquentation augmente.
 
-Sans Git : `npm run build && npx wrangler pages deploy` (réglages dans `wrangler.toml`).
-
-### Netlify (alternative)
-
-Importer le dépôt : `netlify.toml` fournit la commande (`npm run build`) et le dossier (`dist`) ; ajouter
-`SITE_URL` dans les variables d'environnement.
-
-### Domaine
-
-Ajouter le domaine dans l'hébergeur (Custom domains), mettre `SITE_URL` à jour, relancer un déploiement.
-La page `404.html` est servie automatiquement pour les adresses inconnues.
+**Autre hébergeur** : tout hébergeur statique convient (build `npm run build`, dossier `dist`). Cloudflare Pages,
+par exemple, a une bande passante illimitée en offre gratuite et lit le même fichier `public/_headers`.
 
 ## Qualité
 

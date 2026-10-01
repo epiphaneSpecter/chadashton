@@ -529,7 +529,7 @@ Détail par écran dans `docs/screens/*.md`. Récapitulatif :
   canonique, balises Open Graph / X (image de partage `public/og-image.png` = capture de l'accueil en 1200 × 630),
   `sitemap-index.xml` (@astrojs/sitemap, sans la page cachée ni la 404), `robots.txt`, données structurées `Person`
   sur l'accueil, `noindex` sur la 404 et le Song Generator. Adresse du site : variable `SITE_URL` au build,
-  **PLACEHOLDER** `https://chadashton.pages.dev` tant que le domaine n'est pas connu. URL sans barre finale
+  **PLACEHOLDER** `https://chadashton.netlify.app` tant que le domaine n'est pas connu. URL sans barre finale
   (`trailingSlash: 'never'`), comme les liens internes.
 - **Favicon** : SVG + PNG 180 / 512 redessinés depuis le glyphe « A » de la police, couleurs du favicon 16 × 16 fourni
   (`scripts/make-icons.py`) ; le 16 × 16 d'origine reste en secours.
@@ -557,14 +557,15 @@ Détail par écran dans `docs/screens/*.md`. Récapitulatif :
 
 ## 15. Mise en ligne et documentation (étape 11)
 
-- **Hébergement** : Cloudflare Pages recommandé (`wrangler.toml`), Netlify en alternative (`netlify.toml`) ;
-  même fichier d'en-têtes HTTP `public/_headers` (cache long des fichiers `/_astro/*`, 30 jours pour la police et
+- **Hébergement** : **Netlify** (choix du client, `netlify.toml`) ; en-têtes HTTP dans `public/_headers` (cache long des fichiers `/_astro/*`, 30 jours pour la police et
   les vidéos, en-têtes de sécurité de base). Pas de Content-Security-Policy : Astro insère de petits scripts dans
   les pages, une CSP stricte demanderait leurs empreintes (option possible plus tard).
 - **Sortie** : `build.format: 'file'` (`about.html`) + `trailingSlash: 'never'` : `/about` est servi sans
-  redirection par les deux hébergeurs, comme les liens internes et les adresses canoniques.
-- **Node** : `.node-version` = 22. La plus grosse vidéo (15 Mo) reste sous la limite de 25 Mo par fichier de
-  Cloudflare Pages.
+  redirection (Pretty URLs de Netlify), comme les liens internes et les adresses canoniques.
+- **Node** : `.node-version` = 22.
+- **Offre gratuite Netlify** : 300 crédits par mois (déploiement de production : 15 ; bande passante : 20 par Go,
+  soit ≈ 15 Go) ; le site est mis en pause si les crédits sont épuisés. Avec ≈ 97 Mo de vidéos, à surveiller
+  (voir README).
 - **Ajout de projets** : la grille Design vient de la collection ; les galeries Illustration et Animation
   (composées d'après la maquette) affichent en plus, automatiquement, les projets qu'elles ne montrent pas encore
   (`src/components/MoreProjects.astro`, vide aujourd'hui). Vérifié avec un projet de test, puis retiré.

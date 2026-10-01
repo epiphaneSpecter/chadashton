@@ -1,6 +1,0 @@
-# Cloudflare Pages (recommended host). With the Git integration, the dashboard settings are:
-# build command `npm run build`, output directory `dist`, environment variable SITE_URL.
-# Manual deploy from a computer: `npm run build && npx wrangler pages deploy`.
-name = "chadashton"
-pages_build_output_dir = "./dist"
-compatibility_date = "2026-10-01"
