@@ -52,7 +52,7 @@ const projects = (await getCollection('projects', ({ data }) => data.category ==
             class="order-(--mobile-order) text-center desktop:order-none"
             style={{ '--mobile-order': project.data.mobileOrder ?? project.data.order }}
           >
-            <a href={projectHref('design', project.id)} class="group block">
+            <a href={projectHref('design', project.id)} class="block">
               {project.data.thumbnail && (
                 <Image
                   src={project.data.thumbnail}
@@ -62,7 +62,7 @@ const projects = (await getCollection('projects', ({ data }) => data.category ==
                   sizes="(min-width: 1024px) 21vw, 170px"
                 />
               )}
-              <span class="mt-[8px] block text-[11px] leading-[1.1] group-hover:underline desktop:mt-[calc(20*var(--u))] desktop:text-[calc(26*var(--u))]">
+              <span class="mt-[8px] block text-[11px] leading-[1.1] desktop:mt-[calc(20*var(--u))] desktop:text-[calc(26*var(--u))]">
                 {project.data.cardLabel ?? project.data.title}
               </span>
             </a>
