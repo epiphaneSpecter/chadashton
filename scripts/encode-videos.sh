@@ -9,6 +9,7 @@ SRC=assets-source/Animation
 OUT=public/videos
 mkdir -p "$OUT"
 
+# Bit rate capped at <width> kbit/s (1920 px = 1.9 Mbit/s), grainy animations stay light.
 # name | source | width | mobile width (0 = none) | audio (yes/no) | extra filter before scaling
 TABLE=$(
   cat <<'EOF'
@@ -36,8 +37,8 @@ encode() {
     a_webm=(-c:a libopus -b:a 96k)
   fi
   ffmpeg -nostdin -v error -y -i "$input" -vf "$vf" -c:v libx264 -preset slow -crf 27 -profile:v high \
-    -movflags +faststart "${a_mp4[@]}" "$output.mp4"
-  ffmpeg -nostdin -v error -y -i "$input" -vf "$vf" -c:v libvpx-vp9 -crf 38 -b:v 0 -row-mt 1 \
+    -maxrate "${width}k" -bufsize "$((width * 2))k" -movflags +faststart "${a_mp4[@]}" "$output.mp4"
+  ffmpeg -nostdin -v error -y -i "$input" -vf "$vf" -c:v libvpx-vp9 -crf 38 -b:v "${width}k" -row-mt 1 \
     -deadline good -cpu-used 2 "${a_webm[@]}" "$output.webm"
   echo "$output: $(du -h "$output.mp4" | cut -f1) mp4, $(du -h "$output.webm" | cut -f1) webm"
 }
