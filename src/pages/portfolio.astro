@@ -3,12 +3,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import AshtonFontLink from '../components/AshtonFontLink.astro';
-import { Image } from 'astro:assets';
-import type { ImageMetadata } from 'astro';
-import { categories, categoryHref } from '../config/categories';
-import designImage from '../assets/projects/ashton-font/indoor-squash.png';
-import illustrationImage from '../assets/portfolio/illustration-ninja-otter.jpg';
-import animationImage from '../assets/animation/geometrical-animation.jpg';
+import CategoryPreview from '../components/CategoryPreview.astro';
+import { categories, categoryHref, type CategorySlug } from '../config/categories';
 
 // Desktop x position of each label (mockup px at 1920), the spacing is irregular in the mockup.
 const desktopLeft: Record<string, string> = {
@@ -18,13 +14,13 @@ const desktopLeft: Record<string, string> = {
 };
 
 /**
- * Hover state of the XD prototype (desktop): a portrait image appears above the label, the label
+ * Hover state of the XD prototype (desktop): a portrait preview appears above the label, the label
  * slides down and a tagline appears (0.3 s, ease-out). Texts verbatim from the prototype.
  */
-const hover: Record<string, { image: ImageMetadata; tagline: string }> = {
-  design: { image: designImage, tagline: 'Where style and function shake hands' },
-  illustration: { image: illustrationImage, tagline: 'Louder than words' },
-  animation: { image: animationImage, tagline: 'The possibilities are endless from here' },
+const taglines: Record<CategorySlug, string> = {
+  design: 'Where style and function shake hands',
+  illustration: 'Louder than words',
+  animation: 'The possibilities are endless from here',
 };
 ---
 
@@ -47,26 +43,19 @@ const hover: Record<string, { image: ImageMetadata; tagline: string }> = {
             href={categoryHref(category.slug)}
             class="group relative block focus-visible:outline-none"
           >
-            {hover[category.slug] && (
-              <Image
-                src={hover[category.slug].image}
-                alt=""
-                class="absolute top-[calc(-233*var(--u))] left-1/2 hidden h-[calc(346*var(--u))] w-[calc(242*var(--u))] max-w-none -translate-x-1/2 object-cover opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100 group-focus-visible:opacity-100 desktop:block"
-                widths={[242, 484]}
-                sizes="13vw"
-              />
-            )}
+            <CategoryPreview
+              slug={category.slug}
+              class="absolute top-[calc(-233*var(--u))] left-1/2 h-[calc(346*var(--u))] w-[calc(242*var(--u))] -translate-x-1/2"
+            />
             <span class="relative block transition-transform duration-300 ease-out group-hover:underline-active group-focus-visible:underline-active motion-reduce:transition-none desktop:group-hover:translate-y-[calc(135*var(--u))] desktop:group-focus-visible:translate-y-[calc(135*var(--u))]">
               {category.label}
             </span>
-            {hover[category.slug] && (
-              <span
-                class="pointer-events-none absolute top-[calc(195*var(--u))] left-1/2 hidden -translate-x-1/2 text-[max(12px,calc(20*var(--u)))] leading-[1.1] whitespace-nowrap normal-case opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100 group-focus-visible:opacity-100 desktop:block"
-                aria-hidden="true"
-              >
-                {hover[category.slug].tagline}
-              </span>
-            )}
+            <span
+              class="pointer-events-none absolute top-[calc(195*var(--u))] left-1/2 hidden -translate-x-1/2 text-[max(12px,calc(20*var(--u)))] leading-[1.1] whitespace-nowrap normal-case opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100 group-focus-visible:opacity-100 desktop:block"
+              aria-hidden="true"
+            >
+              {taglines[category.slug]}
+            </span>
           </a>
         </li>
       ))}

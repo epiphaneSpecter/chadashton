@@ -1,4 +1,5 @@
 ---
+import CategoryPreview from './CategoryPreview.astro';
 import { categories, categoryHref, type CategorySlug } from '../config/categories';
 
 interface Props {
@@ -17,10 +18,20 @@ const others = categories.filter((category) => category.slug !== current);
   aria-label="Other categories"
   class="flex flex-col items-center gap-[136px] text-[20px] leading-[1.1] uppercase desktop:flex-row desktop:justify-center desktop:gap-0 desktop:text-[calc(30*var(--u))]"
 >
-  {/* Desktop: each word is centered in a 324 px cell (centers at x 797 and 1121 in the mockup). */}
+  {/* Desktop: each word is centered in a 324 px cell (centers at x 797 and 1121 in the mockup).
+      Hover (desktop, as on the Portfolio page): the preview appears above, the label slides down. */}
   {others.map((category) => (
-    <a href={categoryHref(category.slug)} class="text-center desktop:w-[calc(324*var(--u))]">
-      {category.label}
+    <a
+      href={categoryHref(category.slug)}
+      class="group relative block text-center focus-visible:outline-none desktop:w-[calc(324*var(--u))]"
+    >
+      <CategoryPreview
+        slug={category.slug}
+        class="absolute top-[calc(-205*var(--u))] left-1/2 h-[calc(346*var(--u))] w-[calc(242*var(--u))] -translate-x-1/2"
+      />
+      <span class="relative block transition-transform duration-300 ease-out group-hover:underline-active group-focus-visible:underline-active motion-reduce:transition-none desktop:group-hover:translate-y-[calc(171*var(--u))] desktop:group-focus-visible:translate-y-[calc(171*var(--u))]">
+        {category.label}
+      </span>
     </a>
   ))}
 </nav>
