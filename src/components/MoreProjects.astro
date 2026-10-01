@@ -1,0 +1,50 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import { projectHref, type CategorySlug } from '../config/categories';
+
+/**
+ * Projects of a category that its hand-composed gallery (from the mockup) does not show yet:
+ * adding a project file is enough for it to appear here, in the Design grid style.
+ * Renders nothing while every project is already in the gallery.
+ */
+interface Props {
+  category: CategorySlug;
+  /** Projects already linked from the gallery. */
+  featured: string[];
+  class?: string;
+}
+
+const { category, featured, class: className } = Astro.props;
+const projects = (
+  await getCollection(
+    'projects',
+    ({ id, data }) => data.category === category && !featured.includes(id),
+  )
+).sort((a, b) => a.data.order - b.data.order);
+---
+
+{projects.length > 0 && (
+  <section aria-label="More projects" class={className}>
+    <ul class="grid grid-cols-2 gap-x-[10px] gap-y-[16px] px-[20px] desktop:grid-cols-4 desktop:gap-x-[calc(17*var(--u))] desktop:gap-y-[calc(73*var(--u))] desktop:pr-[calc(136*var(--u))] desktop:pl-[calc(137*var(--u))]">
+      {projects.map((project) => (
+        <li class="text-center">
+          <a href={projectHref(category, project.id)} class="group block">
+            {project.data.thumbnail && (
+              <Image
+                src={project.data.thumbnail}
+                alt={project.data.thumbnailAlt ?? project.data.title}
+                class="aspect-[170/126] w-full object-cover desktop:aspect-[400/289]"
+                widths={[170, 340, 400, 800]}
+                sizes="(min-width: 1024px) 21vw, 170px"
+              />
+            )}
+            <span class="mt-[8px] block text-[11px] leading-[1.1] group-hover:underline desktop:mt-[calc(20*var(--u))] desktop:text-[calc(26*var(--u))]">
+              {project.data.cardLabel ?? project.data.title}
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+)}

@@ -554,3 +554,21 @@ Détail par écran dans `docs/screens/*.md`. Récapitulatif :
   Firefox : glyphes alternatifs via `font-feature-settings: 'aalt'` (π, s manuscrit), lecture WebM / MP4 (le MP4 est
   toujours proposé en secours), View Transitions (sans l'API : changement de page instantané). Tailwind 4 vise
   Safari 16.4+, Chrome 111+, Firefox 128+.
+
+## 15. Mise en ligne et documentation (étape 11)
+
+- **Hébergement** : Cloudflare Pages recommandé (`wrangler.toml`), Netlify en alternative (`netlify.toml`) ;
+  même fichier d'en-têtes HTTP `public/_headers` (cache long des fichiers `/_astro/*`, 30 jours pour la police et
+  les vidéos, en-têtes de sécurité de base). Pas de Content-Security-Policy : Astro insère de petits scripts dans
+  les pages, une CSP stricte demanderait leurs empreintes (option possible plus tard).
+- **Sortie** : `build.format: 'file'` (`about.html`) + `trailingSlash: 'never'` : `/about` est servi sans
+  redirection par les deux hébergeurs, comme les liens internes et les adresses canoniques.
+- **Node** : `.node-version` = 22. La plus grosse vidéo (15 Mo) reste sous la limite de 25 Mo par fichier de
+  Cloudflare Pages.
+- **Ajout de projets** : la grille Design vient de la collection ; les galeries Illustration et Animation
+  (composées d'après la maquette) affichent en plus, automatiquement, les projets qu'elles ne montrent pas encore
+  (`src/components/MoreProjects.astro`, vide aujourd'hui). Vérifié avec un projet de test, puis retiré.
+- **Lisibilité** entre 1024 et 1280 px : plancher de 12 px pour les plus petits textes bureau (légende « You Give
+  Me », sous-lignes d'About, interrupteur de la page police) ; aucun texte visible sous 12 px à 1024 px.
+- **README** (démarrage, commandes, ajout d'un projet, vidéos, réglages, mise en ligne) et
+  **checklist de conformité** écran par écran : [`conformity-checklist.md`](conformity-checklist.md).

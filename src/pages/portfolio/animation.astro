@@ -5,6 +5,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import CategoryNav from '../../components/CategoryNav.astro';
+import MoreProjects from '../../components/MoreProjects.astro';
 import Video from '../../components/media/Video.astro';
 import { projectHref } from '../../config/categories';
 // Posters: still frame of each animation matching the mockup (videos in public/videos/).
@@ -293,6 +294,11 @@ const wearASuitHref = projectHref('animation', 'wear-a-suit');
       </div>
     </main>
   </div>
+  <MoreProjects
+    category="animation"
+    featured={['wear-a-suit']}
+    class="mt-[110px] desktop:mt-[calc(200*var(--u))]"
+  />
   <div class="mt-[188px] desktop:mt-[calc(428*var(--u))]">
     <CategoryNav current="animation" barClass="bg-blush" />
   </div>

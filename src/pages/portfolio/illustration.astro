@@ -5,6 +5,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import CategoryNav from '../../components/CategoryNav.astro';
+import MoreProjects from '../../components/MoreProjects.astro';
 import violinist from '../../assets/illustration/violinist.jpg';
 import wildlife from '../../assets/illustration/wildlife.jpg';
 import rush from '../../assets/illustration/rush.jpg';
@@ -252,6 +253,11 @@ const sizes = (width: number) =>
       </div>
     ))}
   </main>
+  <MoreProjects
+    category="illustration"
+    featured={['curly-sox']}
+    class="mt-[110px] desktop:mt-[calc(200*var(--u))]"
+  />
   <div class="mt-[178px] desktop:mt-[calc(304*var(--u))]">
     <CategoryNav current="illustration" />
   </div>

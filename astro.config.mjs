@@ -15,6 +15,8 @@ export default defineConfig({
   site,
   // Internal links are written without a trailing slash (/about); canonical URLs and sitemap follow.
   trailingSlash: 'never',
+  // about.html rather than about/index.html: Cloudflare Pages and Netlify serve /about without redirect.
+  build: { format: 'file' },
   integrations: [
     sitemap({
       // The hidden page and the 404 stay out of search engines.
