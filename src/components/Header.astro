@@ -6,8 +6,11 @@ import { categories, categoryHref } from '../config/categories';
 import { site } from '../config/site';
 
 const pathname = Astro.url.pathname;
-/** The Portfolio page already lists the categories: no sub-navigation there. */
-const showCategories = pathname.replace(/(\.html|\/)$/, '') !== '/portfolio';
+/**
+ * Categories sub-navigation only inside the portfolio (the category pages). Not on the Portfolio page,
+ * which already lists them, nor on the other pages (About, Contact, Ashton font...).
+ */
+const showCategories = pathname.startsWith('/portfolio/');
 ---
 
 {/* `group/header`: hovering the header reveals the categories under the logo (desktop, XD prototype). */}
