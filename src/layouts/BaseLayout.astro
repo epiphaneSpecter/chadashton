@@ -8,9 +8,11 @@ interface Props {
   description?: string;
   /** Extra classes for <body>, e.g. the page background color. */
   bodyClass?: string;
+  /** Keep the page out of search engines (hidden page). */
+  noindex?: boolean;
 }
 
-const { title, description = site.description, bodyClass = '' } = Astro.props;
+const { title, description = site.description, bodyClass = '', noindex = false } = Astro.props;
 const pageTitle = title ? `${title} | ${site.name}` : `${site.author} | ${site.tagline}`;
 ---
 
@@ -21,6 +23,7 @@ const pageTitle = title ? `${title} | ${site.name}` : `${site.author} | ${site.t
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link
       rel="preload"

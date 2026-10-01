@@ -493,3 +493,32 @@ Détail par écran dans `docs/screens/*.md`. Récapitulatif :
 - **Vérifié** (Playwright, site construit) : animations réellement jouées et durées (1000 / 200 / 300 ms), aucune
   animation sur les autres liens ni au retour, menu mobile réutilisable après navigation, vidéos relancées après retour,
   aucune erreur console.
+
+## 13. Pages interactives (étape 9)
+
+- **Ashton Font** (`/ashton-font`, `src/pages/ashton-font.astro`, textes dans `src/data/ashton-font.ts`) :
+  - interrupteur **« BLUPRINT MODE »** (libellé de la maquette, sic) : `button role="switch"` (`aria-checked`) qui bascule
+    entre la police (OFF) et sa **Technical View** (ON) sur la même URL. ON : fonds inversés, titre et textes du hero en
+    contour (`-webkit-text-stroke`, noir sur bureau, gris `#656560` sur mobile comme la maquette), sections 2 et 3
+    remplacées par la construction des glyphes. Sur mobile, l'interrupteur est vertical et fixé sur le bord droit.
+  - Glyphes alternatifs de la police (π = « r » manuscrit, « s » manuscrit) rendus avec la fonctionnalité OpenType
+    `aalt` (`src/components/FontText.astro`, marqueurs `{r}` / `{s}`).
+  - Images : alphabet (`Font/Capitals_Display.png`, sans profil « Display »), cartes Trouser Society / Post Office /
+    Indoor Squash (`Font/Artboard 60 copy 7.png`, `copy 2.png`, capture Indoor Squash). Tuiles Aa / Nn / Zz refaites en
+    HTML/CSS. **Placeholders** : schémas de construction (π + O, parallélogramme + ellipse, gabarit du H, grand H gris,
+    angle) recadrés dans la maquette bureau (`*-from-mockup.png`) : à remplacer par les SVG exportés d'XD.
+  - **Retiré (pas de vente en V1)** : colonne verticale « AVAILABLE SOON » et phrase « The ASHTON font will be
+    AVAILABLE SOON! » / « The Ashton Font will be AVAILABLE SOON. » ; EXIT remonte à leur place (page 4226 px au lieu de
+    4426). « IN PROGRESS » est gardé seul (non commercial). Le GIF `Ashton_Font.gif` n'est pas utilisé : la maquette
+    ne le montre pas et il contient « AVAILABLE SOON ».
+  - EXIT → `/portfolio`. Textes gardés tels quels : « reminicsence », « BLUPRINT », « derrived », « intesely »,
+    « handwriten », « intial », « hapen » ; le mobile garde ses propres variantes (« first r », « derived », « happen »).
+  - Mesures : bureau 0–7 px (états OFF et ON), mobile ≤ 9 px. « BLUPRINT MODE », « OFF/ON » en Futura PT
+    (police de remplacement, non fournie).
+- **Song Generator** (`/song-generator`, page cachée, `noindex`, chansons dans `src/data/songs.ts`) : les 9 chansons
+  de la maquette, dans l'ordre de la maquette au chargement ; **RELOAD** les remet dans un ordre aléatoire différent
+  (si on ajoute des chansons au fichier, il en tire 9 au hasard). BACK TO HOME → accueil. Retour à la ligne avant
+  « - Artiste » sur mobile pour les 3 titres longs, comme la maquette. Mesures : bureau 0–4 px, mobile ≤ 4 px.
+  **Accès** : aucun lien vers cette page n'est identifiable dans la maquette ni le prototype → accessible par son URL
+  seulement, déclencheur à décider avec le client.
+- **Rock Paper Scissors** : c'est la page projet « Mind-bogglers » (dépliant), déjà faite à l'étape 5 selon la maquette.
