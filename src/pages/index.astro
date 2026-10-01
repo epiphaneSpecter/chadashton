@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Video from '../components/media/Video.astro';
 import { site } from '../config/site';
 import { contact } from '../config/navigation';
+import { homeVideo } from '../config/home';
 
 /** Structured data for search engines. */
 const person = {
@@ -13,7 +14,6 @@ const person = {
   email: `mailto:${contact.email}`,
   jobTitle: 'Designer, illustrator and animator',
 };
-import { homeVideo } from '../config/home';
 ---
 
 <BaseLayout bodyClass="bg-blush">
@@ -32,7 +32,8 @@ import { homeVideo } from '../config/home';
         clickable={false}
         class:list={[
           'pointer-events-none absolute inset-0 size-full',
-          homeVideo.fit === 'contain' ? 'object-contain' : 'object-cover',
+          homeVideo.mobileFit === 'cover' ? 'object-cover' : 'object-contain',
+          homeVideo.fit === 'contain' ? 'desktop:object-contain' : 'desktop:object-cover',
         ]}
         data-home-video
       />

@@ -573,3 +573,14 @@ Détail par écran dans `docs/screens/*.md`. Récapitulatif :
   Me », sous-lignes d'About, interrupteur de la page police) ; aucun texte visible sous 12 px à 1024 px.
 - **README** (démarrage, commandes, ajout d'un projet, vidéos, réglages, mise en ligne) et
   **checklist de conformité** écran par écran : [`conformity-checklist.md`](conformity-checklist.md).
+
+## 16. Vidéo de l'accueil (après mise en ligne)
+
+- Choix du client : **`1_Reflect_your_ambitions.mp4`** (projet Wear a Suit) est l'animation de l'accueil. Elle réutilise
+  les fichiers web de la page Wear a Suit (`public/videos/reflect-your-ambitions*`), lue muette, en boucle, en plein
+  écran sur bureau (`cover`) et en entier sur mobile (`contain`, bande 16:9 au centre). Affiche = première image
+  (`src/assets/home/home-animation-poster.jpg`). Fond de page `#FEF8F7` = couleur rendue de la vidéo (au lieu du
+  `#FFF9F8` de la maquette, différence invisible) pour que la bande vidéo ne se voie pas sur mobile.
+- Réglages dans `src/config/home.ts`. Nom et slogan toujours à 0–1 px de la maquette.
+- **Point d'attention** : pendant les scènes sombres de la vidéo (vers 7 à 10 s), le nom et le slogan noirs se
+  lisent mal sur le fond noir.

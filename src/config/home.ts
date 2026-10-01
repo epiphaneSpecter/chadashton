@@ -1,4 +1,5 @@
 import type { ImageMetadata } from 'astro';
+import poster from '../assets/home/home-animation-poster.jpg';
 
 export interface HomeVideo {
   /** Video name in public/videos/ (add a line to scripts/encode-videos.sh, then run it). */
@@ -9,22 +10,22 @@ export interface HomeVideo {
   label: string;
   /** Page background matching the video edges, so the frame does not show. Default: mockup #fff9f8. */
   background?: string;
-  /** `cover` fills the screen (edges cropped), `contain` shows the whole frame. */
+  /** Desktop: `cover` fills the screen (edges cropped), `contain` shows the whole frame. */
   fit?: 'cover' | 'contain';
+  /** Same on screens under 1024 px (portrait): `contain` by default, so the 16:9 frame stays whole. */
+  mobileFit?: 'cover' | 'contain';
 }
 
 /**
- * Illustrated animation of the home page.
- * PLACEHOLDER: the animation is not in the mockup (only its first, empty state) nor in the provided
- * assets; the client will provide it. Until then the home page stays static, as in the mockup.
- *
- * To enable it, for example:
- *   import poster from '../assets/home/home-animation-poster.jpg';
- *   export const homeVideo: HomeVideo | undefined = {
- *     name: 'home-animation',
- *     poster,
- *     label: 'Hand-drawn animation by Chad Ashton',
- *     fit: 'cover',
- *   };
+ * Illustrated animation of the home page: "Reflect Your Ambitions" (1_Reflect_your_ambitions.mp4,
+ * Wear a Suit project), chosen by the client. It reuses the web files of the Wear a Suit page, played
+ * muted in a loop; its first frame has the pinkish white of the mockup's home screen.
  */
-export const homeVideo: HomeVideo | undefined = undefined;
+export const homeVideo: HomeVideo | undefined = {
+  name: 'reflect-your-ambitions',
+  poster,
+  label: 'Reflect Your Ambitions: animated advertisement for Surmesur suits',
+  background: '#fef8f7',
+  fit: 'cover',
+  mobileFit: 'contain',
+};
