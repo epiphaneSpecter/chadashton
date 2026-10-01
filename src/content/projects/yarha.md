@@ -27,7 +27,10 @@ blocks:
     size: [32, 16]
     box: [460, 1144, 1000, 32]
     m: { gap: 0, w: 330, align: right }
-  # PLACEHOLDERS (videos not provided): plain colors of the mockup.
+  # PLACEHOLDERS (videos not provided): plain colors of the mockup. XD prototype, to wire when the files
+  # are provided (encode-videos.sh row + `kind: video`, `video: <name>`):
+  # - hero: Logo_V9.mp4, poster Logo_V9_PosterImage.png, plays on load ("time" trigger) -> `mode: once`;
+  # - black box: Animation_Logo_3.mp4, blue box: Logo_Yarha.mp4, play / pause on tap -> `mode: toggle`.
   - kind: swatch
     color: '#3a5a75'
     label: Yarha' video (not provided)
