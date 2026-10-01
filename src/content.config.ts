@@ -75,8 +75,11 @@ const leafBlocks = (image: SchemaContext['image']) =>
       source: z.string().optional(),
       /** Web video in public/videos/<video>.{webm,mp4}, made by scripts/encode-videos.sh. */
       video: z.string().optional(),
-      /** `loop`: silent GIF-like loop; `toggle`: click to play/pause with sound; `controls`. */
-      mode: z.enum(['loop', 'toggle', 'controls']).default('loop'),
+      /**
+       * `loop`: silent GIF-like loop; `once`: plays once on its own (muted) then click to play/pause
+       * with sound; `toggle`: click to play/pause with sound; `controls`: native player.
+       */
+      mode: z.enum(['loop', 'once', 'toggle', 'controls']).default('loop'),
       /** YouTube id: the poster links to the video and loads the player on click. */
       youtube: z.string().optional(),
       ...placement,

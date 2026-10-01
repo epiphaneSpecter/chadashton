@@ -19,7 +19,7 @@ import ballAndBox from '../../assets/animation/the-ball-and-box.jpg';
 import dinner from '../../assets/animation/a-classic-european-dinner.jpg';
 import reflect from '../../assets/animation/reflect-your-ambitions.jpg';
 import embrace from '../../assets/animation/embrace-every-moment.jpg';
-import heroPoster from '../../assets/animation/animation-hero-poster.jpg';
+import heroPoster from '../../assets/home/home-animation-poster.jpg';
 // PLACEHOLDER: crop of the mockup, the "Look Good In Any Situation" video was not provided.
 import lookGood from '../../assets/animation/look-good-in-any-situation-from-mockup.png';
 
@@ -171,15 +171,16 @@ const wearASuitHref = projectHref('animation', 'wear-a-suit');
     </div>
     <main id="main" class="relative desktop:h-[calc(8700*var(--u))]">
       <h1 class="sr-only">Animation</h1>
-      <!-- Opening video: the mockup only shows its first, almost blank frame (to confirm: Dog_animation_footage.mp4). -->
+      <!-- Opening video (XD prototype): Reflect Your Ambitions, played once when the page opens; its first frame is the almost blank screen of the mockup. -->
       <section
         class="relative h-[852px] bg-blush desktop:h-[calc(1080*var(--u))] desktop:bg-[#fffaee]"
         aria-label="Opening animation"
       >
         <Video
-          name="animation-hero"
+          name="reflect-your-ambitions"
           poster={heroPoster}
-          label="Animated short: a man and his dog in a desert landscape"
+          label="Reflect Your Ambitions: animated advertisement for Surmesur suits"
+          mode="once"
           eager
           class="absolute inset-0 size-full object-contain desktop:object-cover"
         />

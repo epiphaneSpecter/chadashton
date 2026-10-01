@@ -2,12 +2,14 @@
 import AsteriskIcon from './icons/AsteriskIcon.astro';
 import MobileMenu from './MobileMenu.astro';
 import { isActive, mainNav } from '../config/navigation';
+import { categories, categoryHref } from '../config/categories';
 import { site } from '../config/site';
 
 const pathname = Astro.url.pathname;
 ---
 
-<header class="flex items-start justify-between pt-[49px] pr-[23px] pl-[27px] desktop:items-baseline desktop:pt-[calc(48*var(--u))] desktop:pr-[calc(145*var(--u))] desktop:pl-[calc(145*var(--u))]">
+{/* `group/header`: hovering the header reveals the categories under the logo (desktop, XD prototype). */}
+<header class="group/header relative z-20 flex items-start justify-between pt-[49px] pr-[23px] pl-[27px] desktop:items-baseline desktop:pt-[calc(48*var(--u))] desktop:pr-[calc(145*var(--u))] desktop:pl-[calc(145*var(--u))]">
   <a href="/" class="mt-[6px] text-logo desktop:mt-0">
     {site.name}
   </a>
@@ -24,6 +26,30 @@ const pathname = Astro.url.pathname;
               aria-current={active ? 'page' : undefined}
             >
               {link.label}
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  </nav>
+
+  {/* Categories sub-navigation: hidden until the header is hovered or a link is focused; the
+       transparent top padding bridges the gap from the menu so it stays open while the pointer moves. */}
+  <nav
+    aria-label="Portfolio categories"
+    class="absolute top-[calc(102*var(--u))] left-[calc(140*var(--u))] hidden pt-[calc(39*var(--u))] opacity-0 transition-opacity duration-300 ease-out group-focus-within/header:opacity-100 group-hover/header:opacity-100 motion-reduce:transition-none desktop:block"
+  >
+    <ul class="flex gap-[calc(42*var(--u))] text-[max(12px,calc(26*var(--u)))] leading-[1.1] tracking-[-0.065em] uppercase">
+      {categories.map((category) => {
+        const current = isActive(categoryHref(category.slug), pathname);
+        return (
+          <li>
+            <a
+              href={categoryHref(category.slug)}
+              class:list={[current && '[-webkit-text-stroke:0.03em_currentColor]']}
+              aria-current={current ? 'page' : undefined}
+            >
+              {category.label}
             </a>
           </li>
         );
