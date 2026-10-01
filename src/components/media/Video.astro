@@ -155,6 +155,7 @@ const interactive = mode !== 'controls' && clickable;
   }
 
   init();
-  // Pages loaded later by client-side navigation (step 8).
+  // Pages loaded by client-side navigation.
   document.addEventListener('astro:page-load', init);
+  document.addEventListener('astro:before-swap', () => visibility.disconnect());
 </script>

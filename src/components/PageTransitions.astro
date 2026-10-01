@@ -1,0 +1,24 @@
+---
+import { ClientRouter } from 'astro:transitions';
+---
+
+{/* Client-side navigation with the View Transitions API; browsers without it swap instantly. */}
+<ClientRouter fallback="swap" />
+
+<script>
+  import { transitionFor } from '../config/transitions';
+
+  // The animation depends on the destination page (see src/config/transitions.ts and global.css).
+  let transition: string | undefined;
+
+  document.addEventListener('astro:before-preparation', (event) => {
+    transition = event.direction === 'back' ? undefined : transitionFor(event.to.pathname);
+  });
+
+  document.addEventListener('astro:before-swap', (event) => {
+    // The root attributes are replaced by the new page's: set the type on the incoming document.
+    const root = event.newDocument.documentElement;
+    if (transition) root.dataset.transition = transition;
+    else delete root.dataset.transition;
+  });
+</script>

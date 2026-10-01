@@ -470,3 +470,26 @@ Détail par écran dans `docs/screens/*.md`. Récapitulatif :
 - **Navigation** : l'accueil n'a pas de menu dans la maquette ; tout l'écran est un lien vers Portfolio
   (« Enter the portfolio » pour les lecteurs d'écran, contour visible au clavier).
 - **Mesures** : nom et slogan à 0–1 px de la maquette (1920 et 393).
+
+## 12. Transitions entre pages (étape 8)
+
+- **Source** : interactions du prototype XD (manifeste). Les transitions animées sont celles des liens de l'en-tête,
+  identifiées par leur page d'arrivée (couleurs propres à chaque artboard : lilas = Contact, or = About) :
+  | Lien                                                      | Prototype XD                   | Site                           |
+  | --------------------------------------------------------- | ------------------------------ | ------------------------------ |
+  | Logo `C. ASHTON` → accueil                                | fondu (auto-animate), 0,3 s    | fondu enchaîné 0,3 s ease-out  |
+  | Portfolio                                                 | glissement vers le haut, 0,2 s | nouvelle page qui monte, 0,2 s |
+  | Contact                                                   | glissement vers le haut, 0,2 s | idem                           |
+  | About                                                     | glissement vers le haut, 1 s   | idem en 1 s                    |
+  | Tout le reste (catégories, projets, EXIT, retour)         | aucune transition              | instantané                     |
+  | Le lien Shop du prototype (glissement 0,2 s) est hors V1. |
+- **Technique** : View Transitions natives d'Astro (`<ClientRouter fallback="swap" />` dans
+  `src/components/PageTransitions.astro`). Le type est choisi selon la page d'arrivée (`src/config/transitions.ts`) et
+  posé sur `<html data-transition>` ; les animations sont en CSS dans `global.css` (`::view-transition-new(root)`).
+  Retour navigateur : instantané. Navigateurs sans l'API : changement de page instantané. `prefers-reduced-motion` :
+  aucune animation.
+- **Scripts** : menu mobile, vidéos, YouTube, page 404 et accueil se réinitialisent à chaque navigation
+  (`astro:page-load`) ; le menu mobile libère le défilement et le piège de focus quand on quitte la page depuis le menu.
+- **Vérifié** (Playwright, site construit) : animations réellement jouées et durées (1000 / 200 / 300 ms), aucune
+  animation sur les autres liens ni au retour, menu mobile réutilisable après navigation, vidéos relancées après retour,
+  aucune erreur console.

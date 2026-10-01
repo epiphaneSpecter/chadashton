@@ -73,7 +73,12 @@ const variants = [
 </BaseLayout>
 
 <script>
-  const variants = document.querySelectorAll<HTMLElement>('[data-variant]');
-  const pick = Math.floor(Math.random() * variants.length);
-  variants.forEach((variant, index) => (variant.hidden = index !== pick));
+  function pickVariant() {
+    const variants = document.querySelectorAll<HTMLElement>('[data-variant]');
+    const pick = Math.floor(Math.random() * variants.length);
+    variants.forEach((variant, index) => (variant.hidden = index !== pick));
+  }
+
+  pickVariant();
+  document.addEventListener('astro:page-load', pickVariant);
 </script>

@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import PageTransitions from '../components/PageTransitions.astro';
 import { site } from '../config/site';
 
 interface Props {
@@ -28,6 +29,7 @@ const pageTitle = title ? `${title} | ${site.name}` : `${site.author} | ${site.t
       type="font/woff2"
       crossorigin
     />
+    <PageTransitions />
   </head>
   <body class={bodyClass}>
     <slot />
