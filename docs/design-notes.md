@@ -587,3 +587,16 @@ Détail par écran dans `docs/screens/*.md`. Récapitulatif :
 - **Son** : les navigateurs ne lancent seuls qu'une vidéo muette ; un bouton `SOUND ON` / `SOUND OFF` (à côté de
   `PAUSE`, réglage `sound: true` dans `src/config/home.ts`) active ou coupe le son au clic, et relance la vidéo si
   elle était en pause. Le reste de l'écran mène toujours au Portfolio.
+
+## 17. Survol des catégories du Portfolio
+
+- Prototype XD (captures fournies par le client) : au survol d'une catégorie, une image portrait 242 × 346 apparaît
+  au-dessus du libellé (haut à y 327 de la maquette, centrée sur le libellé), le libellé descend de 135 px et se
+  souligne, une phrase apparaît dessous (≈ 20 px) ; transition 0,3 s ease-out.
+- Images : affiche Indoor Squash (Design), `Illustration/Ninja_Otter.png` (Illustration, fond blanc,
+  `src/assets/portfolio/illustration-ninja-otter.jpg`), image de l'animation géométrique (Animation).
+- Phrases (verbatim) : « Where style and function shake hands », « Louder than words »,
+  « The possibilities are endless from here ».
+- Bureau seulement (pas de survol au toucher) ; même état au focus clavier ; pas d'animation si mouvement réduit.
+  La zone de survol couvre l'image, comme le composant XD, pour que le libellé qui descend ne fasse pas clignoter
+  l'état. Écarts : images et phrases à 0–7 px des captures.

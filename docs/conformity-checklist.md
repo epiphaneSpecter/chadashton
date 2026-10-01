@@ -14,7 +14,7 @@ attendant le fichier original.
 | -------------------------------------------------------------------------------- | --------------------------------------------- | :--: | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
 | `landing-page` / `landing`                                                       | `/`                                           |  ⚠️  | 0–1 px                               | Vidéo « Reflect Your Ambitions » (choix du client) en boucle muette ; nom et slogan peu lisibles pendant les scènes sombres (7–10 s). |
 | — / `hamburger`                                                                  | menu mobile                                   |  ✅  | ≤ 6 px                               | Lien Shop retiré (V1).                                                                                                                |
-| `portfolio` / `portfolio`                                                        | `/portfolio`                                  |  ⚠️  | ≤ 6 px                               | Images au survol des catégories (états « Hover » du prototype) non fournies, non réalisées.                                           |
+| `portfolio` / `portfolio`                                                        | `/portfolio`                                  |  ✅  | ≤ 6 px                               | Survol (bureau) : image, libellé qui descend et phrase, d'après le prototype.                                                         |
 | `design` / `design`                                                              | `/portfolio/design`                           |  ⚠️  | ≤ 6 px                               | Placeholders : pochette « You Give Me », vignettes Miles Clayton, Matong'EAU, Yarha'.                                                 |
 | `illustration` / `illustration`                                                  | `/portfolio/illustration`                     |  ⚠️  | bureau ≤ 6 px, mobile ≈ 57 px en bas | Placeholder : chaussette Curly Sox. Décalage cumulé en bas de page mobile (images à 350 px contre 346–355 px dans la maquette).       |
 | `animation` / `animation`                                                        | `/portfolio/animation`                        |  ⚠️  | 0 px (cadres vidéo)                  | Vidéo d'ouverture supposée (`Dog_animation_footage.mp4`, à confirmer) ; « Look Good In Any Situation » : placeholder.                 |
@@ -46,7 +46,7 @@ attendant le fichier original.
 | Vidéos en boucle / au clic                              |  ✅  | Boucles muettes à l'écran ; vidéos Wear a Suit avec son au clic ; aucune animation si mouvement réduit. |
 | Interrupteur BLUPRINT MODE                              |  ✅  | Bascule police / Technical View sur la même page.                                                       |
 | RELOAD (Song Generator)                                 |  ✅  | Nouvel ordre aléatoire des 9 chansons de la maquette.                                                   |
-| États au survol (37 dans le prototype)                  |  ⚠️  | Liens soulignés au survol ; les images de survol du Portfolio ne sont pas fournies.                     |
+| États au survol (37 dans le prototype)                  |  ✅  | Catégories du Portfolio (image + phrase), liens soulignés au survol.                                    |
 
 ## Éléments transverses à fournir ou à valider
 
